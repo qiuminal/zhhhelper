@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var rowZheng: View             // 整句码整行
     private lateinit var tvZhengCode: TextView      // 整句码
     private lateinit var btnZitong: TextView        // 字统链接
-    private lateinit var btnYedian: TextView        // 叶典链接
+    private lateinit var btnHadian: TextView        // 汉典链接
 
-    private var currentData: CharData? = null       // 当前查询结果，用于字统/叶典跳转
+    private var currentData: CharData? = null       // 当前查询结果，用于字统/汉典跳转
 
     private var currentFontSp = 18f                 // 结果卡片正文字号
 
@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         rowZheng = findViewById(R.id.row_zheng)
         tvZhengCode = findViewById(R.id.tv_zheng_code)
         btnZitong = findViewById(R.id.btn_zitong)
-        btnYedian = findViewById(R.id.btn_yedian)
+        btnHadian = findViewById(R.id.btn_hadian)
 
         // 初始隐藏结果区
         resultContainer.visibility = View.GONE
@@ -158,15 +158,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // 字统网：https://zi.tools/?secondary=zi&word=<字>
-        btnZitong.setOnClickListener { openExternalLink("https://zi.tools/?secondary=zi&word=") }
+        // 字统：https://zi.tools/zi/<字>
+        btnZitong.setOnClickListener { openExternalLink("https://zi.tools/zi/") }
 
-        // 叶典：https://www.yedict.com/index.asp?word=<字>
-        btnYedian.setOnClickListener { openExternalLink("https://www.yedict.com/index.asp?word=") }
+        // 汉典：https://zdic.net/hans/<字>
+        btnHadian.setOnClickListener { openExternalLink("https://zdic.net/hans/") }
     }
 
     /**
-     * 用系统浏览器打开字统/叶典查询当前字
+     * 用系统浏览器打开字统/汉典查询当前字
      */
     private fun openExternalLink(baseUrl: String) {
         val charText = currentData?.charText
@@ -213,8 +213,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         tvComponents.setText(d.components ?: "")
-        tvPinyin.setText(if (d.pinyin != null) "(${d.pinyin})" else "")
-        tvUnicode.setText(if (d.unicode != null) "〔${d.unicode}〕" else "")
+        // 拼音：没有则显示「无」，有则带括号展示
+        tvPinyin.setText(
+            if (d.pinyin.isNullOrEmpty()) "无" else "(${d.pinyin})"
+        )
+        // U码：〔〕只括码点字段，再与区块拼接，如「CJK 〔U+7684〕」
+        val block = d.unicodeBlock.orEmpty()
+        val code = d.unicodeCode.orEmpty()
+        tvUnicode.setText(
+            when {
+                block.isEmpty() && code.isEmpty() -> "无"
+                block.isEmpty() -> "〔$code〕"
+                code.isEmpty() -> block
+                else -> "$block 〔$code〕"
+            }
+        )
 
         // 整句码（zheng.txt），没有则隐藏整行
         if (!d.zhengCode.isNullOrEmpty()) {

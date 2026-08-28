@@ -21,17 +21,6 @@
         android:orientation="horizontal"
         android:paddingHorizontal="20dp">
 
-        <!-- 虎码 logo：虎字黄色，码字黑色 -->
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:lineSpacingExtra="0dp"
-            android:text="虎助手"
-            android:textColor="@color/text_primary"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
         <ImageButton
             android:id="@+id/btn_menu"
             android:layout_width="40dp"
@@ -40,6 +29,18 @@
             android:contentDescription="打开菜单"
             android:src="@drawable/ic_menu_hamburger"
             android:tint="@color/text_primary" />
+
+        <!-- 虎助手 logo -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:lineSpacingExtra="0dp"
+            android:text="虎助手"
+            android:textColor="@color/text_primary"
+            android:textSize="28sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <!-- ========== 主内容区（可滚动） ========== -->
@@ -76,11 +77,12 @@
                 android:orientation="horizontal"
                 android:paddingHorizontal="14dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🔍"
-                    android:textSize="18sp" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="搜索"
+                    android:src="@drawable/ic_search"
+                    android:tint="@color/text_hint" />
 
                 <EditText
                     android:id="@+id/et_search"
@@ -102,7 +104,7 @@
                     android:layout_height="32dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="清除"
-                    android:src="@android:drawable/ic_menu_close_clear_cancel"
+                    android:src="@drawable/ic_close"
                     android:tint="@color/text_hint"
                     android:visibility="gone" />
             </LinearLayout>
@@ -127,7 +129,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center"
+                        android:gravity="start"
                         android:text="查询结果："
                         android:textColor="@color/text_secondary"
                         android:textSize="24sp"
@@ -140,7 +142,7 @@
                         android:layout_marginStart="8dp"
                         android:background="@drawable/bg_circle_button"
                         android:contentDescription="减小字体"
-                        android:src="@drawable/ic_minus"
+                        android:src="@drawable/ic_remove"
                         android:tint="@color/text_secondary" />
 
                     <ImageButton
@@ -150,7 +152,7 @@
                         android:layout_marginStart="10dp"
                         android:background="@drawable/bg_circle_button"
                         android:contentDescription="增大字体"
-                        android:src="@android:drawable/ic_menu_add"
+                        android:src="@drawable/ic_add"
                         android:tint="@color/text_secondary" />
                 </LinearLayout>
 
@@ -340,7 +342,7 @@
                             android:background="@drawable/bg_link_underline" />
                     </LinearLayout>
 
-                    <!-- 叶典链接 -->
+                    <!-- 汉典链接 -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -350,15 +352,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="叶典："
+                            android:text="汉典："
                             android:textColor="@color/text_secondary"
                             android:textSize="18sp" />
 
                         <TextView
-                            android:id="@+id/btn_yedian"
+                            android:id="@+id/btn_hadian"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="查看叶典"
+                            android:text="查看汉典"
                             android:textColor="@color/link_blue"
                             android:textSize="18sp"
                             android:background="@drawable/bg_link_underline" />

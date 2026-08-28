@@ -8,7 +8,7 @@ import java.util.HashMap
 /**
  * 从 assets 加载三个码表并合并为内存数据，主键均为「字头」：
  *   zi.txt    字头 + 编码
- *   chai.txt  拆分（两行）+ 拼音 + U码
+ *   chai.txt  拆分（两行）+ 拼音 + U码（区块 + 码点两列）
  *   zheng.txt 整句码
  */
 object DataLoader {
@@ -55,7 +55,8 @@ object DataLoader {
                 d.rootCodes = parts[1].trim()            // 拆分第1行
                 d.components = parts[2].trim()           // 拆分第2行
                 d.pinyin = parts[3].trim()               // 拼音
-                d.unicode = concat(parts[4].trim(), parts[5].trim()) // U码（第5+6列拼接）
+                d.unicodeBlock = parts[4].trim() // U码区块（第5列，如 CJK）
+                d.unicodeCode = parts[5].trim()  // Unicode 码点（第6列，如 U+7684）
             }
         } catch (e: IOException) {
             e.printStackTrace()
@@ -126,9 +127,4 @@ object DataLoader {
     private fun stripBom(s: String): String =
         if (s.isNotEmpty() && s[0] == '\uFEFF') s.substring(1) else s
 
-    private fun concat(a: String, b: String): String = when {
-        a.isEmpty() -> b
-        b.isEmpty() -> a
-        else -> "$a $b"
-    }
 }
