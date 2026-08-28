@@ -2,7 +2,6 @@ package com.qiuminal.zhhhelper
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -46,23 +45,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // API 26+ 使用内置了全局字体族的主题（低版本由布局属性 + AppFonts 字符级回退兜底）
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            setTheme(R.style.Theme_ZhhHelper_Fonts)
-        }
         setContentView(R.layout.activity_main)
-
-        // 初始化全局内置字体（TumanPUA → 霞鹜文楷 → 遍黑体 P1 → P2）
-        AppFonts.init(this)
-
-        // 加载内置数据库
-        DataLoader.load(this)
 
         initViews()
         setupListeners()
 
-        // 全局应用内置字体（标题、静态标签、搜索框提示等）
-        AppFonts.applyToHierarchy(findViewById(android.R.id.content))
+        // 码表与字体在后台线程加载，避免启动白屏（约 59MB 字体 + 6MB 码表）；
+        // 加载完成后回到主线程应用全局字体，并重跑当前查询。
+        Thread {
+            DataLoader.load(applicationContext)
+            AppFonts.load(applicationContext)
+            runOnUiThread {
+                AppFonts.applyToHierarchy(findViewById(android.R.id.content))
+                val current = etSearch.text?.toString().orEmpty().trim()
+                if (current.isNotEmpty()) {
+                    doQuery(current)
+                }
+            }
+        }.start()
     }
 
     private fun initViews() {
