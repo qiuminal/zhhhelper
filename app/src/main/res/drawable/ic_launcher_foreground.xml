@@ -1,19 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 应用图标前景：虎码标志，简单矢量 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- 虎字（简化为几何图形） -->
-    <path
-        android:fillColor="#E8A020"
-        android:pathData="M38,30 L54,30 L54,42 L66,42 L66,54 L54,54 L54,78 L38,78 Z" />
-    <!-- 码字（简化） -->
-    <path
-        android:fillColor="#333333"
-        android:pathData="M60,30 L76,30 L76,42 L68,42 L68,78 L60,78 Z" />
-    <path
-        android:fillColor="#333333"
-        android:pathData="M78,42 L90,42 L90,50 L78,50 Z" />
+
+    <!-- 虎爪印：4 爪尖 + 4 脚趾垫 + 掌垫，整体放大 1.1 居中 -->
+    <group
+        android:scaleX="1.1"
+        android:scaleY="1.1"
+        android:pivotX="54"
+        android:pivotY="54">
+
+        <!-- 爪尖（深色） -->
+        <path android:fillColor="#1B1208"
+            android:pathData="M 34,31 L 30.5,37.5 Q 34,38.8 37.5,37.5 Z"/>
+        <path android:fillColor="#1B1208"
+            android:pathData="M 47.5,26.5 L 44,33.5 Q 47.5,34.8 51,33.5 Z"/>
+        <path android:fillColor="#1B1208"
+            android:pathData="M 60.5,26.5 L 57,33.5 Q 60.5,34.8 64,33.5 Z"/>
+        <path android:fillColor="#1B1208"
+            android:pathData="M 74,31 L 70.5,37.5 Q 74,38.8 77.5,37.5 Z"/>
+
+        <!-- 掌垫 -->
+        <path
+            android:fillColor="#E9A84B"
+            android:strokeColor="#1B1208"
+            android:strokeWidth="1.5"
+            android:pathData="M 40.5,67.5 C 40.5,61.5 44.5,57.2 50.5,56.8 C 52.5,56.6 53.5,56.5 54,56.5 C 54.5,56.5 55.5,56.6 57.5,56.8 C 63.5,57.2 67.5,61.5 67.5,67.5 C 67.5,73.5 62,78.5 54,78.5 C 46,78.5 40.5,73.5 40.5,67.5 Z"/>
+        <path android:fillColor="#F7C86A"
+            android:pathData="M 45,63.5 a 9,4.5 0 1,0 18,0 a 9,4.5 0 1,0 -18,0 Z"/>
+        <path android:fillColor="#D9812B"
+            android:pathData="M 44,71.5 Q 54,76.2 64,71.5 Q 54,73.8 44,71.5 Z"/>
+
+        <!-- 脚趾垫（橙色 + 深色描边） -->
+        <path android:fillColor="#E9A84B" android:strokeColor="#1B1208" android:strokeWidth="1.5"
+            android:pathData="M 29,49 a 5,5.8 0 1,0 10,0 a 5,5.8 0 1,0 -10,0 Z"/>
+        <path android:fillColor="#E9A84B" android:strokeColor="#1B1208" android:strokeWidth="1.5"
+            android:pathData="M 42.5,43 a 5,6.2 0 1,0 10,0 a 5,6.2 0 1,0 -10,0 Z"/>
+        <path android:fillColor="#E9A84B" android:strokeColor="#1B1208" android:strokeWidth="1.5"
+            android:pathData="M 55.5,43 a 5,6.2 0 1,0 10,0 a 5,6.2 0 1,0 -10,0 Z"/>
+        <path android:fillColor="#E9A84B" android:strokeColor="#1B1208" android:strokeWidth="1.5"
+            android:pathData="M 69,49 a 5,5.8 0 1,0 10,0 a 5,5.8 0 1,0 -10,0 Z"/>
+
+        <!-- 脚趾高光 -->
+        <path android:fillColor="#F7C86A"
+            android:pathData="M 31.5,48 a 2.5,3.2 0 1,0 5,0 a 2.5,3.2 0 1,0 -5,0 Z"/>
+        <path android:fillColor="#F7C86A"
+            android:pathData="M 45,42.3 a 2.5,3.4 0 1,0 5,0 a 2.5,3.4 0 1,0 -5,0 Z"/>
+        <path android:fillColor="#F7C86A"
+            android:pathData="M 58,42.3 a 2.5,3.4 0 1,0 5,0 a 2.5,3.4 0 1,0 -5,0 Z"/>
+        <path android:fillColor="#F7C86A"
+            android:pathData="M 71.5,48 a 2.5,3.2 0 1,0 5,0 a 2.5,3.2 0 1,0 -5,0 Z"/>
+    </group>
 </vector>
