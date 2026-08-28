@@ -11,8 +11,8 @@ android {
         applicationId "com.qiuminal.zhhhelper"
         minSdk 23
         targetSdk 34
-        versionCode 11
-        versionName "0.0.11"
+        versionCode 12
+        versionName "0.0.12"
     }
 
     buildTypes {
@@ -37,3 +37,122 @@ dependencies {
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }
+
+// ============================================================
+// 码表二进制编译 generateTablesBin（以后更新码表无需改这里）
+// 源数据：data/ 下三个原始格式 txt，直接替换文件即可：
+//   data/zi.txt    字头 + 编码
+//   data/chai.txt  字头 + 拆分两行 + 拼音 + U码区块 + U码码点
+//   data/zheng.txt 字头 + 整句码
+// 产物：app/src/main/assets/tables.bin（打进 APK，运行时二分查找）
+// 二进制格式（大端序）：
+//   Header(24B): magic "ZHHT" | version u32=1 | recordCount u32
+//                | indexOffset u32 | valuesOffset u32 | checksum u32
+//     checksum = Adler32(index + values)
+//   Index: recordCount * 12B，按 (keyU16_1,keyU16_2) 升序：
+//     keyU16_1 u16 | keyU16_2 u16(0=BMP) | valueOffset u32 | valueLength u32
+//   Values: 每条记录 7 个字段（codes/rootCodes/components/pinyin/block/code/zheng），
+//     每字段 u16 长度 + UTF-8 字节
+// ============================================================
+def dataDir = file("$rootDir/data")
+def tablesBin = file("src/main/assets/tables.bin")
+
+tasks.register('generateTablesBin') {
+    inputs.files(new File(dataDir, 'zi.txt'), new File(dataDir, 'chai.txt'), new File(dataDir, 'zheng.txt'))
+    outputs.file(tablesBin)
+    doLast {
+        def records = [:]
+        // 1) zi.txt：字头 + 编码
+        new File(dataDir, 'zi.txt').eachLine('UTF-8') { line ->
+            int idx = line.indexOf('\t')
+            if (idx <= 0) return
+            def key = line.substring(0, idx)
+            def rec = records.get(key)
+            if (rec == null) { rec = new String[7]; records.put(key, rec) }
+            rec[0] = line.substring(idx + 1).trim()
+        }
+        // 2) chai.txt：字头/拆分1/拆分2/拼音/U码区块/U码码点
+        new File(dataDir, 'chai.txt').eachLine('UTF-8') { line ->
+            def parts = line.split('\t', -1)
+            if (parts.length < 6) return
+            def key = parts[0].replace('\uFEFF', '').trim()
+            if (key.isEmpty()) return
+            def rec = records.get(key)
+            if (rec == null) { rec = new String[7]; records.put(key, rec) }
+            rec[1] = parts[1].trim()
+            rec[2] = parts[2].trim()
+            rec[3] = parts[3].trim()
+            rec[4] = parts[4].trim()
+            rec[5] = parts[5].trim()
+        }
+        // 3) zheng.txt：字头 + 整句码
+        new File(dataDir, 'zheng.txt').eachLine('UTF-8') { line ->
+            int idx = line.indexOf('\t')
+            if (idx <= 0) return
+            def key = line.substring(0, idx)
+            def rec = records.get(key)
+            if (rec == null) { rec = new String[7]; records.put(key, rec) }
+            rec[6] = line.substring(idx + 1).trim()
+        }
+        // 按键的 UTF-16 码元升序排序
+        def keys = new ArrayList(records.keySet())
+        Collections.sort(keys) { a, b ->
+            int n = Math.min(a.length(), b.length())
+            for (int i = 0; i < n; i++) {
+                int d = (int) a.charAt(i) - (int) b.charAt(i)
+                if (d != 0) return d
+            }
+            return a.length() - b.length()
+        }
+        // 组装 index + values
+        def indexBuf = new ByteArrayOutputStream()
+        def indexOut = new DataOutputStream(indexBuf)
+        def valuesBuf = new ByteArrayOutputStream()
+        def valuesOut = new DataOutputStream(valuesBuf)
+        int valueOffset = 0
+        for (String key : keys) {
+            def rec = records.get(key)
+            def recBuf = new ByteArrayOutputStream()
+            def recOut = new DataOutputStream(recBuf)
+            for (int i = 0; i < 7; i++) {
+                def field = rec[i] == null ? '' : rec[i]
+                def fieldBytes = field.getBytes('UTF-8')
+                recOut.writeShort(fieldBytes.length)
+                recOut.write(fieldBytes)
+            }
+            def recBytes = recBuf.toByteArray()
+            indexOut.writeShort((int) key.charAt(0) & 0xFFFF)
+            indexOut.writeShort(key.length() > 1 ? (int) key.charAt(1) & 0xFFFF : 0)
+            indexOut.writeInt(valueOffset)
+            indexOut.writeInt(recBytes.length)
+            valuesOut.write(recBytes)
+            valueOffset += recBytes.length
+        }
+        def indexBytes = indexBuf.toByteArray()
+        def valuesBytes = valuesBuf.toByteArray()
+        // 24 字节头 + Adler32 校验
+        def headerBuf = new ByteArrayOutputStream()
+        def headerOut = new DataOutputStream(headerBuf)
+        headerOut.writeBytes('ZHHT')
+        headerOut.writeInt(1)
+        headerOut.writeInt(keys.size())
+        headerOut.writeInt(24)
+        headerOut.writeInt(24 + indexBytes.length)
+        def crc = new java.util.zip.Adler32()
+        crc.update(indexBytes)
+        crc.update(valuesBytes)
+        headerOut.writeInt((int) crc.value)
+        def headerBytes = headerBuf.toByteArray()
+        tablesBin.parentFile.mkdirs()
+        def fos = new FileOutputStream(tablesBin)
+        try {
+            fos.write(headerBytes)
+            fos.write(indexBytes)
+            fos.write(valuesBytes)
+        } finally {
+            fos.close()
+        }
+        logger.lifecycle("generateTablesBin: {} records -> {}", keys.size(), tablesBin)
+    }
+}
+tasks.named('preBuild').configure { dependsOn('generateTablesBin') }

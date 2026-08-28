@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_result_card"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <!-- 字头 + 分享按钮 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="字头："
+                                android:textColor="@color/text_secondary"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/tv_char"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/text_primary"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:id="@+id/btn_share"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="分享查询结果"
+                            android:src="@drawable/ic_share"
+                            android:tint="@color/text_secondary" />
+                    </LinearLayout>
+
+                    <!-- 编码 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="编码："
+                            android:textColor="@color/text_secondary"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_codes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/code_blue"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- 拆分（含上方小字根码） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="拆分："
+                            android:textColor="@color/text_secondary"
+                            android:textSize="18sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <!-- 字根编码小字（如 Rk Nw Id） -->
+                            <TextView
+                                android:id="@+id/tv_root_codes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/text_hint"
+                                android:textSize="14sp"
+                                android:visibility="gone" />
+
+                            <!-- 拆分部件（如 囗 王 丶） -->
+                            <TextView
+                                android:id="@+id/tv_components"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:textColor="@color/text_primary"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- 拼音 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="拼音："
+                            android:textColor="@color/text_secondary"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_pinyin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_primary"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                    <!-- U码 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="U 码："
+                            android:textColor="@color/text_secondary"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_unicode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_primary"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                    <!-- 整句码 -->
+                    <LinearLayout
+                        android:id="@+id/row_zheng"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="整句码："
+                            android:textColor="@color/text_secondary"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_zheng_code"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/code_blue"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- 字统链接 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="字统："
+                            android:textColor="@color/text_secondary"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/btn_zitong"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="查看字统"
+                            android:textColor="@color/link_blue"
+                            android:textSize="18sp"
+                            android:background="@drawable/bg_link_underline" />
+                    </LinearLayout>
+
+                    <!-- 汉典链接 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="汉典："
+                            android:textColor="@color/text_secondary"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/btn_hadian"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="查看汉典"
+                            android:textColor="@color/link_blue"
+                            android:textSize="18sp"
+                            android:background="@drawable/bg_link_underline" />
+                    </LinearLayout>
+
+                </LinearLayout>

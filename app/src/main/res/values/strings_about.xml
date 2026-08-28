@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="about_version">版本 %1$s</string>
-    <string name="changelog_content">0.0.11（2026-08-29）
+    <string name="changelog_content">0.0.12（2026-08-29）
+支持多字查询：输入多个字按顺序输出单字卡片，可下滑查看，每张卡片独立分享；码表改为二进制索引加载，查询更快；分享图水印放大；查询结果标题微调。
+
+0.0.11（2026-08-29）
 更新 chai 码表数据（含扩展区字与 Unicode 区块信息）。
 
 0.0.10（2026-08-29）
