@@ -103,7 +103,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                // 输入实时套用内置字体（生僻字/扩展区字在搜索框也能正常显示）
+                if (AppFonts.isLoaded() && s != null && s.isNotEmpty()) {
+                    AppFonts.styleInPlace(s)
+                }
+            }
         })
 
         // 清除按钮

@@ -4,10 +4,10 @@
 
 | 优先级 | 文件 | 字体族 | 来源项目 | 授权 |
 |---|---|---|---|---|
-| 1 | res/font/tuman_pua.ttf | TumanPUA | [ywxt/rime-huma](https://github.com/ywxt/rime-huma)（虎码输入方案） | MIT License |
-| 2 | res/font/lxgw_wenkai_screen.ttf | LXGW WenKai GB Screen | [lxgw/LxgwWenKai](https://github.com/lxgw/LxgwWenKai)（霞鹜文楷） | SIL Open Font License 1.1 |
-| 3 | res/font/plangothic_p1.ttf | Plangothic P1 | [Fitzgerald-Porthmouth-Koenigsegg/Plangothic_Project](https://github.com/Fitzgerald-Porthmouth-Koenigsegg/Plangothic_Project)（遍黑体） | SIL Open Font License 1.1 |
-| 4 | res/font/plangothic_p2.ttf | Plangothic P2 | 同上（遍黑体） | SIL Open Font License 1.1 |
+| 1 | assets/fonts/TumanPUA.ttf | TumanPUA | [ywxt/rime-huma](https://github.com/ywxt/rime-huma)（虎码输入方案） | MIT License |
+| 2 | assets/fonts/LXGWWenKaiGBScreen.ttf | LXGW WenKai GB Screen | [lxgw/LxgwWenKai](https://github.com/lxgw/LxgwWenKai)（霞鹜文楷） | SIL Open Font License 1.1 |
+| 3 | assets/fonts/PlangothicP1.ttf | Plangothic P1 | [Fitzgerald-Porthmouth-Koenigsegg/Plangothic_Project](https://github.com/Fitzgerald-Porthmouth-Koenigsegg/Plangothic_Project)（遍黑体） | SIL Open Font License 1.1 |
+| 4 | assets/fonts/PlangothicP2.ttf | Plangothic P2 | 同上（遍黑体） | SIL Open Font License 1.1 |
 
 ## 授权判定：霞鹜文楷与遍黑体
 
@@ -25,7 +25,7 @@
 遍黑体 P1/P2 覆盖 CJK 扩展 B–G 等超大字库，适合显示拆分部件中的生僻字与扩展区字符。其授权同为 OFL-1.1，随附许可证全文。
 
 ### TumanPUA 来源声明
-TumanPUA（res/font/tuman_pua.ttf）来自虎码输入方案 [ywxt/rime-huma](https://github.com/ywxt/rime-huma)，项目以 MIT License 开源。该字体将大量拆字部件映射到 Unicode 私有区（U+E000–U+F8FF），用于显示码表中非汉字部件。MIT 许可允许自由使用、修改与再分发，需保留版权声明（见 `LICENSE-rime-huma-MIT.txt`）。
+TumanPUA（assets/fonts/TumanPUA.ttf）来自虎码输入方案 [ywxt/rime-huma](https://github.com/ywxt/rime-huma)，项目以 MIT License 开源。该字体将大量拆字部件映射到 Unicode 私有区（U+E000–U+F8FF），用于显示码表中非汉字部件。MIT 许可允许自由使用、修改与再分发，需保留版权声明（见 `LICENSE-rime-huma-MIT.txt`）。
 
 ## 许可证全文清单
 
