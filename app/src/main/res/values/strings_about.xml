@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="about_version">版本 %1$s</string>
-    <string name="changelog_content">0.0.10（2026-08-29）
+    <string name="changelog_content">0.0.11（2026-08-29）
+更新 chai 码表数据（含扩展区字与 Unicode 区块信息）。
+
+0.0.10（2026-08-29）
 新增结果卡片图片分享：点击卡片右上角分享按钮，按内置字体生成带圆角框与虎助手水印的图片，通过系统分享发送到各聊天软件。
 
 0.0.9（2026-08-29）
