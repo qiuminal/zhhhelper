@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 应用图标前景：虎码标志，简单矢量 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- 虎字（简化为几何图形） -->
+    <path
+        android:fillColor="#E8A020"
+        android:pathData="M38,30 L54,30 L54,42 L66,42 L66,54 L54,54 L54,78 L38,78 Z" />
+    <!-- 码字（简化） -->
+    <path
+        android:fillColor="#333333"
+        android:pathData="M60,30 L76,30 L76,42 L68,42 L68,78 L60,78 Z" />
+    <path
+        android:fillColor="#333333"
+        android:pathData="M78,42 L90,42 L90,50 L78,50 Z" />
+</vector>

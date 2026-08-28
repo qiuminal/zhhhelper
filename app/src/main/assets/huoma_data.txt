@@ -1,0 +1,20 @@
+国	rni rn rnid	囗 王 丶	guó	U+56FD	Rk Nw Id
+明	mq	日 月	míng	U+660E	Mo Qo
+你	ni	亻 尔	nǐ	U+4F60	Ni Ni
+好	vk	女 子	hǎo	U+597D	Zr Nk
+的	rq	白 勺	de	U+7684	Rk Ro
+我	tr	手 戈	wǒ	U+6211	Tm Ro
+是	jc	日 疋	shì	U+662F	Jc Pc
+不	gi	一 小	bù	U+4E0D	Gi Gi
+了	xb	乛 亅	le	U+4E86	Xb Xb
+人	ro	丿 ㇏	rén	U+4EBA	Ro Ro
+大	dk	一 人	dà	U+5927	Dk Ro
+小	xm	亅 八	xiǎo	U+5C0F	Xm Xm
+中	vs	口 丨	zhōng	U+4E2D	Vs Vs
+上	hh	丨 一	shàng	U+4E0A	Hh Hh
+下	hj	一 卜	xià	U+4E0B	Hj Hj
+天	td	一 大	tiān	U+5929	Td Dk
+地	fb	土 也	dì	U+5730	Fb Yb
+山	ll	丨 凵	shān	U+5C71	Ll Ll
+水	ji	亅 氺	shuǐ	U+6C34	Ji Ji
+火	ho	丶 人	huǒ	U+706B	Ho Ro

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.ZhhHelper" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">#5B7FB5</item>
+        <item name="colorPrimaryVariant">#3D5A8A</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="android:windowBackground">@color/bg_white</item>
+        <item name="android:statusBarColor">@color/bg_white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

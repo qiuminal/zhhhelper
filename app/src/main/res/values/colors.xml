@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_white">#FFFFFF</color>
+    <color name="text_primary">#333333</color>
+    <color name="text_secondary">#7A8BA0</color>
+    <color name="text_hint">#BBBBBB</color>
+    <color name="code_blue">#5B7FB5</color>
+    <color name="link_blue">#4A90D9</color>
+    <color name="border_light">#E0E0E0</color>
+    <color name="gradient_start">#F5E6F0</color>
+    <color name="gradient_end">#E0EAF5</color>
+    <color name="card_corner_gradient">#E8F0FA</color>
+</resources>
