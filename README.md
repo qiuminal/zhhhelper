@@ -60,9 +60,11 @@ zhhhelper/
         ├── assets/
         │   ├── zi.txt       # 字头 + 编码
         │   ├── chai.txt     # 拆分两行 + 拼音 + U码
-        │   └── zheng.txt    # 整句码
+        │   ├── zheng.txt    # 整句码
+        │   └── fonts/       # 内置四款字体 + 授权文件
         ├── java/com/qiuminal/zhhhelper/
         │   ├── MainActivity.java        # 主页面：搜索 + 结果展示 + 外部链接
+        │   ├── AppFonts.java            # 全局字体管理（字符级 fallback）
         │   ├── CharData.java            # 单字数据模型（三表合并）
         │   └── DataLoader.java          # 三码表加载 + 合并 + 内存查询
         └── res/
@@ -71,6 +73,19 @@ zhhhelper/
             ├── drawable/                # 背景、图标
             └── mipmap-anydpi-v26/       # 自适应图标
 `
+
+## 内置字体与全局 fallback
+
+为解决拆分部件（很多不属于汉字、位于 Unicode 私有区）无法显示的问题，APP 内置四款字体，在全局按「字符级 fallback」顺序逐字符渲染：
+
+1. TumanPUA（虎码私有区部件）
+2. 霞鹜文楷屏幕阅读版 LXGW WenKai GB Screen（常用汉字）
+3. 遍黑体 Plangothic P1（CJK 扩展 B–F）
+4. 遍黑体 Plangothic P2（CJK 扩展 G）
+
+实现位于 `app/src/main/java/com/qiuminal/zhhhelper/AppFonts.java`：加载四款字体后用 `Paint.hasGlyph` 逐字符选择第一款能渲染的字体，并以 span 方式应用到整个界面；某字符四款字体都不包含时（如 emoji）交给系统字体渲染。
+
+授权说明：霞鹜文楷与遍黑体均为 SIL OFL 1.1（允许免费捆绑进软件分发，商用/非商用均可，须附带许可证全文）；TumanPUA 来自 [ywxt/rime-huma](https://github.com/ywxt/rime-huma)（MIT）。许可证全文与详细判定见 [`licenses/FONTS.md`](licenses/FONTS.md)，并随 APK 打包进 `assets/fonts/licenses/`。
 
 ## 编译
 
@@ -102,5 +117,5 @@ apksigner sign --ks release.jks --out zhhhelper-release.apk app-aligned.apk
 
 ## 说明
 
-- minSdk 21（Android 5.0+），targetSdk 34，纯 Java，无第三方依赖，仅用 AndroidX + Material Components。
+- minSdk 23（Android 6.0+，因逐字符字形判断需 API 23 的 `Paint.hasGlyph`），targetSdk 34，纯 Java，无第三方依赖，仅用 AndroidX + Material Components。
 - 查询会自动跳过输入中的空白与标点，取第一个汉字作为查询键。

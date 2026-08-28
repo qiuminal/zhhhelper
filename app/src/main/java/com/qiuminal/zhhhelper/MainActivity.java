@@ -46,11 +46,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // 初始化全局内置字体（TumanPUA → 霞鹜文楷 → 遍黑体 P1 → P2）
+        AppFonts.init(this);
+
         // 加载内置数据库
         DataLoader.load(this);
 
         initViews();
         setupListeners();
+
+        // 全局应用内置字体（标题、静态标签、搜索框提示等）
+        AppFonts.applyToHierarchy(findViewById(android.R.id.content));
     }
 
     private void initViews() {
@@ -182,6 +188,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         applyFontSize();
+
+        // 结果文本设置完成后，重新应用字符级 fallback 字体
+        AppFonts.applyToHierarchy(resultContainer);
     }
 
     /**
