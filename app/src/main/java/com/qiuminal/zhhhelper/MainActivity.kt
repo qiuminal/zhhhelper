@@ -10,6 +10,9 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 
 /**
  * 虎助手 - 形码编码与拆字查询主页面
@@ -21,6 +24,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnClear: ImageButton
     private lateinit var btnFontMinus: ImageButton
     private lateinit var btnFontPlus: ImageButton
+    private lateinit var btnMenu: ImageButton
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
 
     private lateinit var resultContainer: View      // 结果区整体（标题+卡片）
     private lateinit var tvChar: TextView           // 字头
@@ -70,6 +76,9 @@ class MainActivity : AppCompatActivity() {
         btnClear = findViewById(R.id.btn_clear)
         btnFontMinus = findViewById(R.id.btn_font_minus)
         btnFontPlus = findViewById(R.id.btn_font_plus)
+        btnMenu = findViewById(R.id.btn_menu)
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navView = findViewById(R.id.navigation_view)
 
         resultContainer = findViewById(R.id.result_container)
         tvChar = findViewById(R.id.tv_char)
@@ -89,6 +98,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
+        // 三横杠：打开左侧菜单
+        btnMenu.setOnClickListener { drawerLayout.openDrawer(GravityCompat.START) }
+
+        // 侧滑菜单：首页 / 关于
+        navView.setNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    true
+                }
+                R.id.nav_about -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    startActivity(Intent(this, AboutActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
+
         // 搜索框实时查询
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
