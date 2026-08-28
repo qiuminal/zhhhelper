@@ -1,6 +1,8 @@
 package com.qiuminal.zhhhelper
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -8,11 +10,15 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import java.io.File
+import java.io.FileOutputStream
 
 /**
  * 虎助手 - 形码编码与拆字查询主页面
@@ -24,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnClear: ImageButton
     private lateinit var btnFontMinus: ImageButton
     private lateinit var btnFontPlus: ImageButton
+    private lateinit var btnShare: ImageButton
     private lateinit var btnMenu: ImageButton
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
@@ -76,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         btnClear = findViewById(R.id.btn_clear)
         btnFontMinus = findViewById(R.id.btn_font_minus)
         btnFontPlus = findViewById(R.id.btn_font_plus)
+        btnShare = findViewById(R.id.btn_share)
         btnMenu = findViewById(R.id.btn_menu)
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.navigation_view)
@@ -158,6 +166,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // 分享：生成结果卡片图片并调起系统分享
+        btnShare.setOnClickListener { shareResultCard() }
+
         // 字统：https://zi.tools/zi/<字>
         btnZitong.setOnClickListener { openExternalLink("https://zi.tools/zi/") }
 
@@ -213,21 +224,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         tvComponents.setText(d.components ?: "")
-        // 拼音：没有则显示「无」，有则带括号展示
-        tvPinyin.setText(
-            if (d.pinyin.isNullOrEmpty()) "无" else "(${d.pinyin})"
-        )
-        // U码：〔〕只括码点字段，再与区块拼接，如「CJK 〔U+7684〕」
-        val block = d.unicodeBlock.orEmpty()
-        val code = d.unicodeCode.orEmpty()
-        tvUnicode.setText(
-            when {
-                block.isEmpty() && code.isEmpty() -> "无"
-                block.isEmpty() -> "〔$code〕"
-                code.isEmpty() -> block
-                else -> "$block 〔$code〕"
-            }
-        )
+        tvPinyin.setText(formatPinyin(d.pinyin))
+        tvUnicode.setText(formatUnicode(d.unicodeBlock, d.unicodeCode))
 
         // 整句码（zheng.txt），没有则隐藏整行
         if (!d.zhengCode.isNullOrEmpty()) {
@@ -242,6 +240,105 @@ class MainActivity : AppCompatActivity() {
         // 结果文本设置完成后，重新应用字符级 fallback 字体
         AppFonts.applyToHierarchy(resultContainer)
     }
+
+    /**
+     * 拼音：没有则显示「无」，有则带括号展示
+     */
+    private fun formatPinyin(pinyin: String?): String =
+        if (pinyin.isNullOrEmpty()) "无" else "($pinyin)"
+
+    /**
+     * U码：〔〕只括码点字段，再与区块拼接，如「CJK 〔U+7684〕」
+     */
+    private fun formatUnicode(block: String?, code: String?): String {
+        val b = block.orEmpty()
+        val c = code.orEmpty()
+        return when {
+            b.isEmpty() && c.isEmpty() -> "无"
+            b.isEmpty() -> "〔$c〕"
+            c.isEmpty() -> b
+            else -> "$b 〔$c〕"
+        }
+    }
+
+    /**
+     * 生成查询结果卡片图片并调起系统分享。
+     * 图片与 App 内渲染一致：复用同款卡片样式与内置字体，
+     * 不含字统/汉典链接行，也不含分享按钮；右下角加虎助手水印。
+     */
+    private fun shareResultCard() {
+        val d = currentData ?: return
+        // 兜底：字体尚未加载完成时补加载（正常情况启动时已后台加载完）
+        if (!AppFonts.isLoaded()) {
+            AppFonts.load(applicationContext)
+        }
+        val card = layoutInflater.inflate(R.layout.layout_share_card, null) as LinearLayout
+
+        card.findViewById<TextView>(R.id.tv_share_char).text = d.charText
+        card.findViewById<TextView>(R.id.tv_share_codes).text = d.codes ?: ""
+        val shareRootCodes = card.findViewById<TextView>(R.id.tv_share_root_codes)
+        if (!d.rootCodes.isNullOrEmpty()) {
+            shareRootCodes.visibility = View.VISIBLE
+            shareRootCodes.text = d.rootCodes
+        }
+        card.findViewById<TextView>(R.id.tv_share_components).text = d.components ?: ""
+        card.findViewById<TextView>(R.id.tv_share_pinyin).text = formatPinyin(d.pinyin)
+        card.findViewById<TextView>(R.id.tv_share_unicode).text = formatUnicode(d.unicodeBlock, d.unicodeCode)
+
+        val shareRowZheng = card.findViewById<View>(R.id.row_share_zheng)
+        val shareZheng = card.findViewById<TextView>(R.id.tv_share_zheng)
+        if (!d.zhengCode.isNullOrEmpty()) {
+            shareRowZheng.visibility = View.VISIBLE
+            shareZheng.text = d.zhengCode
+        }
+
+        // 与主界面一致：按当前字号与字符级 fallback 字体渲染
+        applyShareFontSize(card)
+        AppFonts.applyToHierarchy(card)
+
+        // 宽度与主界面卡片一致（屏幕宽 - 左右各 20dp），高度自适应
+        val targetWidth = resources.displayMetrics.widthPixels - dp(40)
+        card.measure(
+            View.MeasureSpec.makeMeasureSpec(targetWidth, View.MeasureSpec.EXACTLY),
+            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+        )
+        card.layout(0, 0, card.measuredWidth, card.measuredHeight)
+
+        val bitmap = Bitmap.createBitmap(card.measuredWidth, card.measuredHeight, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        card.draw(canvas)
+
+        try {
+            val dir = File(cacheDir, "share").apply { mkdirs() }
+            val file = File(dir, "zhh_share_${System.currentTimeMillis()}.png")
+            FileOutputStream(file).use { out -> bitmap.compress(Bitmap.CompressFormat.PNG, 100, out) }
+            val uri = FileProvider.getUriForFile(this, "$packageName.fileprovider", file)
+            val share = Intent(Intent.ACTION_SEND).apply {
+                type = "image/png"
+                putExtra(Intent.EXTRA_STREAM, uri)
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
+            startActivity(Intent.createChooser(share, getString(R.string.share_title)))
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    /**
+     * 分享卡片按主界面当前字号渲染
+     */
+    private fun applyShareFontSize(card: LinearLayout) {
+        val sp = currentFontSp
+        card.findViewById<TextView>(R.id.tv_share_char).setTextSize(sp + 4f)
+        card.findViewById<TextView>(R.id.tv_share_codes).setTextSize(sp)
+        card.findViewById<TextView>(R.id.tv_share_root_codes).setTextSize(sp - 4f)
+        card.findViewById<TextView>(R.id.tv_share_components).setTextSize(sp)
+        card.findViewById<TextView>(R.id.tv_share_pinyin).setTextSize(sp)
+        card.findViewById<TextView>(R.id.tv_share_unicode).setTextSize(sp - 2f)
+        card.findViewById<TextView>(R.id.tv_share_zheng).setTextSize(sp)
+    }
+
+    private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
 
     /**
      * 应用字号到结果卡片正文

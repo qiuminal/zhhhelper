@@ -23,7 +23,7 @@ class AboutActivity : AppCompatActivity() {
             null
         }
         findViewById<TextView>(R.id.tv_version).text =
-            getString(R.string.about_version, version ?: "0.0.9")
+            getString(R.string.about_version, version ?: "0.0.10")
 
         findViewById<ImageButton>(R.id.btn_back).setOnClickListener { finish() }
         findViewById<TextView>(R.id.btn_github).setOnClickListener {
