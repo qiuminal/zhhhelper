@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText etSearch;
     private ImageButton btnClear;
-    private ImageButton btnRefresh;
     private ImageButton btnFontMinus;
     private ImageButton btnFontPlus;
 
@@ -31,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvComponents;      // 拆分部件
     private TextView tvPinyin;          // 拼音
     private TextView tvUnicode;         // U码
+    private View rowZheng;              // 整句码整行
+    private TextView tvZhengCode;       // 整句码
     private TextView btnZitong;         // 字统链接
     private TextView btnYedian;         // 叶典链接
 
@@ -55,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     private void initViews() {
         etSearch = findViewById(R.id.et_search);
         btnClear = findViewById(R.id.btn_clear);
-        btnRefresh = findViewById(R.id.btn_refresh);
         btnFontMinus = findViewById(R.id.btn_font_minus);
         btnFontPlus = findViewById(R.id.btn_font_plus);
 
@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         tvComponents = findViewById(R.id.tv_components);
         tvPinyin = findViewById(R.id.tv_pinyin);
         tvUnicode = findViewById(R.id.tv_unicode);
+        rowZheng = findViewById(R.id.row_zheng);
+        tvZhengCode = findViewById(R.id.tv_zheng_code);
         btnZitong = findViewById(R.id.btn_zitong);
         btnYedian = findViewById(R.id.btn_yedian);
 
@@ -97,13 +99,6 @@ public class MainActivity extends AppCompatActivity {
 
         // 清除按钮
         btnClear.setOnClickListener(v -> etSearch.setText(""));
-
-        // 刷新按钮（重新加载数据库）
-        btnRefresh.setOnClickListener(v -> {
-            DataLoader.load(this);
-            String input = etSearch.getText().toString().trim();
-            if (!input.isEmpty()) doQuery(input);
-        });
 
         // 字体减小
         btnFontMinus.setOnClickListener(v -> {
@@ -176,7 +171,15 @@ public class MainActivity extends AppCompatActivity {
 
         tvComponents.setText(d.components != null ? d.components : "");
         tvPinyin.setText(d.pinyin != null ? "(" + d.pinyin + ")" : "");
-        tvUnicode.setText(d.unicode != null ? "基本 〔" + d.unicode + "〕" : "");
+        tvUnicode.setText(d.unicode != null ? "〔" + d.unicode + "〕" : "");
+
+        // 整句码（zheng.txt），没有则隐藏整行
+        if (d.zhengCode != null && !d.zhengCode.isEmpty()) {
+            rowZheng.setVisibility(View.VISIBLE);
+            tvZhengCode.setText(d.zhengCode);
+        } else {
+            rowZheng.setVisibility(View.GONE);
+        }
 
         applyFontSize();
     }
@@ -190,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
         tvComponents.setTextSize(currentFontSp);
         tvPinyin.setTextSize(currentFontSp);
         tvUnicode.setTextSize(currentFontSp - 2f);
+        tvZhengCode.setTextSize(currentFontSp);
         tvRootCodes.setTextSize(currentFontSp - 4f);
     }
 }

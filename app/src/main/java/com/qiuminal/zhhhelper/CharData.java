@@ -1,36 +1,18 @@
 package com.qiuminal.zhhhelper;
 
 /**
- * 单字数据模型
- * 对应 assets/huoma_data.txt 中一行记录
+ * 单字数据模型，由三个码表按「字头」主键合并：
+ *   zi.txt    -> charText, codes（编码）
+ *   chai.txt  -> rootCodes（拆分第1行/第2列），components（拆分第2行/第3列），
+ *                 pinyin（第4列），unicode（第5+6列拼接）
+ *   zheng.txt -> zhengCode（整句码）
  */
 public class CharData {
-    public String charText;      // 字头，如 "国"
-    public String codes;         // 编码列表，空格分隔，如 "rni rn rnid"
-    public String components;    // 拆分部件，空格分隔，如 "囗 王 丶"
-    public String pinyin;        // 拼音，如 "guó"
-    public String unicode;       // Unicode，如 "U+56FD"
-    public String rootCodes;     // 字根编码，可选，如 "Rk Nw Id"
-
-    public CharData() {
-    }
-
-    /**
-     * 从一行文本解析，制表符分隔
-     * 格式：字头\t编码\t拆分\t拼音\tUnicode\t字根编码(可选)
-     */
-    public static CharData parse(String line) {
-        if (line == null || line.trim().isEmpty()) return null;
-        String[] parts = line.split("\t", -1);
-        if (parts.length < 2) return null;
-
-        CharData d = new CharData();
-        d.charText = parts[0].trim();
-        d.codes = parts.length > 1 ? parts[1].trim() : "";
-        d.components = parts.length > 2 ? parts[2].trim() : "";
-        d.pinyin = parts.length > 3 ? parts[3].trim() : "";
-        d.unicode = parts.length > 4 ? parts[4].trim() : "";
-        d.rootCodes = parts.length > 5 ? parts[5].trim() : "";
-        return d;
-    }
+    public String charText;      // 字头（主键）
+    public String codes;         // 编码（zi.txt），多个用空格分隔，如 "zhh zh"
+    public String rootCodes;     // 拆分第1行（chai.txt 第2列）
+    public String components;    // 拆分第2行（chai.txt 第3列）
+    public String pinyin;        // 拼音（chai.txt 第4列）
+    public String unicode;       // U码（chai.txt 第5+6列拼接），如 "CJK U+864E"
+    public String zhengCode;     // 整句码（zheng.txt）
 }
