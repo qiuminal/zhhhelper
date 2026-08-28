@@ -24,7 +24,8 @@
             android:text="虎助手"
             android:textColor="@color/text_primary"
             android:textSize="28sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/zhhhelper_fonts" />
 
         <ImageButton
             android:layout_width="40dp"
@@ -57,7 +58,8 @@
                 android:text="🐯虎码拆分查询："
                 android:textColor="@color/text_secondary"
                 android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/zhhhelper_fonts" />
 
             <!-- 搜索框 -->
             <LinearLayout
@@ -73,7 +75,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="🔍"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:fontFamily="@font/zhhhelper_fonts" />
 
                 <EditText
                     android:id="@+id/et_search"
@@ -87,7 +90,8 @@
                     android:maxLines="1"
                     android:textColor="@color/text_primary"
                     android:textColorHint="@color/text_hint"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:fontFamily="@font/zhhhelper_fonts" />
 
                 <ImageButton
                     android:id="@+id/btn_clear"
@@ -124,7 +128,8 @@
                         android:text="查询结果："
                         android:textColor="@color/text_secondary"
                         android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/zhhhelper_fonts" />
 
                     <ImageButton
                         android:id="@+id/btn_font_minus"
@@ -167,7 +172,8 @@
                             android:layout_height="wrap_content"
                             android:text="字头："
                             android:textColor="@color/text_secondary"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:fontFamily="@font/zhhhelper_fonts" />
 
                         <TextView
                             android:id="@+id/tv_char"
@@ -175,7 +181,8 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/text_primary"
                             android:textSize="22sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:fontFamily="@font/zhhhelper_fonts" />
                     </LinearLayout>
 
                     <!-- 编码 -->
@@ -190,7 +197,8 @@
                             android:layout_height="wrap_content"
                             android:text="编码："
                             android:textColor="@color/text_secondary"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:fontFamily="@font/zhhhelper_fonts" />
 
                         <TextView
                             android:id="@+id/tv_codes"
@@ -198,7 +206,8 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/code_blue"
                             android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:fontFamily="@font/zhhhelper_fonts" />
                     </LinearLayout>
 
                     <!-- 拆分（含上方小字根码） -->
@@ -213,7 +222,8 @@
                             android:layout_height="wrap_content"
                             android:text="拆分："
                             android:textColor="@color/text_secondary"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:fontFamily="@font/zhhhelper_fonts" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -227,7 +237,8 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/text_hint"
                                 android:textSize="14sp"
-                                android:visibility="gone" />
+                                android:visibility="gone"
+                                android:fontFamily="@font/zhhhelper_fonts" />
 
                             <!-- 拆分部件（如 囗 王 丶） -->
                             <TextView
@@ -236,7 +247,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:textColor="@color/text_primary"
-                                android:textSize="18sp" />
+                                android:textSize="18sp"
+                                android:fontFamily="@font/zhhhelper_fonts" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -252,14 +264,16 @@
                             android:layout_height="wrap_content"
                             android:text="拼音："
                             android:textColor="@color/text_secondary"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:fontFamily="@font/zhhhelper_fonts" />
 
                         <TextView
                             android:id="@+id/tv_pinyin"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/text_primary"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:fontFamily="@font/zhhhelper_fonts" />
                     </LinearLayout>
 
                     <!-- U码 -->
@@ -274,14 +288,16 @@
                             android:layout_height="wrap_content"
                             android:text="U 码："
                             android:textColor="@color/text_secondary"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:fontFamily="@font/zhhhelper_fonts" />
 
                         <TextView
                             android:id="@+id/tv_unicode"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/text_primary"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:fontFamily="@font/zhhhelper_fonts" />
                     </LinearLayout>
 
                     <!-- 整句码 -->
@@ -298,7 +314,8 @@
                             android:layout_height="wrap_content"
                             android:text="整句码："
                             android:textColor="@color/text_secondary"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:fontFamily="@font/zhhhelper_fonts" />
 
                         <TextView
                             android:id="@+id/tv_zheng_code"
@@ -306,7 +323,8 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/code_blue"
                             android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:fontFamily="@font/zhhhelper_fonts" />
                     </LinearLayout>
 
                     <!-- 字统链接 -->
@@ -321,7 +339,8 @@
                             android:layout_height="wrap_content"
                             android:text="字统："
                             android:textColor="@color/text_secondary"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:fontFamily="@font/zhhhelper_fonts" />
 
                         <TextView
                             android:id="@+id/btn_zitong"
@@ -330,7 +349,8 @@
                             android:text="查看字统"
                             android:textColor="@color/link_blue"
                             android:textSize="18sp"
-                            android:background="@drawable/bg_link_underline" />
+                            android:background="@drawable/bg_link_underline"
+                            android:fontFamily="@font/zhhhelper_fonts" />
                     </LinearLayout>
 
                     <!-- 叶典链接 -->
@@ -345,7 +365,8 @@
                             android:layout_height="wrap_content"
                             android:text="叶典："
                             android:textColor="@color/text_secondary"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:fontFamily="@font/zhhhelper_fonts" />
 
                         <TextView
                             android:id="@+id/btn_yedian"
@@ -354,7 +375,8 @@
                             android:text="查看叶典"
                             android:textColor="@color/link_blue"
                             android:textSize="18sp"
-                            android:background="@drawable/bg_link_underline" />
+                            android:background="@drawable/bg_link_underline"
+                            android:fontFamily="@font/zhhhelper_fonts" />
                     </LinearLayout>
 
                 </LinearLayout>
