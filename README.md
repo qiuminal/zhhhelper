@@ -1,121 +1,36 @@
 # 虎助手（zhhhelper）
 
-安卓形码编码与拆字查询工具。输入汉字，实时查询该字的形码编码、拆分部件、拼音、U 码、整句码，内置码表，纯离线查询。
+虎助手是一款安卓端「形码编码与拆字查询」工具。输入汉字即可实时查询该字的形码编码、拆分部件、拼音、Unicode 与整句码，码表全部内置，纯离线运行。
 
-- 项目英文名：zhhhelper
-- 应用名：虎助手
-- 包名：com.qiuminal.zhhhelper
+## 功能特性
 
-## 功能
+- **多字查询**：一次输入一个或多个汉字，自上而下逐字输出查询卡片，下滑可查看全部结果
+- **结果卡片**：每张卡片展示字头、编码、拆分（字根码 + 部件两行）、拼音、Unicode、整句码（单字在虎整句中的打法）
+- **图片分享**：每张卡片可一键生成与界面渲染一致的结果图（带虎助手水印），分享到微信、QQ 群等应用，内置字体在分享图中同样正常展示
+- **在线跳转**：字统（zi.tools）、汉典（zdic.net）一键直达当前字的查询页
+- **全局字体**：内置 TumanPUA、霞鹜文楷、遍黑体 P1/P2 四款字体，按字符级 fallback 渲染，生僻字、CJK 扩展区汉字与拆分部件均可正常显示
+- **字号调节**：结果卡片字号可自由加减，分享图字号同步生效
+- **侧滑菜单**：首页 / 关于
 
-- 输入汉字，实时查询编码、拆分（两行）、拼音、U 码、整句码
-- 支持多个编码显示（如简码、全码）
-- “字统”“叶典”链接：点击用系统浏览器打开对应网站的当前字查询页
-- 结果卡片字体大小可加减调节
-- 数据全部内置在 APK assets 中，纯离线，无需网络
+## 数据
 
-## 数据来源（三张码表，均以「字头」为主键）
+内置虎码全字集码表（zi / chai / zheng 三表，以字头为主键合并）。码表在构建时编译为二进制索引 `assets/tables.bin`，启动快、查询快、数据不可直接编辑；更新码表只需替换 `data/` 目录下的原始 txt 后重新构建。
 
-### ssets/zi.txt —— 字头 + 编码
+## 技术
 
-`
-字头	编码（多个用空格分隔）
-`
+- 语言：Kotlin（全部源码）
+- 兼容：minSdk 23（Android 6.0+），targetSdk 34
+- 依赖：AndroidX、Material Components
 
-示例：虎	zhh zh
-
-### ssets/chai.txt —— 拆分、拼音、U 码
-
-`
-字头	拆分第1行	拆分第2行	拼音	CJK	U+XXXX
-`
-
-示例：虎	Zh	虎	hǔ hù	CJK	U+864E
-
-- 拆分：展示两行，分别取第 2 列、第 3 列
-- 拼音：取第 4 列
-- U 码：取第 5、6 列拼接显示（如 CJK U+864E）
-
-### ssets/zheng.txt —— 整句码
-
-`
-字头	整句码
-`
-
-示例：虎	zhh
-
-> 文件均为 UTF-8 编码、Tab 分隔。chai.txt 首行带 BOM 也能正常解析。
-
-## 项目结构
-
-`
-zhhhelper/
-├── settings.gradle
-├── build.gradle
-└── app/
-    ├── build.gradle
-    ├── proguard-rules.pro
-    └── src/main/
-        ├── AndroidManifest.xml
-        ├── assets/
-        │   ├── zi.txt       # 字头 + 编码
-        │   ├── chai.txt     # 拆分两行 + 拼音 + U码
-        │   ├── zheng.txt    # 整句码
-        │   └── fonts/       # 内置四款字体 + 授权文件
-        ├── java/com/qiuminal/zhhhelper/
-        │   ├── MainActivity.java        # 主页面：搜索 + 结果展示 + 外部链接
-        │   ├── AppFonts.java            # 全局字体管理（字符级 fallback）
-        │   ├── CharData.java            # 单字数据模型（三表合并）
-        │   └── DataLoader.java          # 三码表加载 + 合并 + 内存查询
-        └── res/
-            ├── layout/activity_main.xml # 主布局
-            ├── values/                  # 颜色、字符串、主题
-            ├── drawable/                # 背景、图标
-            └── mipmap-anydpi-v26/       # 自适应图标
-`
-
-## 内置字体与全局 fallback
-
-为解决拆分部件（很多不属于汉字、位于 Unicode 私有区）无法显示的问题，APP 内置四款字体，在全局按「字符级 fallback」顺序逐字符渲染：
-
-1. TumanPUA（虎码私有区部件）
-2. 霞鹜文楷屏幕阅读版 LXGW WenKai GB Screen（常用汉字）
-3. 遍黑体 Plangothic P1（CJK 扩展 B–F）
-4. 遍黑体 Plangothic P2（CJK 扩展 G）
-
-实现位于 `app/src/main/java/com/qiuminal/zhhhelper/AppFonts.java`：加载四款字体后用 `Paint.hasGlyph` 逐字符选择第一款能渲染的字体，并以 span 方式应用到整个界面；某字符四款字体都不包含时（如 emoji）交给系统字体渲染。
-
-授权说明：霞鹜文楷与遍黑体均为 SIL OFL 1.1（允许免费捆绑进软件分发，商用/非商用均可，须附带许可证全文）；TumanPUA 来自 [ywxt/rime-huma](https://github.com/ywxt/rime-huma)（MIT）。许可证全文与详细判定见 [`licenses/FONTS.md`](licenses/FONTS.md)，并随 APK 打包进 `assets/fonts/licenses/`。
-
-## 编译
+## 构建
 
 环境要求：JDK 17、Android SDK（compileSdk 34）、Gradle 8.x。
 
-`ash
-# 首次同步
-./gradlew build
-
-# 生成 release APK（未签名，输出 app-release-unsigned.apk）
+```bash
 ./gradlew assembleRelease
-`
+```
 
-## 签名
+## 开源与授权
 
-未配置自动签名，release 产物需自行用 pksigner 签名：
-
-`ash
-# 1. 生成密钥库（仅需一次）
-keytool -genkeypair -v -keystore release.jks -keyalg RSA -keysize 2048 \
-  -validity 10000 -alias zhhhelper -dname "CN=虎助手"
-
-# 2. 对齐 + 签名
-zipalign -p -f 4 app-release-unsigned.apk app-aligned.apk
-apksigner sign --ks release.jks --out zhhhelper-release.apk app-aligned.apk
-`
-
-> elease.jks 请妥善保管并加入 .gitignore，不要提交到仓库。后续升级需用同一密钥签名，否则无法覆盖安装。
-
-## 说明
-
-- minSdk 23（Android 6.0+，因逐字符字形判断需 API 23 的 `Paint.hasGlyph`），targetSdk 34，纯 Java，无第三方依赖，仅用 AndroidX + Material Components。
-- 查询会自动跳过输入中的空白与标点，取第一个汉字作为查询键。
+- 字体：霞鹜文楷、遍黑体（SIL OFL 1.1）；TumanPUA（MIT）。许可证全文见 `app/src/main/assets/fonts/licenses/`
+- 本项目采用 GPL-3.0 协议开源，详见 [LICENSE](LICENSE)
