@@ -72,13 +72,35 @@
                     android:textSize="26sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tv_version"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_version"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_update_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_update_badge"
+                        android:gravity="center"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="2dp"
+                        android:text="有新版本"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -197,14 +219,10 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <TextView
+                <com.qiuminal.zhhhelper.JustifyTextView
                     android:id="@+id/tv_changelog"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:lineSpacingExtra="6dp"
-                    android:text="@string/changelog_content"
-                    android:textColor="@color/text_primary"
-                    android:textSize="15sp" />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

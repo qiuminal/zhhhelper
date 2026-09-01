@@ -138,6 +138,9 @@ object AppFonts {
         return if (idx in 1..tfs.size) tfs[idx - 1] else null
     }
 
+    /** 公开查询：返回码点对应的内置字体；四款都没有字形时返回 null（用系统字体）。 */
+    fun typefaceForCodePoint(cp: Int): Typeface? = fontForCodePoint(cp)
+
     /**
      * 递归应用到整棵视图树：静态文本与结果文本走 style() 重新 setText，
      * EditText 只处理 hint + 原地样式（正文由输入监听器实时套用，避免打断输入）。
@@ -238,11 +241,29 @@ object AppFonts {
      */
     private class FontTypefaceSpan(private val typeface: Typeface) : MetricAffectingSpan() {
         override fun updateDrawState(textPaint: TextPaint) {
-            textPaint.typeface = typeface
+            textPaint.typeface = resolveStyle(textPaint)
         }
 
         override fun updateMeasureState(textPaint: TextPaint) {
-            textPaint.typeface = typeface
+            textPaint.typeface = resolveStyle(textPaint)
+        }
+
+        /** 保留画笔已有字重/斜体：叠加 StyleSpan 设置的粗体与仿粗体，再映射到自定义字体。 */
+        private fun resolveStyle(textPaint: TextPaint): Typeface {
+            val old = textPaint.typeface
+            var style = old?.style ?: Typeface.NORMAL
+            if (textPaint.isFakeBoldText) {
+                style = style or Typeface.BOLD
+            }
+            if (style == Typeface.NORMAL) {
+                return typeface
+            }
+            val styled = Typeface.create(typeface, style)
+            if ((style and Typeface.BOLD) != 0 && (styled.style and Typeface.BOLD) == 0) {
+                // 自定义字体无粗体文件时用仿粗体补齐，保证加粗仍可见
+                textPaint.isFakeBoldText = true
+            }
+            return styled
         }
     }
 }

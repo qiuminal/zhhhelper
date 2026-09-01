@@ -14,8 +14,12 @@ import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.Spanned
+import android.text.SpannableStringBuilder
+import android.text.TextPaint
 import android.text.TextWatcher
+import android.text.method.LinkMovementMethod
 import android.text.style.BackgroundColorSpan
+import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.ReplacementSpan
 import android.view.Gravity
@@ -108,6 +112,8 @@ class PracticeActivity : AppCompatActivity() {
         private const val COLOR_CORRECT_BG = 0xFFE8F5E9.toInt()   // 已打对：浅绿阴影
         private const val COLOR_WRONG_BG = 0xFFFDECEA.toInt()     // 已打错：浅红阴影
         private const val COLOR_CURSOR = 0xFF5B7FB5.toInt()       // 待打光标：竖线
+        private const val COLOR_WRONG_LINK = 0xFF4A90D9.toInt()   // 错字链接：蓝色
+        private const val COLOR_WRONG_UNDERLINE = 0x804A90D9.toInt() // 错字虚线：浅蓝
         private const val CARET_ANCHOR = '\u200B'                 // 零宽占位，画光标用
     }
 
@@ -167,6 +173,8 @@ class PracticeActivity : AppCompatActivity() {
         tvDoneStats = findViewById(R.id.tv_done_stats)
         tvWrongLabel = findViewById(R.id.tv_wrong_label)
         tvWrongList = findViewById(R.id.tv_wrong_list)
+        tvWrongList.movementMethod = LinkMovementMethod.getInstance()
+        tvWrongList.highlightColor = 0x224A90D9
         panelDone = findViewById(R.id.panel_done)
         panelDone.isFocusable = true
         panelDone.isFocusableInTouchMode = true
@@ -366,8 +374,28 @@ class PracticeActivity : AppCompatActivity() {
         if (groupIndex < groups.size - 1) {
             startGroup(groupIndex + 1)
         } else {
-            Toast.makeText(this, "已是最后一组", Toast.LENGTH_SHORT).show()
+            showReplayDialog()
         }
+    }
+
+    /** 最后一组跟打完成：弹窗询问是否再练一遍，重新开始 或 乱序开始。 */
+    private fun showReplayDialog() {
+        if (groups.isEmpty() || currentFileIndex !in files.indices) return
+        val practiceName = displayName(files[currentFileIndex])
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_replay_practice)
+        dialog.window?.setBackgroundDrawableResource(R.drawable.bg_dialog_rounded)
+        dialog.findViewById<TextView>(R.id.tv_dialog_title)?.text = "已是${practiceName}最后一组"
+        dialog.findViewById<TextView>(R.id.tv_dialog_body)?.text = "是否重新开始${practiceName}练习？"
+        dialog.findViewById<View>(R.id.btn_dialog_restart)?.setOnClickListener {
+            dialog.dismiss()
+            startGroup(0)
+        }
+        dialog.findViewById<View>(R.id.btn_dialog_shuffle)?.setOnClickListener {
+            dialog.dismiss()
+            shuffleAll()
+        }
+        dialog.show()
     }
     /** 全体乱序：fixed 打散全部条目后按 GROUP_SIZE 重新分组；varible 打乱行（组）顺序。保存乱序状态与种子，冷启动可恢复。 */
     private fun shuffleAll() {
@@ -695,7 +723,7 @@ class PracticeActivity : AppCompatActivity() {
         copyResultToClipboard(buildShareText(speedStr, kpsStr, acc))
 
         tvWrongLabel.visibility = if (wrongChars.isEmpty()) View.GONE else View.VISIBLE
-        tvWrongList.text = wrongChars.joinToString("  ")
+        tvWrongList.text = renderWrongList()
         panelDone.visibility = View.VISIBLE
         val panelFocused = panelDone.requestFocus()
         Log.d("ZhhPractice", "complete panelFocus=$panelFocused imeActive=${(getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).isActive()}")
@@ -706,6 +734,96 @@ class PracticeActivity : AppCompatActivity() {
             scrollPractice.smoothScrollTo(0, targetTop)
         }
     }
+    /** 错字列表渲染：每个错字为蓝色虚线下划线、可点击，点击弹出该字拆分查询卡片。 */
+    private fun renderWrongList(): CharSequence {
+        val sb = SpannableStringBuilder()
+        wrongChars.forEachIndexed { index, ch ->
+            if (index > 0) sb.append("  ")
+            val charStr = ch.toString()
+            val start = sb.length
+            sb.append(charStr)
+            val end = sb.length
+            sb.setSpan(object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    showCharPopup(charStr)
+                }
+                override fun updateDrawState(ds: TextPaint) {
+                    ds.color = COLOR_WRONG_LINK
+                    ds.isUnderlineText = false
+                }
+            }, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            sb.setSpan(ForegroundColorSpan(COLOR_WRONG_LINK), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            sb.setSpan(DashedUnderlineSpan(COLOR_WRONG_LINK, COLOR_WRONG_UNDERLINE, resources.displayMetrics.density), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        return sb
+    }
+
+    /** 点击错字弹出简版拆分查询卡片（富文本，非图片；点击空白处关闭）。 */
+    private fun showCharPopup(charText: String) {
+        if (!DataLoader.isLoaded()) {
+            DataLoader.load(applicationContext)
+        }
+        val data = DataLoader.query(charText)
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.layout_char_popup)
+        dialog.window?.setBackgroundDrawableResource(R.drawable.bg_dialog_rounded)
+        dialog.setCancelable(true)
+        dialog.setCanceledOnTouchOutside(true)
+
+        val tvChar = dialog.findViewById<TextView>(R.id.tv_popup_char)
+        val tvCodes = dialog.findViewById<TextView>(R.id.tv_popup_codes)
+        val tvRootCodes = dialog.findViewById<TextView>(R.id.tv_popup_root_codes)
+        val tvComponents = dialog.findViewById<TextView>(R.id.tv_popup_components)
+        val tvPinyin = dialog.findViewById<TextView>(R.id.tv_popup_pinyin)
+        val tvUnicode = dialog.findViewById<TextView>(R.id.tv_popup_unicode)
+        val rowZheng = dialog.findViewById<View>(R.id.row_popup_zheng)
+        val tvZheng = dialog.findViewById<TextView>(R.id.tv_popup_zheng)
+
+        tvChar.text = AppFonts.style(charText) ?: charText
+        if (data == null) {
+            tvCodes.text = "暂未收录"
+            tvComponents.text = "码表中暂无该字数据"
+            tvPinyin.text = ""
+            tvUnicode.text = ""
+            tvRootCodes.visibility = View.GONE
+            rowZheng.visibility = View.GONE
+        } else {
+            tvCodes.text = data.codes ?: ""
+            if (!data.rootCodes.isNullOrEmpty()) {
+                tvRootCodes.visibility = View.VISIBLE
+                tvRootCodes.text = AppFonts.style(data.rootCodes) ?: data.rootCodes
+            } else {
+                tvRootCodes.visibility = View.GONE
+            }
+            tvComponents.text = AppFonts.style(data.components ?: "") ?: ""
+            tvPinyin.text = AppFonts.style(formatPinyin(data.pinyin)) ?: formatPinyin(data.pinyin)
+            tvUnicode.text = AppFonts.style(formatUnicode(data.unicodeBlock, data.unicodeCode)) ?: formatUnicode(data.unicodeBlock, data.unicodeCode)
+            if (!data.zhengCode.isNullOrEmpty()) {
+                rowZheng.visibility = View.VISIBLE
+                tvZheng.text = AppFonts.style(data.zhengCode) ?: data.zhengCode
+            } else {
+                rowZheng.visibility = View.GONE
+            }
+        }
+        dialog.show()
+    }
+
+    /** 拼音：没有则显示「无」，有则带括号展示。 */
+    private fun formatPinyin(pinyin: String?): String =
+        if (pinyin.isNullOrEmpty()) "无" else "($pinyin)"
+
+    /** U码：〔〕只括码点字段，再与区块拼接，如「基本 〔U+7684〕」。 */
+    private fun formatUnicode(block: String?, code: String?): String {
+        val b = block.orEmpty()
+        val c = code.orEmpty()
+        return when {
+            b.isEmpty() && c.isEmpty() -> "无"
+            b.isEmpty() -> "〔$c〕"
+            c.isEmpty() -> b
+            else -> "$b 〔$c〕"
+        }
+    }
+
 
     /** 生成可分享的纯文本成绩单。 */
     private fun buildShareText(speedStr: String, kpsStr: String, acc: Double): String {
@@ -830,8 +948,61 @@ class PracticeActivity : AppCompatActivity() {
         }
     }
 
-    // ---------------- 其它 ----------------
+    /** 错字蓝色虚线下划线：绘制文字本身 + 底部蓝色虚线（每字一个 span）。 */
+    private class DashedUnderlineSpan(
+        private val textColor: Int,
+        private val lineColor: Int,
+        private val density: Float,
+    ) : ReplacementSpan() {
 
+        override fun getSize(paint: Paint, text: CharSequence?, start: Int, end: Int, fm: Paint.FontMetricsInt?): Int =
+            kotlin.math.ceil(paint.measureText(text, start, end)).toInt()
+
+        override fun draw(
+            canvas: Canvas,
+            text: CharSequence?,
+            start: Int,
+            end: Int,
+            x: Float,
+            top: Int,
+            baseline: Int,
+            bottom: Int,
+            paint: Paint,
+        ) {
+            val oldColor = paint.color
+            val oldTypeface = paint.typeface
+            // 逐字符应用内置 fallback 字体，保证生僻字/部件可正常显示
+            if (text != null && start < end) {
+                val cp = Character.codePointAt(text.toString(), start)
+                AppFonts.typefaceForCodePoint(cp)?.let { paint.typeface = it }
+            }
+            paint.color = textColor
+            paint.isUnderlineText = false
+            canvas.drawText(text.toString(), start, end, x, baseline.toFloat(), paint)
+
+            // 文字底部画浅色虚线：与字拉开距离、线更细更浅，避免误看成笔划
+            val width = paint.measureText(text, start, end)
+            val dash = 4f * density
+            val gap = 3f * density
+            // 虚线紧贴本行行框底部下方，落在行间距内，既与字拉开距离又不会偏向下一行
+            val underlineY = baseline + paint.fontMetrics.descent + 3f * density
+            val endX = x + width
+            var dx = x
+            paint.color = lineColor
+            paint.strokeWidth = 1f * density
+            while (dx < endX) {
+                val segEnd = minOf(dx + dash, endX)
+                canvas.drawLine(dx, underlineY, segEnd, underlineY, paint)
+                dx = segEnd + gap
+            }
+
+            paint.strokeWidth = 0f
+            paint.color = oldColor
+            paint.typeface = oldTypeface
+        }
+    }
+
+    // ---------------- 其它 ----------------
     private fun showKeyboard() {
         etCapture.post {
             val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
