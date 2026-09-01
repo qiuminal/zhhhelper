@@ -20,6 +20,10 @@
         <activity
             android:name=".AboutActivity"
             android:exported="false" />
+        <activity
+            android:name=".PracticeActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.qiuminal.zhhhelper.fileprovider"
@@ -32,3 +36,4 @@
     </application>
 
 </manifest>
+

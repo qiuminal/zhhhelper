@@ -1,7 +1,10 @@
 package com.qiuminal.zhhhelper
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
@@ -28,6 +31,18 @@ class AboutActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.btn_back).setOnClickListener { finish() }
         findViewById<TextView>(R.id.btn_github).setOnClickListener {
             openUrl("https://github.com/qiuminal")
+        }
+
+        // QQ 号：点击复制到剪贴板
+        findViewById<TextView>(R.id.btn_qq).setOnClickListener {
+            val qq = "871334822"
+            try {
+                val cm = getSystemService(ClipboardManager::class.java)
+                cm.setPrimaryClip(ClipData.newPlainText("QQ", qq))
+                Toast.makeText(this, "已复制到剪贴板", Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
         // 全局字体：主界面已加载时立即生效；未加载则在后台补加载一次

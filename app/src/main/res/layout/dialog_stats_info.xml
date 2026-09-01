@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minWidth="280dp"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="统计说明"
+        android:textColor="@color/text_primary"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:lineSpacingExtra="3dp"
+        android:text="速度、击键及键准统计，仅适用于使用虎码官方码表的打单用户，且存在一定误差，仅供参考~"
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/btn_dialog_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="18dp"
+        android:background="?attr/selectableItemBackground"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="8dp"
+        android:text="知道了"
+        android:textColor="@color/code_blue"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+</LinearLayout>

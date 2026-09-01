@@ -11,8 +11,8 @@ android {
         applicationId "com.qiuminal.zhhhelper"
         minSdk 23
         targetSdk 34
-        versionCode 13
-        versionName "0.1.0"
+        versionCode 14
+        versionName "0.2.0"
     }
 
     buildTypes {
@@ -156,3 +156,88 @@ tasks.register('generateTablesBin') {
     }
 }
 tasks.named('preBuild').configure { dependsOn('generateTablesBin') }
+
+// ============================================================
+// 击键码表二进制编译 generateKeystrokesBin
+// 源数据：data/tiger.dict.yaml（Rime 虎码词典，直接替换文件即可）
+// 产物：app/src/main/assets/keystrokes.bin
+// 内容：单字 -> 最短编码字母串（选重简码），供练单击键统计与键准逐键比对；
+//       多字词组条目不参与（上屏键按实际上屏批次计 1 次）。
+// 二进制格式（大端序）：
+//   Header(20B): magic "ZHKY" | version u32=2 | charCount u32
+//                | dataOffset u32(=20) | checksum u32(Adler32 over data)
+//   Data: charCount * 9B，按 (keyU16_1,keyU16_2) 升序：
+//     keyU16_1 u16 | keyU16_2 u16(0=BMP) | codeLen u8 | code[4]（a-z，不足补 0）
+// ============================================================
+def keystrokesBin = file("src/main/assets/keystrokes.bin")
+def keystrokesTxt = new File(dataDir, 'tiger.dict.yaml')
+
+tasks.register('generateKeystrokesBin') {
+    inputs.files(keystrokesTxt)
+    outputs.file(keystrokesBin)
+    doLast {
+        // key = 单字（码点字符串）-> 最短编码字母串
+        def minCodes = [:]
+        boolean inData = false
+        keystrokesTxt.eachLine('UTF-8') { line ->
+            if (!inData) {
+                if (line.trim() == '...') inData = true
+                return
+            }
+            if (line.trim().isEmpty() || line.startsWith('#')) return
+            def parts = line.split('\t', -1)
+            if (parts.length < 2) return
+            def word = parts[0].replace('\uFEFF', '').trim()
+            def code = parts[1].trim()
+            if (word.isEmpty() || code.isEmpty()) return
+            // 只收录单码点（单字）条目；词组条目跳过
+            if (word.codePointCount(0, word.length()) != 1) return
+            if (code.length() > 4) throw new GradleException("keystrokes: code too long for $word: $code")
+            def cur = minCodes.get(word)
+            if (cur == null || code.length() < cur.length()) minCodes.put(word, code)
+        }
+        if (minCodes.isEmpty()) throw new GradleException("keystrokes: no single-char entries in tiger.dict.yaml")
+        // 按键的 UTF-16 码元升序排序
+        def keys = new ArrayList(minCodes.keySet())
+        Collections.sort(keys) { a, b ->
+            int n = Math.min(a.length(), b.length())
+            for (int i = 0; i < n; i++) {
+                int d = (int) a.charAt(i) - (int) b.charAt(i)
+                if (d != 0) return d
+            }
+            return a.length() - b.length()
+        }
+        def dataBuf = new ByteArrayOutputStream()
+        def dataOut = new DataOutputStream(dataBuf)
+        for (String key : keys) {
+            dataOut.writeShort((int) key.charAt(0) & 0xFFFF)
+            dataOut.writeShort(key.length() > 1 ? (int) key.charAt(1) & 0xFFFF : 0)
+            def code = minCodes.get(key)
+            byte[] codeBytes = code.getBytes('US-ASCII')
+            dataOut.writeByte(codeBytes.length)
+            dataOut.write(codeBytes)
+            for (int i = codeBytes.length; i < 4; i++) dataOut.writeByte(0)
+        }
+        def dataBytes = dataBuf.toByteArray()
+        def headerBuf = new ByteArrayOutputStream()
+        def headerOut = new DataOutputStream(headerBuf)
+        headerOut.writeBytes('ZHKY')
+        headerOut.writeInt(2)
+        headerOut.writeInt(keys.size())
+        headerOut.writeInt(20)
+        def crc = new java.util.zip.Adler32()
+        crc.update(dataBytes)
+        headerOut.writeInt((int) crc.value)
+        def headerBytes = headerBuf.toByteArray()
+        keystrokesBin.parentFile.mkdirs()
+        def fos = new FileOutputStream(keystrokesBin)
+        try {
+            fos.write(headerBytes)
+            fos.write(dataBytes)
+        } finally {
+            fos.close()
+        }
+        logger.lifecycle("generateKeystrokesBin: {} single-char entries -> {}", keys.size(), keystrokesBin)
+    }
+}
+tasks.named('preBuild').configure { dependsOn('generateKeystrokesBin') }

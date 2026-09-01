@@ -162,17 +162,18 @@
                     <TextView
                         android:layout_width="88dp"
                         android:layout_height="wrap_content"
-                        android:text="反馈建议："
+                        android:text="QQ："
                         android:textColor="@color/text_secondary"
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/btn_feedback"
-                        android:layout_width="0dp"
+                        android:id="@+id/btn_qq"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="欢迎通过 GitHub 反馈问题与建议"
-                        android:textColor="@color/text_primary"
+                        android:background="@drawable/bg_link_underline"
+                        android:paddingBottom="2dp"
+                        android:text="871334822"
+                        android:textColor="@color/link_blue"
                         android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>

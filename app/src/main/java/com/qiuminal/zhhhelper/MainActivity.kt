@@ -95,6 +95,11 @@ class MainActivity : AppCompatActivity() {
                     drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
+                R.id.nav_practice -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    startActivity(Intent(this, PracticeActivity::class.java))
+                    true
+                }
                 R.id.nav_about -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
                     startActivity(Intent(this, AboutActivity::class.java))
@@ -344,3 +349,4 @@ class MainActivity : AppCompatActivity() {
 
     private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
 }
+
