@@ -109,6 +109,82 @@
                     android:visibility="gone" />
             </LinearLayout>
 
+            <!-- ========== 找不到结果提示 ========== -->
+            <TextView
+                android:id="@+id/tv_no_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:gravity="center"
+                android:text="找不到结果"
+                android:textColor="@color/text_hint"
+                android:textSize="15sp"
+                android:visibility="gone" />
+
+            <!-- ========== 历史搜索（无记录时整体隐藏） ========== -->
+            <LinearLayout
+                android:id="@+id/history_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:gravity="center_vertical"
+                    android:minHeight="36dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_history_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:text="历史搜索"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <!-- 睁眼/闭眼：隐藏或显示历史条目 -->
+                    <ImageButton
+                        android:id="@+id/btn_history_eye"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="4dp"
+                        android:background="@null"
+                        android:contentDescription="隐藏历史"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_visibility" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <ImageButton
+                        android:id="@+id/btn_history_clear"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="清空历史"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_trash" />
+                </LinearLayout>
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/history_chips"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    app:chipSpacingHorizontal="8dp"
+                    app:chipSpacingVertical="6dp"
+                    app:singleLine="false" />
+            </LinearLayout>
+            <!-- /历史搜索 -->
+
             <!-- ========== 结果区（默认隐藏） ========== -->
             <LinearLayout
                 android:id="@+id/result_container"

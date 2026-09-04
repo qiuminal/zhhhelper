@@ -129,6 +129,7 @@ class PracticeActivity : AppCompatActivity() {
         Thread {
             DataLoader.load(applicationContext)
             KeystrokeTable.load(applicationContext)
+            CharLabels.load(applicationContext)
             runOnUiThread {
                 AppFonts.applyToHierarchy(findViewById(android.R.id.content))
                 renderDisplay()
@@ -763,6 +764,9 @@ class PracticeActivity : AppCompatActivity() {
         if (!DataLoader.isLoaded()) {
             DataLoader.load(applicationContext)
         }
+        if (!CharLabels.isLoaded()) {
+            CharLabels.load(applicationContext)
+        }
         val data = DataLoader.query(charText)
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.layout_char_popup)
@@ -780,6 +784,11 @@ class PracticeActivity : AppCompatActivity() {
         val tvZheng = dialog.findViewById<TextView>(R.id.tv_popup_zheng)
 
         tvChar.text = AppFonts.style(charText) ?: charText
+        // 字头右侧标签胶囊（追加在 tv_popup_char 之后），与拆分查询卡片样式一致
+        val charRow = tvChar.parent as? LinearLayout
+        if (charRow != null) {
+            CharLabels.addLabelChips(this, charRow, charText, tvChar, tvCodes)
+        }
         if (data == null) {
             tvCodes.text = "暂未收录"
             tvComponents.text = "码表中暂无该字数据"
@@ -788,7 +797,7 @@ class PracticeActivity : AppCompatActivity() {
             tvRootCodes.visibility = View.GONE
             rowZheng.visibility = View.GONE
         } else {
-            tvCodes.text = data.codes ?: ""
+            tvCodes.text = CharLabels.styleCodes(this, data.codes, charText)
             if (!data.rootCodes.isNullOrEmpty()) {
                 tvRootCodes.visibility = View.VISIBLE
                 tvRootCodes.text = AppFonts.style(data.rootCodes) ?: data.rootCodes
@@ -1017,9 +1026,6 @@ class PracticeActivity : AppCompatActivity() {
 
     private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
 }
-
-
-
 
 
 

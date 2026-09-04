@@ -106,7 +106,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="形码编码与拆字查询"
+                    android:text="拆分查询与跟打练习"
                     android:textColor="@color/text_secondary"
                     android:textSize="14sp" />
             </LinearLayout>

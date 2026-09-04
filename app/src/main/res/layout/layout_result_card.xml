@@ -18,6 +18,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:baselineAligned="false"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <TextView
@@ -32,8 +34,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/text_primary"
-                                android:textSize="22sp"
-                                android:textStyle="bold" />
+                                android:textSize="22sp" />
                         </LinearLayout>
 
                         <ImageButton
@@ -60,7 +61,7 @@
                             android:textColor="@color/text_secondary"
                             android:textSize="18sp" />
 
-                        <TextView
+                        <com.qiuminal.zhhhelper.CodeCapsuleTextView
                             android:id="@+id/tv_codes"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

@@ -141,6 +141,9 @@ object AppFonts {
     /** 公开查询：返回码点对应的内置字体；四款都没有字形时返回 null（用系统字体）。 */
     fun typefaceForCodePoint(cp: Int): Typeface? = fontForCodePoint(cp)
 
+    /** 主字体（霞鹜文楷，覆盖常用字最多）：界面装饰（如标签胶囊）的纵向对齐以它为准。 */
+    fun mainFontTypeface(): Typeface? = fonts?.getOrNull(1)
+
     /**
      * 递归应用到整棵视图树：静态文本与结果文本走 style() 重新 setText，
      * EditText 只处理 hint + 原地样式（正文由输入监听器实时套用，避免打断输入）。

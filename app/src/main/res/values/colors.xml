@@ -9,4 +9,20 @@
     <color name="border_light">#E0E0E0</color>
     <color name="gradient_start">#F5E6F0</color>
     <color name="gradient_end">#E0EAF5</color>
+    <!-- 标签胶囊 5 组配色（text 同时用于命中标签编码的着色；均与编码 code_blue 区分） -->
+    <color name="label_text_huishou">#B45309</color>
+    <color name="label_bg_huishou">#FBEEDD</color>
+    <color name="label_stroke_huishou">#F0D9B8</color>
+    <color name="label_text_xianzhong">#6D4FC4</color>
+    <color name="label_bg_xianzhong">#EFEBFA</color>
+    <color name="label_stroke_xianzhong">#D8CFF2</color>
+    <color name="label_text_shunqu">#14805E</color>
+    <color name="label_bg_shunqu">#E1F4EC</color>
+    <color name="label_stroke_shunqu">#BFE2D3</color>
+    <color name="label_text_chongfu">#C2486B</color>
+    <color name="label_bg_chongfu">#FBE9EF</color>
+    <color name="label_stroke_chongfu">#F2CBD8</color>
+    <color name="label_text_yinbu">#C0392B</color>
+    <color name="label_bg_yinbu">#FBEBE8</color>
+    <color name="label_stroke_yinbu">#F1CBC4</color>
 </resources>

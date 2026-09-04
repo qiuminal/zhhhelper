@@ -55,8 +55,10 @@ object DataLoader {
     fun isLoaded(): Boolean = buf != null
 
     /**
-     * 多字查询：按输入顺序返回每个查到的字的卡片数据，
-     * 跳过空白与标点；未收录的字不产生卡片。
+     * 多字查询：按输入顺序返回每个查到的字的卡片数据。
+     * 只跳过空白；是否收录完全以码表为准——
+     * 〇(U+3007) 等 Unicode 类别非 Letter/Digit 的汉字此前会被
+     * isLetterOrDigit 误过滤导致查不到，故不再按类别过滤。
      */
     fun queryAll(text: String?): List<CharData> {
         val b = buf ?: return emptyList()
@@ -67,7 +69,6 @@ object DataLoader {
             val cp = text.codePointAt(i)
             i += Character.charCount(cp)
             if (Character.isWhitespace(cp)) continue
-            if (!Character.isLetterOrDigit(cp)) continue
             val key = String(Character.toChars(cp))
             val d = lookup(b, key) ?: continue
             result.add(d)

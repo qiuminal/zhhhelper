@@ -11,8 +11,8 @@ android {
         applicationId "com.qiuminal.zhhhelper"
         minSdk 23
         targetSdk 34
-        versionCode 16
-        versionName "0.2.2"
+        versionCode 17
+        versionName "0.2.3"
     }
 
     buildTypes {
@@ -241,3 +241,109 @@ tasks.register('generateKeystrokesBin') {
     }
 }
 tasks.named('preBuild').configure { dependsOn('generateKeystrokesBin') }
+
+// ============================================================
+// 标签码表二进制编译 generateLabelsBin
+// 源数据：data/label.txt（字头 + 标签编码 + 标签名，直接替换文件即可）
+// 产物：app/src/main/assets/labels.bin
+// 内容：字头 -> 有序 (标签编码, 标签名) 去重列表，供查询结果字头标签胶囊、
+//       命中标签编码着色、分享图片与错字速查弹窗使用。
+// 二进制格式（大端序，沿用主码表索引结构）：
+//   Header(24B): magic "ZHLB" | version u32=1 | charCount u32
+//                | indexOffset u32 | valuesOffset u32 | checksum u32(Adler32)
+//   Index: charCount * 12B，按 (keyU16_1,keyU16_2) 升序：
+//     keyU16_1 u16 | keyU16_2 u16(0=BMP) | valueOffset u32 | valueLength u32
+//   Values: 每条记录：entryCount u8 + 每项 { codeLen u8 + code(US-ASCII) + labelLen u8 + label(UTF-8) }
+// ============================================================
+def labelsBin = file('src/main/assets/labels.bin')
+def labelsTxt = new File(dataDir, 'label.txt')
+
+tasks.register('generateLabelsBin') {
+    inputs.file(labelsTxt)
+    outputs.file(labelsBin)
+    doLast {
+        if (!labelsTxt.exists()) throw new GradleException('label table not found: ' + labelsTxt)
+        // 字头 -> 有序 (code,label) 列表，完全重复项只保留首次出现的顺序
+        def records = new LinkedHashMap<String, List<String[]>>()
+        labelsTxt.eachLine('UTF-8') { line ->
+            if (line.trim().isEmpty()) return
+            def parts = line.split('\t', -1)
+            if (parts.length < 3) return
+            def key = parts[0].replace('\uFEFF', '').trim()
+            if (key.isEmpty()) return
+            def code = parts[1].trim()
+            def label = parts[2].trim()
+            if (code.isEmpty() || label.isEmpty()) return
+            def list = records.get(key)
+            if (list == null) { list = new ArrayList<String[]>(); records.put(key, list) }
+            boolean dup = false
+            for (String[] item : list) {
+                if (item[0] == code && item[1] == label) { dup = true; break }
+            }
+            if (!dup) list.add([code, label] as String[])
+        }
+        if (records.isEmpty()) throw new GradleException('labels: no entries in label.txt')
+        def keys = new ArrayList(records.keySet())
+        Collections.sort(keys) { a, b ->
+            int n = Math.min(a.length(), b.length())
+            for (int i = 0; i < n; i++) {
+                int d = (int) a.charAt(i) - (int) b.charAt(i)
+                if (d != 0) return d
+            }
+            return a.length() - b.length()
+        }
+        def indexBuf = new ByteArrayOutputStream()
+        def indexOut = new DataOutputStream(indexBuf)
+        def valuesBuf = new ByteArrayOutputStream()
+        def valuesOut = new DataOutputStream(valuesBuf)
+        int valueOffset = 0
+        for (String key : keys) {
+            def list = records.get(key)
+            def recBuf = new ByteArrayOutputStream()
+            def recOut = new DataOutputStream(recBuf)
+            recOut.writeByte(list.size())
+            for (String[] item : list) {
+                def codeBytes = item[0].getBytes('US-ASCII')
+                if (codeBytes.length > 255) throw new GradleException('labels: code too long for ' + key)
+                recOut.writeByte(codeBytes.length)
+                recOut.write(codeBytes)
+                def labelBytes = item[1].getBytes('UTF-8')
+                if (labelBytes.length > 255) throw new GradleException('labels: label too long for ' + key)
+                recOut.writeByte(labelBytes.length)
+                recOut.write(labelBytes)
+            }
+            def recBytes = recBuf.toByteArray()
+            indexOut.writeShort((int) key.charAt(0) & 0xFFFF)
+            indexOut.writeShort(key.length() > 1 ? (int) key.charAt(1) & 0xFFFF : 0)
+            indexOut.writeInt(valueOffset)
+            indexOut.writeInt(recBytes.length)
+            valuesOut.write(recBytes)
+            valueOffset += recBytes.length
+        }
+        def indexBytes = indexBuf.toByteArray()
+        def valuesBytes = valuesBuf.toByteArray()
+        def headerBuf = new ByteArrayOutputStream()
+        def headerOut = new DataOutputStream(headerBuf)
+        headerOut.writeBytes('ZHLB')
+        headerOut.writeInt(1)
+        headerOut.writeInt(keys.size())
+        headerOut.writeInt(24)
+        headerOut.writeInt(24 + indexBytes.length)
+        def crc = new java.util.zip.Adler32()
+        crc.update(indexBytes)
+        crc.update(valuesBytes)
+        headerOut.writeInt((int) crc.value)
+        def headerBytes = headerBuf.toByteArray()
+        labelsBin.parentFile.mkdirs()
+        def fos = new FileOutputStream(labelsBin)
+        try {
+            fos.write(headerBytes)
+            fos.write(indexBytes)
+            fos.write(valuesBytes)
+        } finally {
+            fos.close()
+        }
+        logger.lifecycle('generateLabelsBin: {} chars -> {}', keys.size(), labelsBin)
+    }
+}
+tasks.named('preBuild').configure { dependsOn('generateLabelsBin') }

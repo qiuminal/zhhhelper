@@ -1201,7 +1201,7 @@
 沿	kod kodk
 爆	col colk
 振	ufc
-趣	pqr pq pqry
+趣	pq pqr pqry
 操	udd udde
 诚	sna snae
 挑	upw upww
