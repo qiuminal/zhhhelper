@@ -1,0 +1,33 @@
+name: Bug 报告
+description: 反馈查询/练单/分享等功能的异常表现
+title: "[Bug] 简述问题"
+labels: [bug]
+body:
+  - type: input
+    id: device
+    attributes:
+      label: 设备与系统
+      placeholder: 如 OPPO Reno / Android 14
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: APP 版本
+      placeholder: 如 0.2.4
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: 复现步骤 / 现象
+    validations:
+      required: true
+  - type: textarea
+    id: expect
+    attributes:
+      label: 预期表现
+  - type: textarea
+    id: extra
+    attributes:
+      label: 补充（截图/日志/涉及汉字等）

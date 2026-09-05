@@ -57,29 +57,14 @@ object AppUpdater {
                 }
                 conn.disconnect()
             } catch (e: Exception) {
-                e.printStackTrace()
+                // 非关键路径失败：静默降级，避免打扰用户
             }
             mainHandler.post { onResult(info) }
         }.start()
     }
 
-    /** 语义化版本比较：latest 是否比 current 新。 */
-    fun isNewer(latest: String?, current: String?): Boolean {
-        if (latest.isNullOrBlank() || current.isNullOrBlank()) {
-            return false
-        }
-        val a = latest.trim().split('.').mapNotNull { it.toIntOrNull() }
-        val b = current.trim().split('.').mapNotNull { it.toIntOrNull() }
-        val n = maxOf(a.size, b.size)
-        for (i in 0 until n) {
-            val x = a.getOrElse(i) { 0 }
-            val y = b.getOrElse(i) { 0 }
-            if (x != y) {
-                return x > y
-            }
-        }
-        return false
-    }
+    /** 语义化版本比较：latest 是否比 current 新（纯逻辑见 [Version]）。 */
+    fun isNewer(latest: String?, current: String?): Boolean = Version.isNewer(latest, current)
 
     /**
      * 后台下载 APK 到 cacheDir/updates/，完成后拉起系统安装器。

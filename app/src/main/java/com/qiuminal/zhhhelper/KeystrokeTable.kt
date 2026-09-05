@@ -16,6 +16,10 @@ import java.util.zip.Adler32
  *     keyU16_1 u16 | keyU16_2 u16(0=BMP) | codeLen u8 | code[4]（a-z，不足补 0）
  *
  * 与 DataLoader 一致：不做 HashMap，直接在字节缓冲上二分查找，内存占用小。
+ *
+ * 注意：索引按 UTF-16 码元建键，当前仅服务练单（六套内置练习文本均不含
+ * 扩展区汉字，按码元/码点计键结果一致）。若未来加入扩展区字根/字集，
+ * 需与 DataLoader 一样改为按 codePoint 遍历建键，避免每字按两个码元重复计键。
  */
 object KeystrokeTable {
 
@@ -45,7 +49,7 @@ object KeystrokeTable {
             if (crc.value != expected) return
             buf = b
         } catch (e: Exception) {
-            e.printStackTrace()
+            // 非关键路径失败：静默降级，避免打扰用户
         }
     }
 

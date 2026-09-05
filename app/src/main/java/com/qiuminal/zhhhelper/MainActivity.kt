@@ -615,7 +615,7 @@ class MainActivity : AppCompatActivity() {
             val uri = Uri.parse(baseUrl + Uri.encode(charText))
             startActivity(Intent(Intent.ACTION_VIEW, uri))
         } catch (e: Exception) {
-            e.printStackTrace()
+            // 非关键路径失败：静默降级，避免打扰用户
         }
     }
 
@@ -692,22 +692,6 @@ class MainActivity : AppCompatActivity() {
     /**
      * 拼音：没有则显示「无」，有则带括号展示
      */
-    private fun formatPinyin(pinyin: String?): String =
-        if (pinyin.isNullOrEmpty()) "无" else "($pinyin)"
-
-    /**
-     * U码：〔〕只括码点字段，再与区块拼接，如「基本 〔U+7684〕」
-     */
-    private fun formatUnicode(block: String?, code: String?): String {
-        val b = block.orEmpty()
-        val c = code.orEmpty()
-        return when {
-            b.isEmpty() && c.isEmpty() -> "无"
-            b.isEmpty() -> "〔$c〕"
-            c.isEmpty() -> b
-            else -> "$b 〔$c〕"
-        }
-    }
 
     /**
      * 生成单字查询结果卡片图片并调起系统分享。
@@ -776,7 +760,7 @@ class MainActivity : AppCompatActivity() {
             }
             startActivity(Intent.createChooser(share, getString(R.string.share_title)))
         } catch (e: Exception) {
-            e.printStackTrace()
+            // 非关键路径失败：静默降级，避免打扰用户
         }
     }
 
@@ -817,5 +801,4 @@ class MainActivity : AppCompatActivity() {
         card.findViewById<TextView>(R.id.tv_zheng_code).setTextSize(sp)
     }
 
-    private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
 }

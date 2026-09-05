@@ -11,13 +11,31 @@ android {
         applicationId "com.qiuminal.zhhhelper"
         minSdk 23
         targetSdk 34
-        versionCode 17
-        versionName "0.2.3"
+        versionCode 18
+        versionName "0.2.4"
+    }
+
+    signingConfigs {
+        // CI（GitHub Actions Release job）通过环境变量注入密钥自动签名；
+        // 本地无这些环境变量时保持“不签名”，沿用 zipalign + apksigner 手动签名流程。
+        release {
+            if (System.getenv('STORE_FILE')) {
+                storeFile file(System.getenv('STORE_FILE'))
+                storePassword System.getenv('STORE_PASSWORD')
+                keyAlias System.getenv('KEY_ALIAS')
+                keyPassword System.getenv('KEY_PASSWORD')
+            }
+        }
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            // R8 代码压缩 + 资源瘦身：去掉未使用的第三方代码与资源，缩小 APK
+            minifyEnabled true
+            shrinkResources true
+            if (System.getenv('STORE_FILE')) {
+                signingConfig signingConfigs.release
+            }
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -36,6 +54,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
 }
 
 // ============================================================

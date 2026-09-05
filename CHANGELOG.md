@@ -2,6 +2,13 @@
 
 > 客户端「关于」页仅展示精炼文案，本文件保留仓库内详细记录，便于后续追溯与维护。
 
+## 0.2.4（2026-09-05）
+· 质量：为版本比较、拼音/U码展示、键准/速度/击键公式、Levenshtein 编辑距离等纯逻辑补齐 JVM 单元测试（14 项），抽出 UiFormat/PracticeMath 纯函数，便于回归
+· 质量：release 开启 R8 代码压缩与资源瘦身（minifyEnabled + shrinkResources），APK 由约 40.8MB 降至约 38.2MB
+· 质量：移除逐键 Log.d 与 printStackTrace 等遗留调试输出；删除重复的 formatPinyin/formatUnicode/dp 实现与无用局部变量
+· 治理：新增 GitHub Actions（push/PR 自动执行单元测试与 Debug 构建并上传产物）；新增 CONTRIBUTING 与 Issue/PR 模板；.gitignore 忽略构建期自动生成的 tables.bin/keystrokes.bin/labels.bin
+· 修复：首位编码高亮时左侧圆弧被裁切（对称内边距 + 负外边距，文字视觉起点不变，圆弧叠加在中文冒号后的空白上）
+
 ## 0.2.3（2026-09-05）
 · 拆分查询新增「历史搜索」：自动记录已收录字的查询，分次上屏的记录会分别入库；支持展开/收起、睁眼隐藏/显示、一键清空，最多保留最近 50 条
 · 查询结果字头新增标签展示（内置标签码表，5 类配色）：命中标签编码的编码在编码栏以对应颜色高亮，点击标签闪烁提示对应编码；错字速查与分享图片同步生效

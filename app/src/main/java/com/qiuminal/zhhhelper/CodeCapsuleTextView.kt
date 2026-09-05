@@ -30,12 +30,12 @@ class CodeCapsuleTextView @JvmOverloads constructor(
     }
 
     init {
-        // Codes TextView is wrap_content, so the last code letter ends exactly at the
-        // view right edge and the capsule's right arc gets clipped. Reserve end padding
-        // (text start unchanged) so the highlight always has room to draw its right cap.
-        val endCap = (resources.displayMetrics.density * 7f).toInt()
-        if (paddingRight < endCap) {
-            setPadding(paddingLeft, paddingTop, endCap, paddingBottom)
+        // Codes TextView is wrap_content, so the first/last code letters sit exactly at the
+        // view edges and the capsule arcs get clipped when those codes are highlighted.
+        // Reserve symmetric padding on both sides so the rounded highlight always fits.
+        val reserve = (resources.displayMetrics.density * 7f).toInt()
+        if (paddingLeft < reserve || paddingRight < reserve) {
+            setPadding(maxOf(paddingLeft, reserve), paddingTop, maxOf(paddingRight, reserve), paddingBottom)
         }
     }
 

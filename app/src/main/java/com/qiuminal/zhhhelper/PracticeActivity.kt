@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.os.SystemClock
-import android.util.Log
 import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableString
@@ -78,7 +77,7 @@ class PracticeActivity : AppCompatActivity() {
     private var groupIndex = 0
     private var originalGroups: List<List<String>> = emptyList()  // 原始分组（恢复顺序用）
     private var shuffled = false
-    private var varibleMode = false
+    private var variableMode = false
 
     // 打字会话状态
     private var target = ""
@@ -146,18 +145,15 @@ class PracticeActivity : AppCompatActivity() {
         if (doneVisible && event.action == KeyEvent.ACTION_DOWN) {
             when (event.keyCode) {
                 KeyEvent.KEYCODE_SPACE -> {
-                    Log.d("ZhhPractice", "hotkey space handled")
                     nextGroup()
                     return true
                 }
                 KeyEvent.KEYCODE_F3 -> {
-                    Log.d("ZhhPractice", "hotkey f3 handled")
                     startGroup(groupIndex)
                     return true
                 }
             }
         }
-        Log.d("ZhhPractice", "key code=${event.keyCode} act=${event.action} done=$doneVisible")
         return super.dispatchKeyEvent(event)
     }
 
@@ -308,10 +304,10 @@ class PracticeActivity : AppCompatActivity() {
         val firstIsLetter = first in 'A'..'Z' || first in 'a'..'z'
 
         return if (!firstIsLetter && maxLen > 4) {
-            varibleMode = true
+            variableMode = true
             lines.map { line -> codePoints(line) }
         } else {
-            varibleMode = false
+            variableMode = false
             // fixed：每行一项，按 GROUP_SIZE 分组
             val result = mutableListOf<List<String>>()
             var i = 0
@@ -416,7 +412,7 @@ class PracticeActivity : AppCompatActivity() {
     /** 乱序（固定种子可复现）：fixed 打散全部条目后按 GROUP_SIZE 重新分组；varible 打乱行（组）顺序。 */
     private fun applyShuffle(source: List<List<String>>, seed: Long): List<List<String>> {
         val rnd = Random(seed)
-        if (varibleMode) {
+        if (variableMode) {
             return source.toMutableList().also { it.shuffle(rnd) }
         }
         val flat = mutableListOf<String>()
@@ -621,40 +617,15 @@ class PracticeActivity : AppCompatActivity() {
         if (firstCharCommitMs == 0L) 0L else (nowMs - firstCharCommitMs).coerceAtLeast(0L)
 
     /**
-     * 结算/展示用击键速度与字速：
-     *  - 击键（键/秒）：只统计第一个字之后的剩余字，首字只作计时起点；
-     *  - 速度（字/分）：首字计入正确字数，其用时按剩余字平均击键速度推算，
-     *    即 速度 = 总正确字数 × 剩余键数 / (剩余用时 × (剩余键数 + 首字键数)) × 60，
-     *    避免“首字打对、其余全错”时速度被算成 0；
-     * 无法测算（剪贴板一次性上屏全部字、整组单批上屏、剩余字用时≈0 或剩余键数为 0）时，结算态返回 ∞。
+     * 结算/展示用击键速度与字速：口径说明见 PracticeMath.kt（纯逻辑）。
+     * 此处只把会话状态喂给纯函数 [computeKpsAndSpeed] / [keyAccuracyPct]，
+     * 便于用 JVM 单元测试回归统计公式。
      */
-    private fun computeKpsSpeed(nowMs: Long, allowInfinite: Boolean, singleBatch: Boolean = false): Triple<Double, Double, Boolean> {
-        val elapsed = restElapsedMs(nowMs)
-        val keys = restKeys()
-        if (allowInfinite && (singleBatch || elapsed <= 0 || keys <= 0)) {
-            return Triple(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, true)
-        }
-        val sec = elapsed.coerceAtLeast(1L) / 1000.0
-        val kps = keys / sec
-        // 方案A：首字用时 = 首字键数 / 剩余字平均击键速度，首字正确也计入字/分
-        val speed = if (keys > 0) {
-            correctCount * keys.toDouble() / (sec * (keys + firstCharKeys)) * 60.0
-        } else {
-            0.0
-        }
-        return Triple(kps, speed, false)
-    }
+    private fun computeKpsSpeed(nowMs: Long, allowInfinite: Boolean, singleBatch: Boolean = false): Triple<Double, Double, Boolean> =
+        computeKpsAndSpeed(correctCount, restKeys(), restElapsedMs(nowMs), firstCharKeys, allowInfinite, singleBatch)
 
-    /**
-     * 键准（键级）：全组（含首字）(应键数 - 错键数) / 应键数，取值 0~100。
-     * 首字计入键准：首个字上屏后即可按实际错字结算（速度按方案A将首字推算计入，击键仍按剩余字口径）。
-     */
-    private fun keyAccuracy(): Double {
-        val expected = expectedKeys
-        if (expected <= 0) return 100.0
-        val correct = (expected - errorKeys).coerceAtLeast(0)
-        return correct * 100.0 / expected
-    }
+    /** 键准（键级，含首字）：委托纯函数 [keyAccuracyPct]，口径见 PracticeMath.kt。 */
+    private fun keyAccuracy(): Double = keyAccuracyPct(expectedKeys, errorKeys)
 
     /**
      * 单个错字的错键数结算（主流的编辑距离思路，逐键比对）：
@@ -670,25 +641,8 @@ class PracticeActivity : AppCompatActivity() {
             expectedCode == null -> actualCode?.length ?: 1
             actualCode == null -> 1
             expectedCode == actualCode -> 1
-            else -> editDistance(expectedCode, actualCode)
+            else -> levenshteinDistance(expectedCode, actualCode)
         }
-    }
-
-    /** Levenshtein 编辑距离：两个编码串逐字母比对的差异数。 */
-    private fun editDistance(a: String, b: String): Int {
-        var prev = IntArray(b.length + 1) { it }
-        var curr = IntArray(b.length + 1)
-        for (i in 1..a.length) {
-            curr[0] = i
-            for (j in 1..b.length) {
-                val cost = if (a[i - 1] == b[j - 1]) 0 else 1
-                curr[j] = minOf(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + cost)
-            }
-            val tmp = prev
-            prev = curr
-            curr = tmp
-        }
-        return prev[b.length]
     }
 
     // ---------------- 完成与统计 ----------------
@@ -726,8 +680,7 @@ class PracticeActivity : AppCompatActivity() {
         tvWrongLabel.visibility = if (wrongChars.isEmpty()) View.GONE else View.VISIBLE
         tvWrongList.text = renderWrongList()
         panelDone.visibility = View.VISIBLE
-        val panelFocused = panelDone.requestFocus()
-        Log.d("ZhhPractice", "complete panelFocus=$panelFocused imeActive=${(getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).isActive()}")
+        panelDone.requestFocus()
         updateStats(allowInfinite = true)
 
         scrollPractice.post {
@@ -816,23 +769,6 @@ class PracticeActivity : AppCompatActivity() {
         }
         dialog.show()
     }
-
-    /** 拼音：没有则显示「无」，有则带括号展示。 */
-    private fun formatPinyin(pinyin: String?): String =
-        if (pinyin.isNullOrEmpty()) "无" else "($pinyin)"
-
-    /** U码：〔〕只括码点字段，再与区块拼接，如「基本 〔U+7684〕」。 */
-    private fun formatUnicode(block: String?, code: String?): String {
-        val b = block.orEmpty()
-        val c = code.orEmpty()
-        return when {
-            b.isEmpty() && c.isEmpty() -> "无"
-            b.isEmpty() -> "〔$c〕"
-            c.isEmpty() -> b
-            else -> "$b 〔$c〕"
-        }
-    }
-
 
     /** 生成可分享的纯文本成绩单。 */
     private fun buildShareText(speedStr: String, kpsStr: String, acc: Double): String {
@@ -1024,13 +960,4 @@ class PracticeActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(window.decorView.windowToken, 0)
     }
 
-    private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
 }
-
-
-
-
-
-
-
-

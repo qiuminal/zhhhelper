@@ -10,3 +10,8 @@ captures/
 *.keystore
 *.apk
 !app/build/outputs/apk/**/*.apk
+
+# 构建期由 Gradle preBuild 自动生成的二进制码表（勿直接入库/编辑）
+app/src/main/assets/tables.bin
+app/src/main/assets/keystrokes.bin
+app/src/main/assets/labels.bin

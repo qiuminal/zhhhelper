@@ -1,0 +1,22 @@
+name: 功能建议
+description: 提出新功能或体验改进的想法
+title: "[建议] 简述想法"
+labels: [enhancement]
+body:
+  - type: textarea
+    id: scenario
+    attributes:
+      label: 使用场景
+      placeholder: 什么时候会用到？解决什么问题？
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: 期望的行为
+    validations:
+      required: true
+  - type: textarea
+    id: alternative
+    attributes:
+      label: 其它方案/备注

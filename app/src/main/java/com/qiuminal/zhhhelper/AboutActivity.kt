@@ -79,7 +79,7 @@ class AboutActivity : AppCompatActivity() {
                 cm.setPrimaryClip(ClipData.newPlainText("QQ", qq))
                 Toast.makeText(this, "已复制到剪贴板", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
-                e.printStackTrace()
+                // 非关键路径失败：静默降级，避免打扰用户
             }
         }
 
@@ -135,7 +135,7 @@ class AboutActivity : AppCompatActivity() {
         try {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
         } catch (e: Exception) {
-            e.printStackTrace()
+            // 非关键路径失败：静默降级，避免打扰用户
         }
     }
 }

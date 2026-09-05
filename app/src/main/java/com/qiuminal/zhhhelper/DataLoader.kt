@@ -48,7 +48,7 @@ object DataLoader {
             if (crc.value != expected) return
             buf = b
         } catch (e: Exception) {
-            e.printStackTrace()
+            // 非关键路径失败：静默降级，避免打扰用户
         }
     }
 
