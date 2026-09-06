@@ -649,16 +649,8 @@ class MainActivity : AppCompatActivity() {
         val tvCodes = card.findViewById<TextView>(R.id.tv_codes)
         tvCodes.setText(CharLabels.styleCodes(this, d.codes, d.charText))
 
-        // 字根编码（拆分上方小字），没有则隐藏
-        val tvRootCodes = card.findViewById<TextView>(R.id.tv_root_codes)
-        if (!d.rootCodes.isNullOrEmpty()) {
-            tvRootCodes.visibility = View.VISIBLE
-            tvRootCodes.setText(d.rootCodes)
-        } else {
-            tvRootCodes.visibility = View.GONE
-        }
-
-        card.findViewById<TextView>(R.id.tv_components).setText(d.components ?: "")
+        // 拆分：字根编码与部件逐组上下对齐（数量不配时视图内部退回两行样式）
+        card.findViewById<RootPairsView>(R.id.pairs_split).setContent(d.rootCodes, d.components)
         card.findViewById<TextView>(R.id.tv_pinyin).setText(formatPinyin(d.pinyin))
         card.findViewById<TextView>(R.id.tv_unicode).setText(formatUnicode(d.unicodeBlock, d.unicodeCode))
 
@@ -712,12 +704,8 @@ class MainActivity : AppCompatActivity() {
         shareChar.text = d.charText
         val tvShareCodes = card.findViewById<TextView>(R.id.tv_share_codes)
         tvShareCodes.text = CharLabels.styleCodes(this, d.codes, d.charText)
-        val shareRootCodes = card.findViewById<TextView>(R.id.tv_share_root_codes)
-        if (!d.rootCodes.isNullOrEmpty()) {
-            shareRootCodes.visibility = View.VISIBLE
-            shareRootCodes.text = d.rootCodes
-        }
-        card.findViewById<TextView>(R.id.tv_share_components).text = d.components ?: ""
+        // 拆分：字根编码与部件逐组上下对齐（数量不配时视图内部退回两行样式）
+        card.findViewById<RootPairsView>(R.id.pairs_share).setContent(d.rootCodes, d.components)
         card.findViewById<TextView>(R.id.tv_share_pinyin).text = formatPinyin(d.pinyin)
         card.findViewById<TextView>(R.id.tv_share_unicode).text = formatUnicode(d.unicodeBlock, d.unicodeCode)
 
@@ -771,8 +759,7 @@ class MainActivity : AppCompatActivity() {
         val sp = currentFontSp
         card.findViewById<TextView>(R.id.tv_share_char).setTextSize(sp + 4f)
         card.findViewById<TextView>(R.id.tv_share_codes).setTextSize(sp)
-        card.findViewById<TextView>(R.id.tv_share_root_codes).setTextSize(sp - 4f)
-        card.findViewById<TextView>(R.id.tv_share_components).setTextSize(sp)
+        card.findViewById<RootPairsView>(R.id.pairs_share).setTextSizes(sp, sp - 4f)
         card.findViewById<TextView>(R.id.tv_share_pinyin).setTextSize(sp)
         card.findViewById<TextView>(R.id.tv_share_unicode).setTextSize(sp - 2f)
         card.findViewById<TextView>(R.id.tv_share_zheng).setTextSize(sp)
@@ -794,8 +781,7 @@ class MainActivity : AppCompatActivity() {
         val sp = currentFontSp
         card.findViewById<TextView>(R.id.tv_char).setTextSize(sp + 4f)
         card.findViewById<TextView>(R.id.tv_codes).setTextSize(sp)
-        card.findViewById<TextView>(R.id.tv_root_codes).setTextSize(sp - 4f)
-        card.findViewById<TextView>(R.id.tv_components).setTextSize(sp)
+        card.findViewById<RootPairsView>(R.id.pairs_split).setTextSizes(sp, sp - 4f)
         card.findViewById<TextView>(R.id.tv_pinyin).setTextSize(sp)
         card.findViewById<TextView>(R.id.tv_unicode).setTextSize(sp - 2f)
         card.findViewById<TextView>(R.id.tv_zheng_code).setTextSize(sp)

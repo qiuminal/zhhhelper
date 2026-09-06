@@ -6831,7 +6831,7 @@
 㞗	Cs Fi Ks Id	尸 一 氺 丶	qiú	扩A	U+3797
 㞘	Cs Js Id	尸 豕 丶	dū	扩A	U+3798
 㞞	Cs Wc Jr Jr Si	尸 彳 人 人 龰	sóng	扩A	U+379E
-㞢	Sc Fi 	屮 一		扩A	U+37A2
+㞢	Sc Fi 	屮 一	zhī	扩A	U+37A2
 㟂	Vs Km 	山 母	mǔ	扩A	U+37C2
 㟃	Vs Ae Fi Dk	山 ㇆一 口	sī	扩A	U+37C3
 㟖	Vs Nw Lc	山 王 廾	lòng lóng	扩A	U+37D6

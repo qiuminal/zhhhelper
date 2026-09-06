@@ -2,6 +2,13 @@
 
 > 客户端「关于」页仅展示精炼文案，本文件保留仓库内详细记录，便于后续追溯与维护。
 
+## 0.2.5（2026-09-06）
+· 拆分栏排版重做：新增 RootPairsView 自定义 ViewGroup，每组「大写+小写」两字母字根编码居中悬于对应部件正上方；以配对单元为最小换行单位，字根较多或用户调大字号导致换行时，编码始终跟随其部件，对应关系不断裂（查询结果卡片 / 错字速查弹窗 / 分享图片三处同步，字号随用户设置缩放：部件 sp、编码 sp-4）
+· 新增 parseRootPairs 纯函数（UiFormat.kt）：字根码组数与部件码点数严格配对后才逐组对齐；全码表 99,138 条中 99,137 条可配对，唯一例外 𠔻（20 部件对 18 码，码表数据本身不齐）自动降级为旧版两行样式，不会错位显示；UiFormatTest 补 6 项单测（连写部件 / 增补平面 / PUA / 数量不配 / 空值），累计 12/12 通过
+· 修复多字体部件纵向错位：TumanPUA（upem=256，ascent 0.859em）与霞鹜文楷（upem=2048，ascent 0.928em）等内置字体度量不同，部件拆为独立视图按顶边堆叠后，PUA 部件整体偏上（如「攘」的部件 U+E417）；改为行内统一基线对齐（按 TextView.getBaseline 聚合行 ascent/descent），复刻旧版单 TextView 同基线排版，原则同 CharLabels.glyphCenterOffset 的统一基准度量
+· 「整句码：」标签统一改为「整句：」（layout_result_card / layout_char_popup / layout_share_card 三处布局），与「字头 / 编码 / 拆分 / 拼音」等两字标题对齐
+· 码表：data/chai.txt 为 㞢（U+37A2）补充拼音 zhī（与源码表全文比对，99,144 行仅此一处差异），tables.bin 已随构建重新生成
+
 ## 0.2.4（2026-09-05）
 · 质量：为版本比较、拼音/U码展示、键准/速度/击键公式、Levenshtein 编辑距离等纯逻辑补齐 JVM 单元测试（14 项），抽出 UiFormat/PracticeMath 纯函数，便于回归
 · 质量：release 开启 R8 代码压缩与资源瘦身（minifyEnabled + shrinkResources），APK 由约 40.8MB 降至约 38.2MB
