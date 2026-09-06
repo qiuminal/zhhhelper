@@ -729,8 +729,7 @@ class PracticeActivity : AppCompatActivity() {
 
         val tvChar = dialog.findViewById<TextView>(R.id.tv_popup_char)
         val tvCodes = dialog.findViewById<TextView>(R.id.tv_popup_codes)
-        val tvRootCodes = dialog.findViewById<TextView>(R.id.tv_popup_root_codes)
-        val tvComponents = dialog.findViewById<TextView>(R.id.tv_popup_components)
+        val pairsView = dialog.findViewById<RootPairsView>(R.id.pairs_popup)
         val tvPinyin = dialog.findViewById<TextView>(R.id.tv_popup_pinyin)
         val tvUnicode = dialog.findViewById<TextView>(R.id.tv_popup_unicode)
         val rowZheng = dialog.findViewById<View>(R.id.row_popup_zheng)
@@ -744,20 +743,14 @@ class PracticeActivity : AppCompatActivity() {
         }
         if (data == null) {
             tvCodes.text = "暂未收录"
-            tvComponents.text = "码表中暂无该字数据"
+            pairsView.setContent(null, "码表中暂无该字数据")
             tvPinyin.text = ""
             tvUnicode.text = ""
-            tvRootCodes.visibility = View.GONE
             rowZheng.visibility = View.GONE
         } else {
             tvCodes.text = CharLabels.styleCodes(this, data.codes, charText)
-            if (!data.rootCodes.isNullOrEmpty()) {
-                tvRootCodes.visibility = View.VISIBLE
-                tvRootCodes.text = AppFonts.style(data.rootCodes) ?: data.rootCodes
-            } else {
-                tvRootCodes.visibility = View.GONE
-            }
-            tvComponents.text = AppFonts.style(data.components ?: "") ?: ""
+            // 拆分：字根编码与部件逐组上下对齐（数量不配时视图内部退回两行样式）
+            pairsView.setContent(data.rootCodes, data.components)
             tvPinyin.text = AppFonts.style(formatPinyin(data.pinyin)) ?: formatPinyin(data.pinyin)
             tvUnicode.text = AppFonts.style(formatUnicode(data.unicodeBlock, data.unicodeCode)) ?: formatUnicode(data.unicodeBlock, data.unicodeCode)
             if (!data.zhengCode.isNullOrEmpty()) {
