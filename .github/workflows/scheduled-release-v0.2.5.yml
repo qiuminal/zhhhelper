@@ -1,0 +1,100 @@
+# 虎助手 v0.2.5「定时发版」（仓库原生 GitHub Actions）
+#
+# 计划：2026-09-07 10:20（北京时间）由 GitHub 自动执行：
+#   检出 v0.2.5 发布提交 → 构建签名 release APK → 创建 GitHub Release v0.2.5。
+# cron 字段为 UTC：'20 2 7 9 *' = 每年 9 月 7 日 02:20 UTC = 10:20 北京时间（Asia/Shanghai）。
+# 时间选择：刻意避开整点——GitHub Actions 的 schedule 高峰在每小时 :00（大量仓库 cron 堆积，
+#   触发延迟可达数十分钟甚至丢弃），:20 分错峰；UTC 02:xx 亦为全球负载低谷。
+# 说明：
+#   - schedule 仅对默认分支（main）生效，因此本文件必须先合入 main。
+#   - 创建 Release 使用 RELEASE_PAT（本仓库 GITHUB_TOKEN 无法创建 Release，见 PR #4）。
+#   - 带防重保护：v0.2.5 已存在时直接跳过，避免重复/误发。
+
+name: Scheduled Release v0.2.5
+
+on:
+  schedule:
+    - cron: '20 2 7 9 *'
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 要创建/更新的 Release tag（仅人工验证时临时覆盖，如 v0.2.5-rc1）
+        type: string
+        required: false
+        default: v0.2.5
+
+run-name: 定时发版 ${{ github.event.inputs.release_tag || 'v0.2.5' }}
+
+permissions:
+  contents: write
+
+jobs:
+  scheduled-release:
+    name: 构建签名 APK 并发布 Release
+    runs-on: ubuntu-latest
+    env:
+      # v0.2.5 正式代码 = release/0.2.5 发布提交，保证发布内容与本地试用验收一致
+      RELEASE_SHA: 04121d2dd4f1112a724619bc452ce2be62e28828
+      RELEASE_TAG: ${{ github.event.inputs.release_tag || 'v0.2.5' }}
+    steps:
+      - name: 检出发布提交
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.RELEASE_SHA }}
+
+      - name: 配置 JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: 配置 Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: 从 Secret 还原签名 keystore
+        run: |
+          printf '%s' '${{ secrets.SIGNING_KEYSTORE_BASE64 }}' | base64 -d > app/signing.jks
+
+      - name: 构建签名 release APK
+        env:
+          STORE_FILE: signing.jks
+          STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+        run: ./gradlew --no-daemon assembleRelease
+
+      - name: 检查 Release 是否已存在
+        id: check_release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "${{ env.RELEASE_TAG }}" >/dev/null 2>&1; then
+            echo "Release ${{ env.RELEASE_TAG }} 已存在，跳过创建。"
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 上传 APK 并创建 GitHub Release
+        if: steps.check_release.outputs.exists == 'false'
+        uses: softprops/action-gh-release@v2
+        with:
+          token: ${{ secrets.RELEASE_PAT }}
+          tag_name: ${{ env.RELEASE_TAG }}
+          target_commitish: ${{ env.RELEASE_SHA }}
+          name: 虎助手 ${{ env.RELEASE_TAG }}
+          body: |
+            ## 虎助手 v0.2.5（2026-09-07）
+
+            本次 Release 由 GitHub Actions「定时发版」于 2026-09-07 10:20（北京时间）自动构建并签名，APK 开箱即用，可直接覆盖升级。
+
+            ### 更新内容
+            - 拆分栏全新排版：每组字根编码与其对应部件上下对齐，字根较多或字号较大自动换行时，对应关系依然清晰
+            - 「整句码」栏目更名为「整句」，与其他栏目标题对齐
+            - 修复个别PUA区字根（如「攘」的其中一个部件）显示位置偏上的问题
+            - 拆分码表更新：为「㞢」补充拼音
+
+            ### 安装
+            下载 `app-release.apk` 直接安装即可（与历史版本同一签名，可覆盖升级）。
+          files: app/build/outputs/apk/release/app-release.apk
+          fail_on_unmatched_files: true
