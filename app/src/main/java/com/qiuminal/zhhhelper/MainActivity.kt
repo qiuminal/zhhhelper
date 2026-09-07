@@ -13,6 +13,7 @@ import android.os.Looper
 import android.text.Editable
 import android.text.Spanned
 import android.text.TextWatcher
+import android.view.MotionEvent
 import android.view.View
 import android.view.Gravity
 import android.view.inputmethod.InputMethodManager
@@ -133,7 +134,6 @@ class MainActivity : AppCompatActivity() {
     private fun setupListeners() {
         // 三横杠：打开左侧菜单
         btnMenu.setOnClickListener { drawerLayout.openDrawer(GravityCompat.START) }
-
         // 侧滑菜单：首页 / 关于
         navView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -188,8 +188,13 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        // 清除按钮
-        btnClear.setOnClickListener { etSearch.setText("") }
+        // 清除按钮：清空后光标回到搜索框并保持/弹起键盘，用户直接输入下一个字
+        btnClear.setOnClickListener {
+            etSearch.setText("")
+            etSearch.requestFocus()
+            (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager)
+                .showSoftInput(etSearch, 0)
+        }
 
         // 垃圾桶：一键清空全部历史
         btnHistoryClear.setOnClickListener { clearHistory() }
@@ -212,6 +217,37 @@ class MainActivity : AppCompatActivity() {
                 reapplyFontSize()
             }
         }
+    }
+
+    /**
+     * 搜索框外任何触摸（点击卡片、滚动列表、点按钮/空白、开抽屉等）
+     * 都让搜索框交出焦点并收起输入法，避免键盘挡住查询结果。
+     * 在 DOWN 阶段判断：滑动同样始于 DOWN，天然覆盖；点在框内则不干预。
+     * 豁免：清除按钮（btnClear）——点清除的下一步就是输入新字，
+     * 光标和键盘应留在搜索框，不能反被收起。
+     */
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        if (ev.actionMasked == MotionEvent.ACTION_DOWN && etSearch.hasFocus()) {
+            if (!isTouchInside(etSearch, ev) && !isTouchInside(btnClear, ev)) {
+                etSearch.clearFocus()
+                hideIme()
+            }
+        }
+        return super.dispatchTouchEvent(ev)
+    }
+
+    /** 触点是否落在指定 view 的窗口坐标范围内。 */
+    private fun isTouchInside(v: View, ev: MotionEvent): Boolean {
+        val loc = IntArray(2)
+        v.getLocationInWindow(loc)
+        return ev.rawX >= loc[0] && ev.rawX <= loc[0] + v.width &&
+            ev.rawY >= loc[1] && ev.rawY <= loc[1] + v.height
+    }
+
+    /** 收起输入法（对搜索框的 window token 生效）。 */
+    private fun hideIme() {
+        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(etSearch.windowToken, 0)
     }
 
     // ---------------- 历史搜索 ----------------
