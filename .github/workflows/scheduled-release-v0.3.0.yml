@@ -1,18 +1,26 @@
 # 虎助手 v0.3.0「定时发版」（仓库原生 GitHub Actions）
 #
-# 计划：2026-09-09 12:00（北京时间）由 GitHub 自动执行：
-#   检出 v0.3.0 发布提交 → 构建签名 release APK → 创建 GitHub Release v0.3.0。
-# cron 字段为 UTC：'0 4 9 9 *' = 09-09 04:00 UTC = 12:00 北京时间（Asia/Shanghai）。
+# 计划：2026-09-09 13:30（北京时间）由 GitHub 自动执行。
+# 使用每 5 分钟调度作为可靠性兜底；只有目标时间窗口内才真正构建和发布：
+#   目标时间：2026-09-09 05:30 UTC = 北京时间 13:30
+#   允许窗口：13:30–14:00（若 GitHub 某个调度点延迟，后续调度仍可接管）
+# 窗口外的运行只做条件判断，不消耗构建步骤。
+# 两次及以上运行均使用同一个幂等发布流程：首个成功创建 v0.3.0，后续发现已存在则跳过。
 # 说明：
 #   - schedule 仅对默认分支（main）生效，因此本文件必须先合入 main。
 #   - 创建 Release 使用 RELEASE_PAT（本仓库 GITHUB_TOKEN 无法创建 Release，见 PR #4）。
-#   - 带防重保护：v0.3.0 已存在时直接跳过，避免重复/误发。
+#   - workflow_dispatch 保留，可在需要时人工立即启动。
+#   - 通过 concurrency 防止多个兜底触发同时上传同一个 Release。
 
 name: Scheduled Release v0.3.0
 
 on:
+  # push 让本次改造立即生成一个运行实例，不再依赖 GitHub 是否及时登记一次性 schedule。
+  push:
+    branches:
+      - main
   schedule:
-    - cron: '0 4 9 9 *'
+    - cron: '*/5 5-6 9 9 *'
   workflow_dispatch:
     inputs:
       release_tag:
@@ -22,6 +30,11 @@ on:
         default: v0.3.0
 
 run-name: 定时发版 ${{ github.event.inputs.release_tag || 'v0.3.0' }}
+
+# 多个 schedule 兜底点可能重叠，串行化发布流程，避免同时操作同一 tag。
+concurrency:
+  group: release-v0.3.0
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -35,25 +48,45 @@ jobs:
       RELEASE_SHA: 387321f1bc045ccb7bde43009d8119267aba086e
       RELEASE_TAG: ${{ github.event.inputs.release_tag || 'v0.3.0' }}
     steps:
+      - name: 判断是否进入发布窗口
+        id: window
+        shell: bash
+        run: |
+          now=$(date -u +%s)
+          start=$(date -u -d '2026-09-09 05:30:00' +%s)
+          end=$(date -u -d '2026-09-09 06:00:00' +%s)
+          if [ "$now" -ge "$start" ] && [ "$now" -lt "$end" ]; then
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+            echo "当前处于发布窗口，将继续。"
+          else
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            echo "当前不在发布窗口，安全退出。"
+          fi
+
       - name: 检出发布提交
+        if: steps.window.outputs.publish == 'true'
         uses: actions/checkout@v4
         with:
           ref: ${{ env.RELEASE_SHA }}
 
       - name: 配置 JDK 17
+        if: steps.window.outputs.publish == 'true'
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
       - name: 配置 Gradle
+        if: steps.window.outputs.publish == 'true'
         uses: gradle/actions/setup-gradle@v4
 
       - name: 从 Secret 还原签名 keystore
+        if: steps.window.outputs.publish == 'true'
         run: |
           printf '%s' '${{ secrets.SIGNING_KEYSTORE_BASE64 }}' | base64 -d > app/signing.jks
 
       - name: 构建签名 release APK
+        if: steps.window.outputs.publish == 'true'
         env:
           STORE_FILE: signing.jks
           STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
@@ -61,7 +94,19 @@ jobs:
           KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
         run: ./gradlew --no-daemon assembleRelease
 
+      - name: 等待到计划发布时间
+        if: steps.window.outputs.publish == 'true' && github.event_name == 'schedule'
+        run: |
+          target=$(date -u -d '2026-09-09 05:30:00' +%s)
+          now=$(date -u +%s)
+          delay=$((target - now))
+          if [ "$delay" -gt 0 ]; then
+            echo "等待 ${delay} 秒，到达 2026-09-09 13:30:00（北京时间）"
+            sleep "$delay"
+          fi
+
       - name: 检查 Release 是否已存在
+        if: steps.window.outputs.publish == 'true'
         id: check_release
         env:
           GH_TOKEN: ${{ github.token }}
