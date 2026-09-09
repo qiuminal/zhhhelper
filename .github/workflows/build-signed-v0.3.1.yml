@@ -39,8 +39,11 @@ jobs:
         run: ./gradlew --no-daemon assembleRelease
 
       - name: 验证 APK 签名
+        shell: bash
         run: |
-          apksigner verify --verbose app/build/outputs/apk/release/app-release.apk
+          APKSIGNER=$(find "$ANDROID_HOME/build-tools" -type f -name apksigner -print -quit)
+          test -n "$APKSIGNER"
+          "$APKSIGNER" verify --verbose app/build/outputs/apk/release/app-release.apk
 
       - name: 上传正式签名 APK
         uses: actions/upload-artifact@v4
