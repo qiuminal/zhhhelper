@@ -1,0 +1,98 @@
+# 虎助手 v0.3.0「定时发版」（仓库原生 GitHub Actions）
+#
+# 计划：2026-09-09 12:00（北京时间）由 GitHub 自动执行：
+#   检出 v0.3.0 发布提交 → 构建签名 release APK → 创建 GitHub Release v0.3.0。
+# cron 字段为 UTC：'0 4 9 9 *' = 09-09 04:00 UTC = 12:00 北京时间（Asia/Shanghai）。
+# 说明：
+#   - schedule 仅对默认分支（main）生效，因此本文件必须先合入 main。
+#   - 创建 Release 使用 RELEASE_PAT（本仓库 GITHUB_TOKEN 无法创建 Release，见 PR #4）。
+#   - 带防重保护：v0.3.0 已存在时直接跳过，避免重复/误发。
+
+name: Scheduled Release v0.3.0
+
+on:
+  schedule:
+    - cron: '0 4 9 9 *'
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 要创建/更新的 Release tag（仅人工验证时临时覆盖，如 v0.3.0-rc1）
+        type: string
+        required: false
+        default: v0.3.0
+
+run-name: 定时发版 ${{ github.event.inputs.release_tag || 'v0.3.0' }}
+
+permissions:
+  contents: write
+
+jobs:
+  scheduled-release:
+    name: 构建签名 APK 并发布 Release
+    runs-on: ubuntu-latest
+    env:
+      # v0.3.0 正式代码 = release/0.3.0 发布提交，保证发布内容与本地试用验收一致
+      RELEASE_SHA: 387321f1bc045ccb7bde43009d8119267aba086e
+      RELEASE_TAG: ${{ github.event.inputs.release_tag || 'v0.3.0' }}
+    steps:
+      - name: 检出发布提交
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.RELEASE_SHA }}
+
+      - name: 配置 JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: 配置 Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: 从 Secret 还原签名 keystore
+        run: |
+          printf '%s' '${{ secrets.SIGNING_KEYSTORE_BASE64 }}' | base64 -d > app/signing.jks
+
+      - name: 构建签名 release APK
+        env:
+          STORE_FILE: signing.jks
+          STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+        run: ./gradlew --no-daemon assembleRelease
+
+      - name: 检查 Release 是否已存在
+        id: check_release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "${{ env.RELEASE_TAG }}" >/dev/null 2>&1; then
+            echo "Release ${{ env.RELEASE_TAG }} 已存在，跳过创建。"
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 上传 APK 并创建 GitHub Release
+        if: steps.check_release.outputs.exists == 'false'
+        uses: softprops/action-gh-release@v2
+        with:
+          token: ${{ secrets.RELEASE_PAT }}
+          tag_name: ${{ env.RELEASE_TAG }}
+          target_commitish: ${{ env.RELEASE_SHA }}
+          name: 虎助手 ${{ env.RELEASE_TAG }}
+          body: |
+            0.3.0（2026-09-09）
+
+            · 新增文章跟打 Beta 版：支持从剪贴板载文或导入手机 TXT 文件进行跟打
+            · 文章跟打区沿用练单区的字帖模式：正文即跟打区，中文两端对齐，逐字即时校验
+            · 实时统计 速度/字数/错字，支持重打与成绩记录
+            · 成绩历史持久化表格展示，最多保留 100 条
+            · 跟打区提前一拍滚动，光标进入可视区倒数第二行即翻出下一行，消除页末等待
+            · 成绩表格只绘内部框线并铺满整页行，列顺序/字号/配色与练单保持一致；修复时间列被挤成两行、行首光标与首字重叠、冷启动成绩表空白等细节问题
+            · 成绩历史改用应用私有文件 + fsync 落盘，并关闭系统云备份（allowBackup），避免旧快照覆盖私有成绩数据
+            · 侧边菜单进入「关于」页不再二次重排字体，更新检查延后到页面入场后启动，减少卡顿
+
+            详细记录见 CHANGELOG.md
+          files: app/build/outputs/apk/release/app-release.apk
+          fail_on_unmatched_files: true

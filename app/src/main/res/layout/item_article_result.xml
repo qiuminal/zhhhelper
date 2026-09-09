@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="26dp"
+    android:divider="@drawable/divider_result_v"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:showDividers="middle">
+    <TextView android:id="@+id/tv_result_title" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.5" android:ellipsize="end" android:gravity="center" android:maxLines="1" android:textColor="@color/text_primary" android:textSize="12sp" />
+    <TextView android:id="@+id/tv_result_speed" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.75" android:gravity="center" android:textColor="@color/text_primary" android:textSize="12sp" />
+    <TextView android:id="@+id/tv_result_chars" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.65" android:gravity="center" android:textColor="@color/text_primary" android:textSize="12sp" />
+    <TextView android:id="@+id/tv_result_errors" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.7" android:gravity="center" android:textColor="@color/text_primary" android:textSize="12sp" />
+    <TextView android:id="@+id/tv_result_elapsed" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.8" android:gravity="center" android:textColor="@color/text_primary" android:textSize="12sp" />
+    <TextView android:id="@+id/tv_result_time" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.35" android:ellipsize="end" android:gravity="center" android:maxLines="1" android:textColor="@color/text_primary" android:textSize="12sp" />
+</LinearLayout>

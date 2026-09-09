@@ -36,19 +36,24 @@ class JustifyTextView @JvmOverloads constructor(
 
     private val lines = mutableListOf<Line>()
     private var totalHeight = 0f
+    private var builtWidth = -1
+    private var layoutDirty = true
 
     fun setText(text: CharSequence?) {
         content = text ?: ""
+        layoutDirty = true
         relayout()
     }
 
     fun setTextSizeSp(sp: Float) {
         textSizePx = sp2px(sp)
+        layoutDirty = true
         relayout()
     }
 
     fun setLineSpacingExtraDp(dp: Float) {
         lineSpacingExtraPx = dp2px(dp)
+        layoutDirty = true
         relayout()
     }
 
@@ -59,12 +64,13 @@ class JustifyTextView @JvmOverloads constructor(
 
     /** 字体加载完成后重建排版（内置字体选择变化会影响字符宽度与行高）。 */
     fun rebuild() {
+        layoutDirty = true
         relayout()
     }
 
     private fun relayout() {
         if (width > 0) {
-            buildLines((width - paddingLeft - paddingRight).coerceAtLeast(0))
+            ensureLines((width - paddingLeft - paddingRight).coerceAtLeast(0))
             invalidate()
         } else {
             requestLayout()
@@ -74,7 +80,7 @@ class JustifyTextView @JvmOverloads constructor(
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val widthSize = MeasureSpec.getSize(widthMeasureSpec)
         val availW = (widthSize - paddingLeft - paddingRight).coerceAtLeast(0)
-        buildLines(availW)
+        ensureLines(availW)
         val height = (totalHeight + paddingTop + paddingBottom).toInt()
         setMeasuredDimension(
             if (MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.UNSPECIFIED) {
@@ -89,9 +95,17 @@ class JustifyTextView @JvmOverloads constructor(
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         if (w != oldw) {
-            buildLines((w - paddingLeft - paddingRight).coerceAtLeast(0))
+            ensureLines((w - paddingLeft - paddingRight).coerceAtLeast(0))
             invalidate()
         }
+    }
+
+    /** 同一内容和宽度只排版一次，避免 onMeasure/onSizeChanged 连续重复扫描整篇更新日志。 */
+    private fun ensureLines(availW: Int) {
+        if (!layoutDirty && builtWidth == availW) return
+        buildLines(availW)
+        builtWidth = availW
+        layoutDirty = false
     }
 
     // ---------------- 排版 ----------------
