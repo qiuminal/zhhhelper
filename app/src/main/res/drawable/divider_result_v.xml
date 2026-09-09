@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 成绩表格纵向分隔线：细且淡 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <size android:width="0.5dp" />
+    <solid android:color="#F0F0F0" />
+</shape>

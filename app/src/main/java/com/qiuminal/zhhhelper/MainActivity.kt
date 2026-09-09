@@ -129,6 +129,52 @@ class MainActivity : AppCompatActivity() {
         // 初始隐藏结果区
         resultContainer.visibility = View.GONE
         btnClear.visibility = View.GONE
+
+        // 侧边菜单「文章」项：在"文章"字形右侧紧贴追加 Beta 小标签
+        // menu actionView 会被推到行最右端；NavigationView 文本框占满整行宽度。
+        // 方案：把文本宽度收缩为 wrap 后在其后插入标签，保证紧贴字形。
+        navView.post {
+            val density = resources.displayMetrics.density
+            fun findArticleText(v: View): TextView? {
+                if (v is TextView && v.text.toString() == "文章") return v
+                if (v is android.view.ViewGroup) {
+                    for (i in 0 until v.childCount) findArticleText(v.getChildAt(i))?.let { return it }
+                }
+                return null
+            }
+            val articleText = findArticleText(navView) ?: return@post
+            val parent = articleText.parent as? android.view.ViewGroup ?: return@post
+            runCatching {
+                val density2 = resources.displayMetrics.density
+                // NavigationMenuItemView 实为水平 LinearLayout：文本框占满剩余宽度(624px)，
+                // 直接 addView 会把标签排到文本框右端(远离字形)。
+                // 方案：把文本框收缩为 wrap_content，标签作为后续子项自然紧跟"文章"字形。
+                val textLp = articleText.layoutParams
+                when (textLp) {
+                    is android.widget.LinearLayout.LayoutParams -> {
+                        textLp.width = android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+                        textLp.weight = 0f
+                        articleText.layoutParams = textLp
+                    }
+                    is android.view.ViewGroup.LayoutParams -> {
+                        textLp.width = android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+                        articleText.layoutParams = textLp
+                    }
+                }
+                val tag = android.widget.ImageView(this).apply {
+                    layoutParams = android.widget.LinearLayout.LayoutParams(
+                        (density2 * 28f).toInt(),
+                        (density2 * 16f).toInt(),
+                    ).apply {
+                        marginStart = (density2 * 6f).toInt()
+                        gravity = android.view.Gravity.CENTER_VERTICAL
+                    }
+                    setImageResource(R.drawable.ic_tag_beta)
+                    contentDescription = "beta"
+                }
+                parent.addView(tag)
+            }
+        }
     }
 
     private fun setupListeners() {
@@ -146,8 +192,15 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, PracticeActivity::class.java))
                     true
                 }
+                R.id.nav_article -> {
+                    drawerLayout.closeDrawer(GravityCompat.START, false)
+                    startActivity(Intent(this, ArticleActivity::class.java))
+                    true
+                }
                 R.id.nav_about -> {
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    // 立即打开轻量 About 页，不等待约 300ms 的抽屉关闭动画；
+                    // closeDrawer(false) 瞬时复位底层抽屉，避免与 Activity 入场动画叠加。
+                    drawerLayout.closeDrawer(GravityCompat.START, false)
                     startActivity(Intent(this, AboutActivity::class.java))
                     true
                 }

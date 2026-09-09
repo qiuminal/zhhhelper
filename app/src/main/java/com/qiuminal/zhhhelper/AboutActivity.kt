@@ -24,6 +24,11 @@ import androidx.core.content.ContextCompat
  */
 class AboutActivity : AppCompatActivity() {
 
+    companion object {
+        /** 应晚于默认 Activity 入场动画，避免更新检查的线程启动影响动画帧。 */
+        private const val UPDATE_CHECK_DELAY_MS = 350L
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
@@ -37,16 +42,13 @@ class AboutActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.tv_version).text =
             getString(R.string.about_version, currentVersion)
 
-        // 有新版本：后台查询 GitHub Releases，发现新版本时显示徽标并可点击更新
-        val updateBadge = findViewById<TextView>(R.id.tv_update_badge)
-        AppUpdater.checkLatest { info ->
-            runOnUiThread {
-                if (info != null && AppUpdater.isNewer(info.versionName, currentVersion)) {
-                    updateBadge.visibility = View.VISIBLE
-                    updateBadge.setOnClickListener { confirmUpdate(info) }
-                }
+        // 先完成首帧与 Activity 入场动画，再启动非关键的网络更新检查。
+        // 使用 decorView.postDelayed 不阻塞主线程；短暂延后可避免网络线程创建与入场动画争抢资源。
+        window.decorView.postDelayed({
+            if (!isFinishing && !isDestroyed) {
+                checkForUpdate(currentVersion)
             }
-        }
+        }, UPDATE_CHECK_DELAY_MS)
 
         // 更新日志：版本号+日期首行加粗，与正文内容区分
         val changelogText = getString(R.string.changelog_content)
@@ -83,14 +85,26 @@ class AboutActivity : AppCompatActivity() {
             }
         }
 
-        // 全局字体：主界面已加载时立即生效；未加载则在后台补加载一次
-        Thread {
-            AppFonts.load(applicationContext)
-            runOnUiThread {
-                AppFonts.applyToHierarchy(findViewById(android.R.id.content))
-                findViewById<JustifyTextView>(R.id.tv_changelog)?.rebuild()
+        // 字体已由主页面后台加载。已加载时在 About 首次绘制前一次性应用，
+        // 避免先显示系统字体、随后整页替换字体并重排造成明显闪烁。
+        // About 也可能被系统单独恢复；此时先用系统字体稳定显示，不在进页后整页二次刷新。
+        if (AppFonts.isLoaded()) {
+            AppFonts.applyToHierarchy(findViewById(android.R.id.content))
+            changelogView.rebuild()
+        }
+    }
+
+    /** 后台检查更新；结果只在 Activity 仍存活时更新徽标。 */
+    private fun checkForUpdate(currentVersion: String) {
+        AppUpdater.checkLatest { info ->
+            if (isFinishing || isDestroyed) return@checkLatest
+            if (info != null && AppUpdater.isNewer(info.versionName, currentVersion)) {
+                findViewById<TextView>(R.id.tv_update_badge).apply {
+                    visibility = View.VISIBLE
+                    setOnClickListener { confirmUpdate(info) }
+                }
             }
-        }.start()
+        }
     }
 
     private fun confirmUpdate(info: ReleaseInfo) {
