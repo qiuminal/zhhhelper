@@ -406,31 +406,18 @@ class ArticleActivity : AppCompatActivity() {
         referenceView.setTextSizeSp(fontSp)
     }
 
-    /** 冷启动读取诊断信息：读取失败时显示在成绩表占位行，避免 Toast 被键盘遮挡 */
-    private var loadDiagnostic: String? = null
-
     private fun loadResultHistory() {
-        loadDiagnostic = null
-        // 主存储：应用私有文件（写入时已 fsync），读取不依赖 SharedPreferences
-        var raw: String? = null
-        var fileExists = false
-        var fileLength = 0L
-        runCatching {
-            val file = File(filesDir, HISTORY_FILE)
-            fileExists = file.exists()
-            fileLength = file.length()
-            if (file.exists() && file.length() > 0L) raw = file.readText()
-        }
-        var fromPrefs = false
-        // 兼容旧版本：文件不存在时回退读取 SharedPreferences 中的旧历史
+        // 主存储：应用私有文件（写入时已 fsync），读取不依赖 SharedPreferences。
+        // 文件不存在或内容为空时保持空成绩表，不向用户暴露内部诊断信息。
+        var raw: String? = runCatching {
+            File(filesDir, HISTORY_FILE).takeIf { it.isFile && it.length() > 0L }?.readText()
+        }.getOrNull()
+        // 兼容旧版本：文件不存在或读取不到有效内容时回退读取 SharedPreferences 中的旧历史。
         if (raw.isNullOrEmpty()) {
             raw = getSharedPreferences("article", MODE_PRIVATE).getString(HISTORY_KEY, null)
-            fromPrefs = !raw.isNullOrEmpty()
         }
-        if (raw.isNullOrEmpty()) {
-            loadDiagnostic = "文件存在=$fileExists 大小=$fileLength prefs=$fromPrefs"
-            return
-        }
+        if (raw.isNullOrEmpty()) return
+
         runCatching {
             val array = JSONArray(raw)
             for (i in 0 until minOf(array.length(), MAX_HISTORY)) {
@@ -445,9 +432,6 @@ class ArticleActivity : AppCompatActivity() {
                     finishedAt = item.optLong("finishedAt"),
                 )
             }
-        }
-        if (results.isEmpty()) {
-            loadDiagnostic = "文件存在=$fileExists 大小=$fileLength prefs=$fromPrefs 解析失败"
         }
     }
 
@@ -533,7 +517,7 @@ class ArticleActivity : AppCompatActivity() {
                 row.addView(cell(weights[5], format.format(Date(result.finishedAt)), ellipsize = true))
             } else {
                 row.addView(
-                    cell(weights[0], if (results.isEmpty()) (loadDiagnostic ?: "暂无成绩") else "", ellipsize = false),
+                    cell(weights[0], "", ellipsize = false),
                 )
                 for (w in 1 until weights.size) row.addView(cell(weights[w], ""))
             }
