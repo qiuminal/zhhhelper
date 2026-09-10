@@ -30,6 +30,8 @@
 - Release 前必须全局搜索并确认没有残留调试输出或调试文案，例如 `Log.d`、`println`、`printStackTrace`、`文件存在=`、`大小=`、`prefs=`、`debug` 测试入口等；必要的错误处理只能记录非敏感、面向用户的正式提示。
 - Release APK 只能由清理后的 Release 源码构建，禁止把调试 APK、unsigned APK 或临时测试组件作为正式版本上传；签名必须使用项目正式发布证书。
 - PR 描述应说明调试代码和临时组件已清理，并附上构建/测试结果；发现残留时不得合并或发布。
+- GitHub Release 附件统一命名为 `zhhhelper-vX.Y.Z-release.apk`，例如 `zhhhelper-v0.2.3-release.apk`；每个 Release 只上传一个正式签名 APK。
+- Release 标题统一为 `虎助手 vX.Y.Z`，正文沿用历史版本结构：版本号与日期、以 `·` 开头的变更条目、`详细记录见 CHANGELOG.md`，然后追加 GitHub 自动生成的 `**Full Changelog**: v上一版本...v当前版本`。
 
 ## 发布流程（维护者）
 本地打 tag 并推送，同时更新 CHANGELOG.md 与关于页文案；发布前按上述清理规范检查并构建正式 Release APK。APK 签名密钥仅存于本地/GitHub Secrets，绝不入库。
