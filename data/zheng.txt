@@ -1122,6 +1122,7 @@
 睡	qll
 物	qne
 者	qor
+烁	cbyx
 赞	qpq
 选	qpu
 制	qrp
