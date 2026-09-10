@@ -18,6 +18,18 @@
 - 替换 data/ 下对应 txt 即可，Gradle 会在 preBuild 自动重新生成二进制码表。
 - 不要手动编辑 app/src/main/assets/*.bin（构建产物，已 gitignore）。
 
+## 版本与发布规范
+
+### 版本号与变更记录
+- 每个可测试版本先更新 `app/build.gradle` 中的 `versionCode` 与 `versionName`，并在 `CHANGELOG.md`、关于页文案中记录用户可见变更。
+- 调试试验、临时验证和发布准备不得直接冒充正式 Release；测试 APK 应明确标注为 debug、trial 或 unsigned。
+
+### 调试信息与临时组件清理
+- 调试日志、文件诊断信息、路径/大小/开关状态等内部诊断文案，只允许在本地调试或临时测试分支使用；功能验证完成后必须删除，不能保留在正式代码路径中。
+- 临时按钮、调试入口、测试菜单、占位视图、试验性组件和仅用于排查问题的资源，验证完成后必须移除；若功能本身需要保留，必须改成正式用户界面和正式文案。
+- Release 前必须全局搜索并确认没有残留调试输出或调试文案，例如 `Log.d`、`println`、`printStackTrace`、`文件存在=`、`大小=`、`prefs=`、`debug` 测试入口等；必要的错误处理只能记录非敏感、面向用户的正式提示。
+- Release APK 只能由清理后的 Release 源码构建，禁止把调试 APK、unsigned APK 或临时测试组件作为正式版本上传；签名必须使用项目正式发布证书。
+- PR 描述应说明调试代码和临时组件已清理，并附上构建/测试结果；发现残留时不得合并或发布。
+
 ## 发布流程（维护者）
-本地打 tag 并推送，同时更新 CHANGELOG.md 与关于页文案；APK 签名密钥仅存于本地
-/GitHub Secrets，绝不入库。
+本地打 tag 并推送，同时更新 CHANGELOG.md 与关于页文案；发布前按上述清理规范检查并构建正式 Release APK。APK 签名密钥仅存于本地/GitHub Secrets，绝不入库。
