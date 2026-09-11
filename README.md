@@ -28,11 +28,19 @@
 
 环境要求：JDK 17、Android SDK（compileSdk 34）、Gradle 8.x。
 
+> ⚠️ **维护者注意**：本机为离线环境，**不要用 `./gradlew`**（wrapper 会联网下载 Gradle 而失败）。
+> 源码改动、产物交付、发版流程（含本机无 git、走 GitHub API 的完整步骤）以及**更新日志双版本**等强制规则，
+> 一律见 `CONTRIBUTING.md` 开头的「⚠️ 铁律」与「发布流程」两节，动手前必须先读。
+
 ```bash
-./gradlew assembleRelease
+# 离线环境统一使用共享 Gradle
+D:\dsh\tools\gradle-8.5\bin\gradle.bat clean assembleRelease --offline --no-daemon
 ```
 
 ## 更新日志
+
+> 本项目**始终维护两版日志**：仓库内 `CHANGELOG.md` 为**对内详细版**（技术细节，不可删减）；
+> 客户端关于页与 GitHub Release 正文为**对外精简版**。本节仅摘录部分对外条目，完整记录见 `CHANGELOG.md`。
 
 ```text
 0.2.2（2026-09-02）

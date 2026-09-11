@@ -98035,478 +98035,478 @@
 ⿓	Tl	龍		康熙部首	U+2FD3
 ⿔	Wg	⿔		康熙部首	U+2FD4
 ⿕	Jl Dk Dk Dk	侖 口 口 口		康熙部首	U+2FD5
-豈	Vs Zd 	山 豆		兼容表意文字	U+F900
-更	Fi Or Bi	一 日 		兼容表意文字	U+F901
-車	Yc	車	chē jū	兼容表意文字	U+F902
-賈	Vx Ob 	覀 貝		兼容表意文字	U+F903
-滑	Ks Fg 	氵 ⾻		兼容表意文字	U+F904
-串	Dk Dk Gs	口 口 丨		兼容表意文字	U+F905
-句	Gj	句		兼容表意文字	U+F906
-龜	Wg	龜		兼容表意文字	U+F907
-龜	Wg	龜		兼容表意文字	U+F908
-契	Af Pd Md	丰 刀 大		兼容表意文字	U+F909
-金	Zj	金		兼容表意文字	U+F90A
-喇	Dk Xs Pd	口 束 刂		兼容表意文字	U+F90B
-奈	Md Fs 	大 示		兼容表意文字	U+F90C
-懶	Hx Xs Pd Ob	忄 束 刀 貝		兼容表意文字	U+F90D
-癩	Ab Xs Pd Ob	疒 束 刀 貝		兼容表意文字	U+F90E
-羅	Ys Is Ui	罒 糹 隹		兼容表意文字	U+F90F
-蘿	Lc Ys Is Ui	艹 罒 糹 隹		兼容表意文字	U+F910
-螺	Cc Qt Is	虫 田 糸		兼容表意文字	U+F911
-裸	Ti Qt Em	衤 田 木		兼容表意文字	U+F912
-邏	Ys Is Ui Uc	罒 糹 隹 辶		兼容表意文字	U+F913
-樂	Ub Iy Iy Em	白 幺 幺 木		兼容表意文字	U+F914
-洛	Ks Sg 	氵 各		兼容表意文字	U+F915
-烙	Ch Sg 	火 各		兼容表意文字	U+F916
-珞	Nw Sg 	王 各		兼容表意文字	U+F917
-落	Lc Ks Sg	艹 氵 各		兼容表意文字	U+F918
-酪	Yy Sg 	酉 各		兼容表意文字	U+F919
-駱	Nm Sg 	馬 各		兼容表意文字	U+F91A
-亂	Ya Ks Mk Ks Ry Ae	爫 龴 冂 厶 又 乚		兼容表意文字	U+F91B
-卵	Bl	卵		兼容表意文字	U+F91C
-欄	Em Am Xs Hb	木 門 束 丷		兼容表意文字	U+F91D
-爛	Ch Am Xs Hb	火 門 束 丷		兼容表意文字	U+F91E
-蘭	Lc Am Xs Hb	艹 門 束 丷		兼容表意文字	U+F91F
-鸞	Sy Is Is Xn	言 糹 糹 鳥		兼容表意文字	U+F920
-嵐	Vs Oj Tp Cc	山 ⺇丿 虫		兼容表意文字	U+F921
-濫	Ks Qc Ru Am	氵 臣  皿		兼容表意文字	U+F922
-藍	Lc Qc Ru Am	艹 臣  皿		兼容表意文字	U+F923
-襤	Ti Qc Ru Am	衤 臣  皿		兼容表意文字	U+F924
-拉	Us Il 	扌 立		兼容表意文字	U+F925
-臘	Vy Oc Ps	月 巛 		兼容表意文字	U+F926
-蠟	Cc Oc Ps	虫 巛 		兼容表意文字	U+F927
-廊	Xg Id Ig Te	广 丶 艮 阝		兼容表意文字	U+F928
-朗	Id Ig Vy	丶 艮 月		兼容表意文字	U+F929
-浪	Ks Id Ig	氵 丶 艮		兼容表意文字	U+F92A
-狼	Mq Id Ig	犭 丶 艮		兼容表意文字	U+F92B
-郎	Id Ig Te	丶 艮 阝		兼容表意文字	U+F92C
-來	Em Jr Jr	木 人 人		兼容表意文字	U+F92D
-冷	Ks Ji Zj	氵 亼 ㄗ		兼容表意文字	U+F92E
-勞	Ch Ch Wg Sl	火 火 冖 力		兼容表意文字	U+F92F
-擄	Us Zh Qt Sl	扌 虍 田 力		兼容表意文字	U+F930
-櫓	Em Wv Or	木 魚 日		兼容表意文字	U+F931
-爐	Ch Zh Qt Am	火 虍 田 皿		兼容表意文字	U+F932
-盧	Zh Qt Am	虍 田 皿		兼容表意文字	U+F933
-老	Ql	老		兼容表意文字	U+F934
-蘆	Lc Zh Qt Am	艹 虍 田 皿		兼容表意文字	U+F935
-虜	Zh Qt Sl	虍 田 力		兼容表意文字	U+F936
-路	Pu Sg 	⻊ 各		兼容表意文字	U+F937
-露	Tv Pu Sg	⻗⻊ 各		兼容表意文字	U+F938
-魯	Wv Or 	魚 日		兼容表意文字	U+F939
-鷺	Pu Sg Xn	⻊ 各 鳥		兼容表意文字	U+F93A
-碌	Ms Bj Ks	石 彑 氺		兼容表意文字	U+F93B
-祿	Fs Bj Ks	⺬彑 氺		兼容表意文字	U+F93C
-綠	Is Bj Ks	糸 彑 氺		兼容表意文字	U+F93D
-菉	Lc Bj Ks	艹 彑 氺		兼容表意文字	U+F93E
-錄	Zj Bj Ks	金 彑 氺		兼容表意文字	U+F93F
-鹿	Xl	鹿		兼容表意文字	U+F940
-論	Sy Jl 	言 侖		兼容表意文字	U+F941
-壟	Tl Gt 	龍 土		兼容表意文字	U+F942
-弄	Nw Lc 	王 廾		兼容表意文字	U+F943
-籠	Ru Tl 	⺮ 龍		兼容表意文字	U+F944
-聾	Tl Qe 	龍 耳		兼容表意文字	U+F945
-牢	Wg Qn 	宀 牛		兼容表意文字	U+F946
-磊	Ms Ms Ms	石 石 石		兼容表意文字	U+F947
-賂	Ob Sg 	貝 各		兼容表意文字	U+F948
-雷	Tv Qt 	⻗田		兼容表意文字	U+F949
-壘	Qt Qt Qt Gt	田 田 田 土		兼容表意文字	U+F94A
-屢	Cs Ku Or Bn	尸   女		兼容表意文字	U+F94B
-樓	Em Ku Or Bn	木   女		兼容表意文字	U+F94C
-淚	Ks Mh Mq	氵 户 犬		兼容表意文字	U+F94D
-漏	Ks Cs Tv	氵 尸 雨		兼容表意文字	U+F94E
-累	Qt Is 	田 糸		兼容表意文字	U+F94F
-縷	Is Ku Or Bn	糹   女		兼容表意文字	U+F950
-陋	Te Fi Mk Jr Ae	阝 一 冂 人 ㇗		兼容表意文字	U+F951
-勒	Tg Sl 	革 力		兼容表意文字	U+F952
-肋	Vy Sl 	月 力		兼容表意文字	U+F953
-凜	Wb Zt Rk Dk Xh	冫 亠 囗 口 禾		兼容表意文字	U+F954
-凌	Wb Gt Pe Hi	冫 土 儿 夊		兼容表意文字	U+F955
-稜	Xh Gt Pe Hi	禾 土 儿 夊		兼容表意文字	U+F956
-綾	Is Gt Pe Hi	糸 土 儿 夊		兼容表意文字	U+F957
-菱	Lc Gt Pe Hi	艹 土 儿 夊		兼容表意文字	U+F958
-陵	Te Gt Pe Hi	阝 土 儿 夊		兼容表意文字	U+F959
-讀	Sy Gs Ys Ob	言 士 罒 貝		兼容表意文字	U+F95A
-拏	Bn Ry Us	女 又 手		兼容表意文字	U+F95B
-樂	Ub Iy Iy Em	白 幺 幺 木		兼容表意文字	U+F95C
-諾	Sy Lc Ns Dk	言 艹 𠂇 口		兼容表意文字	U+F95D
-丹	Mk Zt 	⺆亠		兼容表意文字	U+F95E
-寧	Wg Hx Am Ad	宀 心 皿 丁		兼容表意文字	U+F95F
-怒	Bn Ry Hx	女 又 心		兼容表意文字	U+F960
-率	Zt Iy Wb Wb Ns	亠 幺 冫  十		兼容表意文字	U+F961
-異	Qt Ln Hb	田 龷 八		兼容表意文字	U+F962
-北	Ap Vb 	 匕		兼容表意文字	U+F963
-磻	Ms Tp Pm Qt	石 丿 米 田		兼容表意文字	U+F964
-便	Jr Fi Or Bi	亻 一 日 		兼容表意文字	U+F965
-復	Wc Et Or Hi	彳 𠂉 日 夊		兼容表意文字	U+F966
-不	Cb	不		兼容表意文字	U+F967
-泌	Ks Hx Tp	氵 心 丿		兼容表意文字	U+F968
-數	Ku Or Bn Hp	  女 攵		兼容表意文字	U+F969
-索	Ns Wg Is	十 冖 糸		兼容表意文字	U+F96A
-參	Ks Ks Ks Jr Es	厶 厶 厶 人 彡		兼容表意文字	U+F96B
-塞	Wg Qj Hb Gt	宀   土		兼容表意文字	U+F96C
-省	Yx Tp Qm	𡭔 丿 目		兼容表意文字	U+F96D
-葉	Lc Ln Ae Em	艹 廿 ㇗木		兼容表意文字	U+F96E
-說	Sy Hb Dk Pe	言 八 口 儿		兼容表意文字	U+F96F
-殺	Bi Em Id Rs	㐅 木 丶 殳		兼容表意文字	U+F970
-辰	Fc	辰		兼容表意文字	U+F971
-沈	Ks Wg Pe	氵 冖 		兼容表意文字	U+F972
-拾	Us Ji Dk	扌 亼 口		兼容表意文字	U+F973
-若	Lc Ns Dk	艹 𠂇 口		兼容表意文字	U+F974
-掠	Us Gg Yx	扌  小		兼容表意文字	U+F975
-略	Qt Sg 	田 各		兼容表意文字	U+F976
-亮	Gg Pe 	 儿		兼容表意文字	U+F977
-兩	Ml	兩		兼容表意文字	U+F978
-凉	Wb Gg Yx	冫  小		兼容表意文字	U+F979
-梁	Ks Pd Hb Em	氵 刀 八 木		兼容表意文字	U+F97A
-糧	Pm Or Fi Dl	米 日 一 里		兼容表意文字	U+F97B
-良	Id Ig 	丶 艮		兼容表意文字	U+F97C
-諒	Sy Gg Yx	言  小		兼容表意文字	U+F97D
-量	Or Fi Dl	日 一 里		兼容表意文字	U+F97E
-勵	Xc Lc Qt Vr Sl	厂 艹 田 ⽱力		兼容表意文字	U+F97F
-呂	Dk Tp Dk	口 丿 口		兼容表意文字	U+F980
-女	Bn	女		兼容表意文字	U+F981
-廬	Xg Zh Qt Am	广 虍 田 皿		兼容表意文字	U+F982
-旅	Lf Et Ti	方 𠂉 		兼容表意文字	U+F983
-濾	Ks Zh Qt Hx	氵 虍 田 心		兼容表意文字	U+F984
-礪	Ms Xc Lc Qt Vr	石 厂 艹 田 ⽱		兼容表意文字	U+F985
-閭	Am Dk Dk	門 口 口		兼容表意文字	U+F986
-驪	Nm Fi Vy Fi Vy Xl	馬 一  一  鹿		兼容表意文字	U+F987
-麗	Fi Vy Fi Vy Xl	一  一  鹿		兼容表意文字	U+F988
-黎	Xh Pd Jr Ks	禾  人 氺		兼容表意文字	U+F989
-力	Sl	力		兼容表意文字	U+F98A
-曆	Xc Xh Xh Or	厂 禾 禾 日		兼容表意文字	U+F98B
-歷	Xc Xh Xh Si	厂 禾 禾 止		兼容表意文字	U+F98C
-轢	Yc Ub Iy Iy Em	車 白 幺 幺 木		兼容表意文字	U+F98D
-年	Et Vk 	𠂉 		兼容表意文字	U+F98E
-憐	Hx Pm Lx Vk	忄 米 夕 㐄		兼容表意文字	U+F98F
-戀	Sy Is Is Hx	言 糹 糹 心		兼容表意文字	U+F990
-撚	Us Vy Mq Ch	扌  犬 灬		兼容表意文字	U+F991
-漣	Ks Yc Uc	氵 車 辶		兼容表意文字	U+F992
-煉	Ch Xs Hb	火 束 丷		兼容表意文字	U+F993
-璉	Nw Yc Uc	王 車 辶		兼容表意文字	U+F994
-秊	Xh Lq 	禾 千		兼容表意文字	U+F995
-練	Is Xs Hb	糹 束 丷		兼容表意文字	U+F996
-聯	Qe Iy Iy Lc	耳 幺 幺 丱		兼容表意文字	U+F997
-輦	Hf Hf Yc	夫 夫 車		兼容表意文字	U+F998
-蓮	Lc Yc Uc	艹 車 辶		兼容表意文字	U+F999
-連	Yc Uc 	車 辶		兼容表意文字	U+F99A
-鍊	Zj Xs Hb	金 束 丷		兼容表意文字	U+F99B
-列	Gd Pd 	歹 刂		兼容表意文字	U+F99C
-劣	Yx Tp Sl	𡭔 丿 力		兼容表意文字	U+F99D
-咽	Dk Rk Md	口 囗 大		兼容表意文字	U+F99E
-烈	Gd Pd Ch	歹 刂 灬		兼容表意文字	U+F99F
-裂	Gd Pd Ti	歹 刂 衣		兼容表意文字	U+F9A0
-說	Sy Hb Dk Pe	言 八 口 儿		兼容表意文字	U+F9A1
-廉	Xg Hb Bj Ch	广 䒑  		兼容表意文字	U+F9A2
-念	Ji Ae Hx	亽  心		兼容表意文字	U+F9A3
-捻	Us Ji Ae Hx	扌 亽  心		兼容表意文字	U+F9A4
-殮	Gd Ji Dk Dk Jr Jr	歹 亼 口 口 人 人		兼容表意文字	U+F9A5
-簾	Ru Xg Hb Bj Ch	⺮ 广 䒑  		兼容表意文字	U+F9A6
-獵	Mq Oc Ps	犭 巛 		兼容表意文字	U+F9A7
-令	Ji Zj 	亼 ㄗ		兼容表意文字	U+F9A8
-囹	Rk Ji Zj	囗 亼 ㄗ		兼容表意文字	U+F9A9
-寧	Wg Hx Am Ad	宀 心 皿 丁		兼容表意文字	U+F9AA
-嶺	Vs Ji Zj Wy	山 亼 ㄗ 頁		兼容表意文字	U+F9AB
-怜	Hx Ji Zj	忄 亼 ㄗ		兼容表意文字	U+F9AC
-玲	Nw Ji Zj	王 亼 ㄗ		兼容表意文字	U+F9AD
-瑩	Ch Ch Wg Nw Id	火 火 冖 王 丶		兼容表意文字	U+F9AE
-羚	Gy Ji Zj	⺶ 亼 ㄗ		兼容表意文字	U+F9AF
-聆	Qe Ji Zj	耳 亼 ㄗ		兼容表意文字	U+F9B0
-鈴	Zj Ji Zj	金 亼 ㄗ		兼容表意文字	U+F9B1
-零	Tv Ji Zj	⻗亼 ㄗ		兼容表意文字	U+F9B2
-靈	Tv Dk Dk Dk Ug Jr Jr	⻗口 口 口 工 人 人		兼容表意文字	U+F9B3
-領	Ji Zj Wy	亼 ㄗ 頁		兼容表意文字	U+F9B4
-例	Jr Gd Pd	亻 歹 刂		兼容表意文字	U+F9B5
-禮	Fs Yq Zd	礻 曲 豆		兼容表意文字	U+F9B6
-醴	Yy Yq Zd	酉 曲 豆		兼容表意文字	U+F9B7
-隸	Gs Fs Bj Ks	士 示  氺		兼容表意文字	U+F9B8
-惡	Fi Cy Hx	一  心		兼容表意文字	U+F9B9
-了	Rl	了		兼容表意文字	U+F9BA
-僚	Jr Md Hb Or Yx	亻 大 丷 日 小		兼容表意文字	U+F9BB
-寮	Wg Md Hb Or Yx	宀 大 丷 日 小		兼容表意文字	U+F9BC
-尿	Cs Ks 	尸 水		兼容表意文字	U+F9BD
-料	Pm Jd 	米 斗		兼容表意文字	U+F9BE
-樂	Ub Iy Iy Em	白 幺 幺 木		兼容表意文字	U+F9BF
-燎	Ch Md Hb Or Yx	火 大 丷 日 小		兼容表意文字	U+F9C0
-療	Ab Md Hb Or Yx	疒 大 丷 日 小		兼容表意文字	U+F9C1
-蓼	Lc Zv Jr Es	艹 羽 人 彡		兼容表意文字	U+F9C2
-遼	Md Hb Or Yx Uc	大 丷 日 小 辶		兼容表意文字	U+F9C3
-龍	Tl	龍		兼容表意文字	U+F9C4
-暈	Or Wg Yc	日 冖 車		兼容表意文字	U+F9C5
-阮	Te Me Pe	阝 二 儿		兼容表意文字	U+F9C6
-劉	Bm Zj Pd	 金 刂		兼容表意文字	U+F9C7
-杻	Em Ae Gt	木 ヿ土		兼容表意文字	U+F9C8
-柳	Em Bm 	木 卯		兼容表意文字	U+F9C9
-流	Ks By Oc	氵  		兼容表意文字	U+F9CA
-溜	Ks Bm Qt	氵  田		兼容表意文字	U+F9CB
-琉	Nw By Oc	王  		兼容表意文字	U+F9CC
-留	Bm Qt 	 田		兼容表意文字	U+F9CD
-硫	Ms By Oc	石  		兼容表意文字	U+F9CE
-紐	Is Ae Gt	糸 ヿ土		兼容表意文字	U+F9CF
-類	Pm Mq Wy	米 犬 頁		兼容表意文字	U+F9D0
-六	Al	六		兼容表意文字	U+F9D1
-戮	Zv Jr Es Pg	羽 人 彡 戈		兼容表意文字	U+F9D2
-陸	Te Gt Hb Gt	阝 土 八 土		兼容表意文字	U+F9D3
-倫	Jr Jl 	亻 侖		兼容表意文字	U+F9D4
-崙	Vs Jl 	山 侖		兼容表意文字	U+F9D5
-淪	Ks Jl 	氵 侖		兼容表意文字	U+F9D6
-輪	Yc Jl 	車 侖		兼容表意文字	U+F9D7
-律	Wc Bv 	彳 聿		兼容表意文字	U+F9D8
-慄	Hx Vx Em	忄 覀 木		兼容表意文字	U+F9D9
-栗	Vx Em 	覀 木		兼容表意文字	U+F9DA
-率	Zt Iy Wb Wb Ns	亠 幺 冫  十		兼容表意文字	U+F9DB
-隆	Te Hi Fi Ls	阝 夂 一 生		兼容表意文字	U+F9DC
-利	Xh Pd 	禾 刂		兼容表意文字	U+F9DD
-吏	Fi Dk Bi	一 口 		兼容表意文字	U+F9DE
-履	Cs Wc Et Or Hi	尸 彳 𠂉 日 夊		兼容表意文字	U+F9DF
-易	Or Nk Es	日 勹 		兼容表意文字	U+F9E0
-李	Em Hi 	木 子		兼容表意文字	U+F9E1
-梨	Xh Pd Em	禾 刂 木		兼容表意文字	U+F9E2
-泥	Ks Cs Vb	氵 尸 匕		兼容表意文字	U+F9E3
-理	Nw Dl 	王 里		兼容表意文字	U+F9E4
-痢	Ab Xh Pd	疒 禾 刂		兼容表意文字	U+F9E5
-罹	Ys Hx Ui	罒 忄 隹		兼容表意文字	U+F9E6
-裏	Ti Dl 	衣 里		兼容表意文字	U+F9E7
-裡	Ti Dl 	衤 里		兼容表意文字	U+F9E8
-里	Dl	里		兼容表意文字	U+F9E9
-離	Zt Bi Mk Vr Ui	亠 㐅 凵 禸 隹		兼容表意文字	U+F9EA
-匿	Nk Lc Ns Dk	匸 艹 𠂇 口		兼容表意文字	U+F9EB
-溺	Ks Bg Es Bg Es	氵 弓 彡 弓 彡		兼容表意文字	U+F9EC
-吝	Vw Dk 	文 口		兼容表意文字	U+F9ED
-燐	Ch Pm Lx Vk	火 米 夕 㐄		兼容表意文字	U+F9EE
-璘	Nw Pm Lx Vk	王 米 夕 㐄		兼容表意文字	U+F9EF
-藺	Lc Am Ui	艹 門 隹		兼容表意文字	U+F9F0
-隣	Te Pm Lx Vk	阝 米 夕 㐄		兼容表意文字	U+F9F1
-鱗	Wv Pm Lx Vk	鱼 米 夕 㐄		兼容表意文字	U+F9F2
-麟	Xl Pm Lx Vk	鹿 米 夕 㐄		兼容表意文字	U+F9F3
-林	Em Em 	木 木		兼容表意文字	U+F9F4
-淋	Ks Em Em	氵 木 木		兼容表意文字	U+F9F5
-臨	Qc Et Dk Dk Dk	臣 𠂉 口 口 口		兼容表意文字	U+F9F6
-立	Il	立		兼容表意文字	U+F9F7
-笠	Ru Il 	⺮ 立		兼容表意文字	U+F9F8
-粒	Pm Il 	米 立		兼容表意文字	U+F9F9
-狀	Ap Mq 	爿 犬		兼容表意文字	U+F9FA
-炙	Vy Ch 	 火		兼容表意文字	U+F9FB
-識	Sy Xy Pg	言 音 戈		兼容表意文字	U+F9FC
-什	Jr Ns 	亻 十		兼容表意文字	U+F9FD
-茶	Lc Jr Em	艹 人 木		兼容表意文字	U+F9FE
-刺	Em Mk Pd	木 冂 刂		兼容表意文字	U+F9FF
-切	Rq Pd 	七 刀		兼容表意文字	U+FA00
-度	Xg Ln Ry	广 廿 又		兼容表意文字	U+FA01
-拓	Us Ms 	扌 石		兼容表意文字	U+FA02
-糖	Pm Xg Bv Dk	米 广 肀 口		兼容表意文字	U+FA03
-宅	Wg Tp Rq	宀 丿 七		兼容表意文字	U+FA04
-洞	Ks Mk Fi Dk	氵 冂 一 口		兼容表意文字	U+FA05
-暴	Or Ln Hb Ks	日 龷 八 氺		兼容表意文字	U+FA06
-輻	Yc Fi Dk Qt	車 一 口 田		兼容表意文字	U+FA07
-行	Px	行		兼容表意文字	U+FA08
-降	Te Hi Vk	阝 夂 㐄		兼容表意文字	U+FA09
-見	Ej	見		兼容表意文字	U+FA0A
-廓	Xg Gg Hi Te	广  子 阝		兼容表意文字	U+FA0B
-兀	Fi Pe 	一 儿		兼容表意文字	U+FA0C
-嗀	Gs Wg Fi Dk Rs	士 冖 一 口 殳		兼容表意文字	U+FA0D
-﨎	Vw Ui Ry	文 隹 又		兼容表意文字	U+FA0E
-﨏	Gt Hg 	土 谷		兼容表意文字	U+FA0F
-塚	Gt Wg Js Id	土 冖 豕 丶		兼容表意文字	U+FA10
-﨑	Vs Il Zk	山  可		兼容表意文字	U+FA11
-晴	Or Af Vy	日 龶 円		兼容表意文字	U+FA12
-﨓	Em Lc Jr Kc	木 艹 亻 寸		兼容表意文字	U+FA13
-﨔	Em Ks Hb Us	木 ⺍ 手		兼容表意文字	U+FA14
-凞	Wb Qc Vj Ch	冫 臣 己 灬		兼容表意文字	U+FA15
-猪	Mq Ql Or	犭 耂 日		兼容表意文字	U+FA16
-益	Ks Am 	 皿		兼容表意文字	U+FA17
-礼	Fs Ae 	示 乚	lǐ	兼容表意文字	U+FA18
-神	Fs Or Gs	⺬日 丨		兼容表意文字	U+FA19
-祥	Fs Gy 	⺬羊		兼容表意文字	U+FA1A
-福	Fs Fi Dk Qt	⺬一 口 田		兼容表意文字	U+FA1B
-靖	Il Af Vy	立 龶 円		兼容表意文字	U+FA1C
-精	Pm Af Vy	米 龶 円		兼容表意文字	U+FA1D
-羽	Zv	羽		兼容表意文字	U+FA1E
-﨟	Lc Vy Or Nk Fw	艹 月 曰 勹 亾		兼容表意文字	U+FA1F
-蘒	Lc Xh Wg	艹 禾 龜		兼容表意文字	U+FA20
-﨡	Cc Ls 	虫 生		兼容表意文字	U+FA21
-諸	Sy Ql Or	言 耂 日		兼容表意文字	U+FA22
-﨣	Pz Jd 	走 斗		兼容表意文字	U+FA23
-﨤	Cj Uc 	及 ⻍		兼容表意文字	U+FA24
-逸	Wt Uc 	兔 辶		兼容表意文字	U+FA25
-都	Ql Or Te	耂 日 阝		兼容表意文字	U+FA26
-﨧	Zj Ql Hi	金 耂 子		兼容表意文字	U+FA27
-﨨	Zj Gt Gy	金 土 		兼容表意文字	U+FA28
-﨩	Te Xn Vs	阝  山		兼容表意文字	U+FA29
-飯	Qs Xc Ry	⻞⺁ 又		兼容表意文字	U+FA2A
-飼	Qs Ae Fi Dk	⻞㇆ 一 口		兼容表意文字	U+FA2B
-館	Qs Wg Ki	⻞宀 㠯		兼容表意文字	U+FA2C
-鶴	Wg Ui Xn	宀 隹 鳥		兼容表意文字	U+FA2D
-郞	Id Ig Te	丶 艮 阝		兼容表意文字	U+FA2E
-隷	Gs Fs Bj Ks	士 示  氺		兼容表意文字	U+FA2F
-侮	Jr Et Km	亻 𠂉 母		兼容表意文字	U+FA30
-僧	Jr Hb Rk Yx Or	亻 丷 囗 ⺌ 曰		兼容表意文字	U+FA31
-免	Wt Pe 	 		兼容表意文字	U+FA32
-勉	Wt Pe Sl	  力		兼容表意文字	U+FA33
-勤	Ln Dk Af Sl	廿 口 龶 力		兼容表意文字	U+FA34
-卑	Ub Tp Ns	白 丿 十		兼容表意文字	U+FA35
-喝	Dk Or Nk Fw	口 曰 勹 亾		兼容表意文字	U+FA36
-嘆	Dk Ln Dk Hf	口 廿 口 夫		兼容表意文字	U+FA37
-器	Dk Dk Mq Dk Dk	口 口 犬 口 口		兼容表意文字	U+FA38
-塀	Gt Cs Tp Eg Tp Eg	土 尸 丿  丿 干		兼容表意文字	U+FA39
-墨	Ph Gt 	黑 土		兼容表意文字	U+FA3A
-層	Cs Hb Rk Yx Or	尸 丷 囗 ⺌ 曰		兼容表意文字	U+FA3B
-屮	Sc	屮		兼容表意文字	U+FA3C
-悔	Hx Et Km	忄 𠂉 母		兼容表意文字	U+FA3D
-慨	Hx Ub Vb Du	忄 白 匕 旡		兼容表意文字	U+FA3E
-憎	Hx Hb Rk Yx Or	忄 丷 囗 ⺌ 曰		兼容表意文字	U+FA3F
-懲	Wc Vs Fi Tp Gs Hp Hx	彳 山 一 ㇒士 攵 心		兼容表意文字	U+FA40
-敏	Et Km Hp	𠂉 母 攵		兼容表意文字	U+FA41
-既	Ub Vb Du	白 匕 旡		兼容表意文字	U+FA42
-暑	Or Ql Or	日 耂 日		兼容表意文字	U+FA43
-梅	Em Et Km	木 𠂉 母		兼容表意文字	U+FA44
-海	Ks Et Km	氵 𠂉 母		兼容表意文字	U+FA45
-渚	Ks Ql Or	氵 耂 日		兼容表意文字	U+FA46
-漢	Ks Ln Dk Hf	氵 廿 口 夫		兼容表意文字	U+FA47
-煮	Ql Or Ch	耂 日 灬		兼容表意文字	U+FA48
-爫	Ya	爫		兼容表意文字	U+FA49
-琢	Nw Js Id	王 豕 丶		兼容表意文字	U+FA4A
-碑	Ms Ub Tp Ns	石 白 丿 十		兼容表意文字	U+FA4B
-社	Fs Gt 	⺬土		兼容表意文字	U+FA4C
-祉	Fs Si 	⺬止		兼容表意文字	U+FA4D
-祈	Fs Tj 	⺬斤		兼容表意文字	U+FA4E
-祐	Fs Ns Dk	⺬𠂇 口		兼容表意文字	U+FA4F
-祖	Fs Fq 	⺬且		兼容表意文字	U+FA50
-祝	Fs Dk Pe	⺬口 儿		兼容表意文字	U+FA51
-禍	Fs Fg Dk	⺬冎 口		兼容表意文字	U+FA52
-禎	Fs Yb Ob	⺬⺊ 貝		兼容表意文字	U+FA53
-穀	Gs Wg Fi Xh Rs	士 冖 一 禾 殳		兼容表意文字	U+FA54
-突	Ex Mq 	 犬		兼容表意文字	U+FA55
-節	Ru Ig Zj	⺮  卩		兼容表意文字	U+FA56
-練	Is Xs Hb	糸 束 丷		兼容表意文字	U+FA57
-縉	Is Fi Cy Or	糸 一 业 日		兼容表意文字	U+FA58
-繁	Et Km Hp Is	𠂉 母 攵 糸		兼容表意文字	U+FA59
-署	Ys Ql Or	罒 耂 日		兼容表意文字	U+FA5A
-者	Ql Or 	耂 日		兼容表意文字	U+FA5B
-臭	Oi Mq 	自 犬		兼容表意文字	U+FA5C
-艹	Lc	艹		兼容表意文字	U+FA5D
-艹	Lc	艹		兼容表意文字	U+FA5E
-著	Lc Ql Or	艹 耂 日		兼容表意文字	U+FA5F
-褐	Ti Or Nk Fw	衤 曰 勹 亾		兼容表意文字	U+FA60
-視	Fs Ej 	⺬見		兼容表意文字	U+FA61
-謁	Sy Or Nk Fw	言 曰 勹 亾		兼容表意文字	U+FA62
-謹	Sy Ln Dk Af	言 廿 口 龶		兼容表意文字	U+FA63
-賓	Wg Fi Si Ob	宀 一  貝		兼容表意文字	U+FA64
-贈	Ob Hb Rk Yx Or	貝 丷 囗 ⺌ 曰		兼容表意文字	U+FA65
-辶	Uc	辶		兼容表意文字	U+FA66
-逸	Wt Uc 	兔 ⻍		兼容表意文字	U+FA67
-難	Ln Dk Hf Ui	廿 口 夫 隹		兼容表意文字	U+FA68
-響	Ix Ub Vb Te Xy	乡 白 匕 阝 音		兼容表意文字	U+FA69
-頻	Si Si Wy	止  頁		兼容表意文字	U+FA6A
-恵	Nf Hx 	 心		兼容表意文字	U+FA6B
-𤋮	Qc Vj Ch	臣 己 灬		兼容表意文字	U+FA6C
-舘	Jr Gt Dk Wg Ki	人 土 口 宀 㠯		兼容表意文字	U+FA6D
-並	Hb Cy 	䒑 		兼容表意文字	U+FA70
-况	Me Dk Pe	二 口 儿		兼容表意文字	U+FA71
-全	Jr Nw 	人 王		兼容表意文字	U+FA72
-侀	Jr Eg Eg Pd	亻  干 刂		兼容表意文字	U+FA73
-充	Fi Ks Pe	一 厶 儿		兼容表意文字	U+FA74
-冀	Ap Vb Qt Lc Hb	 匕 田 ⺿		兼容表意文字	U+FA75
-勇	Ks Ty Sl	龴  力		兼容表意文字	U+FA76
-勺	Nk Id 	勹 丶		兼容表意文字	U+FA77
-喝	Dk Or Nk Vb	口 曰 勹 匕		兼容表意文字	U+FA78
-啕	Dk Nk Af	口 勹 		兼容表意文字	U+FA79
-喙	Dk Bj Js	口 彑 		兼容表意文字	U+FA7A
-嗢	Dk Or Am	口 日 皿		兼容表意文字	U+FA7B
-塚	Gt Wg Js	土 冖 豕		兼容表意文字	U+FA7C
-墳	Gt Ns Lc Ob	土 十 ⺿貝		兼容表意文字	U+FA7D
-奄	Md Or Ae	大 日 乚		兼容表意文字	U+FA7E
-奔	Md Ns Lc	大 十 		兼容表意文字	U+FA7F
-婢	Bn Or Tp Ns	女 日 丿 十		兼容表意文字	U+FA80
-嬨	Bn Hx Zt Iy Zt Iy	女 心 亠 幺 亠 幺		兼容表意文字	U+FA81
-廒	Xg Af Pd Hp	广 龶  攵		兼容表意文字	U+FA82
-廙	Xg Qt Lc Hb	广 田 ⺿		兼容表意文字	U+FA83
-彩	Tp Pm Es	丿 米 彡		兼容表意文字	U+FA84
-徭	Wc Ya Eg Mk	彳 爫 干 凵		兼容表意文字	U+FA85
-惘	Hx Mk Hb Fw	忄 冂 䒑 亾		兼容表意文字	U+FA86
-慎	Hx Ns Fq Hb	忄 十 且 八		兼容表意文字	U+FA87
-愈	Ji Vy Pd Hx	亼 ⺝刂 心		兼容表意文字	U+FA88
-憎	Hx Hb Rk Yx Or	忄 丷 囗 ⺌ 曰		兼容表意文字	U+FA89
-慠	Hx Af Pd Hp	忄 龶  攵		兼容表意文字	U+FA8A
-懲	Wc Vs Nw Hp Hx	彳 山 王 攵 心		兼容表意文字	U+FA8B
-戴	Ns Pg Qt Ln Hb	十 戈 田 龷 八		兼容表意文字	U+FA8C
-揄	Us Ji Vy Pd	扌 亼 ⺝刂		兼容表意文字	U+FA8D
-搜	Us Pj Gs Ry	扌  丨 又		兼容表意文字	U+FA8E
-摒	Us Cs Hb Lc	扌 尸 䒑 廾		兼容表意文字	U+FA8F
-敖	Af Pd Hp	龶  攵		兼容表意文字	U+FA90
-晴	Or Af Vy	日 龶 ⺝		兼容表意文字	U+FA91
-朗	Id Ig Vy	丶  月		兼容表意文字	U+FA92
-望	Fw Vy Nw	 月 王		兼容表意文字	U+FA93
-杖	Em Fi Bi Id	木 一  丶		兼容表意文字	U+FA94
-歹	Gd	歹		兼容表意文字	U+FA95
-殺	Bi Em Rs	㐅 木 殳		兼容表意文字	U+FA96
-流	Ks By Oc	氵  		兼容表意文字	U+FA97
-滛	Ks Ya Eg Mk	氵 爫 干 凵		兼容表意文字	U+FA98
-滋	Ks Zt Iy Zt Iy	氵 亠 幺 亠 幺		兼容表意文字	U+FA99
-漢	Ks Ln Dk Hf	氵 廿 口 夫		兼容表意文字	U+FA9A
-瀞	Ks Af Vy Xd Bv	氵 龶 ⺝⺈ 		兼容表意文字	U+FA9B
-煮	Ql Or Ch	耂 日 灬		兼容表意文字	U+FA9C
-瞧	Qm Ui Ch	目 隹 灬		兼容表意文字	U+FA9D
-爵	Ya Ys Ig Kc	爫 罒  寸		兼容表意文字	U+FA9E
-犯	Mq Vs 	犭 巳		兼容表意文字	U+FA9F
-猪	Mq Ql Or	犭 耂 日		兼容表意文字	U+FAA0
-瑱	Nw Ns Qm Ae Hb	王 十 目 ㇗八		兼容表意文字	U+FAA1
-甆	Zt Iy Zt Iy Rw	亠 幺 亠 幺 瓦		兼容表意文字	U+FAA2
-画	Fi Qt Mk	一 田 凵		兼容表意文字	U+FAA3
-瘝	Ab Ys Ks	疒 罒 水		兼容表意文字	U+FAA4
-瘟	Ab Or Am	疒 日 皿		兼容表意文字	U+FAA5
-益	Ks Am 	 皿		兼容表意文字	U+FAA6
-盛	Nu Ae Am	戊 ㇆皿		兼容表意文字	U+FAA7
-直	Ns Qm Fi	十  一		兼容表意文字	U+FAA8
-睊	Qm Ks Vy	目 厶 ⺝		兼容表意文字	U+FAA9
-着	Gy Qm 	⺶ 目		兼容表意文字	U+FAAA
-磌	Ms Ns Qm Hb	石 十  		兼容表意文字	U+FAAB
-窱	Ex Jr Gs Hi Em	 亻 丨 夂 木		兼容表意文字	U+FAAC
-節	Ru Ig Zj	⺮  卩		兼容表意文字	U+FAAD
-类	Pm Mq 	米 犬		兼容表意文字	U+FAAE
-絛	Jr Gs Hi Is	亻 丨 夂 糸		兼容表意文字	U+FAAF
-練	Is Em Or	糸 木 日		兼容表意文字	U+FAB0
-缾	Af Tp Eg Tp Eg	缶 丿  丿 干		兼容表意文字	U+FAB1
-者	Ql Or 	耂 日		兼容表意文字	U+FAB2
-荒	Lc Fw Oc	艹 亾 		兼容表意文字	U+FAB3
-華	Ln Lc Us	龷 艹 		兼容表意文字	U+FAB4
-蝹	Cc Rk Jr Am	虫 囗 人 皿		兼容表意文字	U+FAB5
-襁	Ti Bg Ks Cc	衤 弓 厶 虫		兼容表意文字	U+FAB6
-覆	Vx Wc Et Or Hi	襾 彳 𠂉 日 夊		兼容表意文字	U+FAB7
-視	Fs Ej 	礻 見		兼容表意文字	U+FAB8
-調	Sy Mk Gt Dk	言 ⺆土 口		兼容表意文字	U+FAB9
-諸	Sy Ql Or	言 耂 日		兼容表意文字	U+FABA
-請	Sy Af Vy	言 龶 ⺝		兼容表意文字	U+FABB
-謁	Sy Or Nk Vb	言 曰 勹 匕		兼容表意文字	U+FABC
-諾	Sy Lc Ns Dk	言 ⺿𠂇 口		兼容表意文字	U+FABD
-諭	Sy Ji Vy Pd	言 亼 ⺝刂		兼容表意文字	U+FABE
-謹	Sy Ln Dk Gt	言 廿 口 土		兼容表意文字	U+FABF
-變	Sy Is Is Hi	言 糹 糹 夂		兼容表意文字	U+FAC0
-贈	Ob Hb Qt Or	貝 丷 田 曰		兼容表意文字	U+FAC1
-輸	Yc Ji Vy Pd	車 亼 ⺝刂		兼容表意文字	U+FAC2
-遲	Cs Ks Vk Uc	尸 氺 㐄 ⻍		兼容表意文字	U+FAC3
-醙	Yy Pj Gs Ry	酉  丨 又		兼容表意文字	U+FAC4
-鉶	Zj Eg Eg Pd	金  干 刂		兼容表意文字	U+FAC5
-陼	Te Ql Or	阝 耂 日		兼容表意文字	U+FAC6
-難	Ln Dk Hf Ui	廿 口 夫 隹		兼容表意文字	U+FAC7
-靖	Il Af Vy	立 龶 ⺝		兼容表意文字	U+FAC8
-韛	Gw Ln Tp Ty	韋 龷 丿 		兼容表意文字	U+FAC9
-響	Ix Ig Te Xy	乡  阝 音		兼容表意文字	U+FACA
-頋	Xc Zj Wy	厂 ⺋ 頁		兼容表意文字	U+FACB
-頻	Si Yx Tp Wy	止 𡭔 丿 頁		兼容表意文字	U+FACC
-鬒	Pc Es Ns Qm Hb	镸 彡 十  		兼容表意文字	U+FACD
-龜	Wg	⿔		兼容表意文字	U+FACE
-𢡊	Hx Tp Md Tp Md Hx	忄 丿 大 丿 大 心		兼容表意文字	U+FACF
-𢡄	Hx Tp Md Tp Md Or	忄 丿 大 丿 大 日		兼容表意文字	U+FAD0
-𣏕	Em Em Id	木 木 丶		兼容表意文字	U+FAD1
-㮝	Em Hg Te	木 谷 阝		兼容表意文字	U+FAD2
-䀘	Qm Eg Eg	目  干		兼容表意文字	U+FAD3
-䀹	Qm Md Ju Ju	目 大 入 入		兼容表意文字	U+FAD4
-𥉉	Qm Jr Gs Hi Em	目 亻 丨 夂 木		兼容表意文字	U+FAD5
-𥳐	Ru Am Eg Eg	⺮ 門  干		兼容表意文字	U+FAD6
-𧻓	Pz Tp Eg Tp Eg	走 丿  丿 干		兼容表意文字	U+FAD7
-齃	Oi Qt Lc Or Nk Vb	自 田 丌 曰 勹 匕		兼容表意文字	U+FAD8
-龎	Xc Tl 	厂 龍		兼容表意文字	U+FAD9
+豈	Vs Zd 	山 豆		兼容	U+F900
+更	Fi Or Bi	一 日 		兼容	U+F901
+車	Yc	車	chē jū	兼容	U+F902
+賈	Vx Ob 	覀 貝		兼容	U+F903
+滑	Ks Fg 	氵 ⾻		兼容	U+F904
+串	Dk Dk Gs	口 口 丨		兼容	U+F905
+句	Gj	句		兼容	U+F906
+龜	Wg	龜		兼容	U+F907
+龜	Wg	龜		兼容	U+F908
+契	Af Pd Md	丰 刀 大		兼容	U+F909
+金	Zj	金		兼容	U+F90A
+喇	Dk Xs Pd	口 束 刂		兼容	U+F90B
+奈	Md Fs 	大 示		兼容	U+F90C
+懶	Hx Xs Pd Ob	忄 束 刀 貝		兼容	U+F90D
+癩	Ab Xs Pd Ob	疒 束 刀 貝		兼容	U+F90E
+羅	Ys Is Ui	罒 糹 隹		兼容	U+F90F
+蘿	Lc Ys Is Ui	艹 罒 糹 隹		兼容	U+F910
+螺	Cc Qt Is	虫 田 糸		兼容	U+F911
+裸	Ti Qt Em	衤 田 木		兼容	U+F912
+邏	Ys Is Ui Uc	罒 糹 隹 辶		兼容	U+F913
+樂	Ub Iy Iy Em	白 幺 幺 木		兼容	U+F914
+洛	Ks Sg 	氵 各		兼容	U+F915
+烙	Ch Sg 	火 各		兼容	U+F916
+珞	Nw Sg 	王 各		兼容	U+F917
+落	Lc Ks Sg	艹 氵 各		兼容	U+F918
+酪	Yy Sg 	酉 各		兼容	U+F919
+駱	Nm Sg 	馬 各		兼容	U+F91A
+亂	Ya Ks Mk Ks Ry Ae	爫 龴 冂 厶 又 乚		兼容	U+F91B
+卵	Bl	卵		兼容	U+F91C
+欄	Em Am Xs Hb	木 門 束 丷		兼容	U+F91D
+爛	Ch Am Xs Hb	火 門 束 丷		兼容	U+F91E
+蘭	Lc Am Xs Hb	艹 門 束 丷		兼容	U+F91F
+鸞	Sy Is Is Xn	言 糹 糹 鳥		兼容	U+F920
+嵐	Vs Oj Tp Cc	山 ⺇丿 虫		兼容	U+F921
+濫	Ks Qc Ru Am	氵 臣  皿		兼容	U+F922
+藍	Lc Qc Ru Am	艹 臣  皿		兼容	U+F923
+襤	Ti Qc Ru Am	衤 臣  皿		兼容	U+F924
+拉	Us Il 	扌 立		兼容	U+F925
+臘	Vy Oc Ps	月 巛 		兼容	U+F926
+蠟	Cc Oc Ps	虫 巛 		兼容	U+F927
+廊	Xg Id Ig Te	广 丶 艮 阝		兼容	U+F928
+朗	Id Ig Vy	丶 艮 月		兼容	U+F929
+浪	Ks Id Ig	氵 丶 艮		兼容	U+F92A
+狼	Mq Id Ig	犭 丶 艮		兼容	U+F92B
+郎	Id Ig Te	丶 艮 阝		兼容	U+F92C
+來	Em Jr Jr	木 人 人		兼容	U+F92D
+冷	Ks Ji Zj	氵 亼 ㄗ		兼容	U+F92E
+勞	Ch Ch Wg Sl	火 火 冖 力		兼容	U+F92F
+擄	Us Zh Qt Sl	扌 虍 田 力		兼容	U+F930
+櫓	Em Wv Or	木 魚 日		兼容	U+F931
+爐	Ch Zh Qt Am	火 虍 田 皿		兼容	U+F932
+盧	Zh Qt Am	虍 田 皿		兼容	U+F933
+老	Ql	老		兼容	U+F934
+蘆	Lc Zh Qt Am	艹 虍 田 皿		兼容	U+F935
+虜	Zh Qt Sl	虍 田 力		兼容	U+F936
+路	Pu Sg 	⻊ 各		兼容	U+F937
+露	Tv Pu Sg	⻗⻊ 各		兼容	U+F938
+魯	Wv Or 	魚 日		兼容	U+F939
+鷺	Pu Sg Xn	⻊ 各 鳥		兼容	U+F93A
+碌	Ms Bj Ks	石 彑 氺		兼容	U+F93B
+祿	Fs Bj Ks	⺬彑 氺		兼容	U+F93C
+綠	Is Bj Ks	糸 彑 氺		兼容	U+F93D
+菉	Lc Bj Ks	艹 彑 氺		兼容	U+F93E
+錄	Zj Bj Ks	金 彑 氺		兼容	U+F93F
+鹿	Xl	鹿		兼容	U+F940
+論	Sy Jl 	言 侖		兼容	U+F941
+壟	Tl Gt 	龍 土		兼容	U+F942
+弄	Nw Lc 	王 廾		兼容	U+F943
+籠	Ru Tl 	⺮ 龍		兼容	U+F944
+聾	Tl Qe 	龍 耳		兼容	U+F945
+牢	Wg Qn 	宀 牛		兼容	U+F946
+磊	Ms Ms Ms	石 石 石		兼容	U+F947
+賂	Ob Sg 	貝 各		兼容	U+F948
+雷	Tv Qt 	⻗田		兼容	U+F949
+壘	Qt Qt Qt Gt	田 田 田 土		兼容	U+F94A
+屢	Cs Ku Or Bn	尸   女		兼容	U+F94B
+樓	Em Ku Or Bn	木   女		兼容	U+F94C
+淚	Ks Mh Mq	氵 户 犬		兼容	U+F94D
+漏	Ks Cs Tv	氵 尸 雨		兼容	U+F94E
+累	Qt Is 	田 糸		兼容	U+F94F
+縷	Is Ku Or Bn	糹   女		兼容	U+F950
+陋	Te Fi Mk Jr Ae	阝 一 冂 人 ㇗		兼容	U+F951
+勒	Tg Sl 	革 力		兼容	U+F952
+肋	Vy Sl 	月 力		兼容	U+F953
+凜	Wb Zt Rk Dk Xh	冫 亠 囗 口 禾		兼容	U+F954
+凌	Wb Gt Pe Hi	冫 土 儿 夊		兼容	U+F955
+稜	Xh Gt Pe Hi	禾 土 儿 夊		兼容	U+F956
+綾	Is Gt Pe Hi	糸 土 儿 夊		兼容	U+F957
+菱	Lc Gt Pe Hi	艹 土 儿 夊		兼容	U+F958
+陵	Te Gt Pe Hi	阝 土 儿 夊		兼容	U+F959
+讀	Sy Gs Ys Ob	言 士 罒 貝		兼容	U+F95A
+拏	Bn Ry Us	女 又 手		兼容	U+F95B
+樂	Ub Iy Iy Em	白 幺 幺 木		兼容	U+F95C
+諾	Sy Lc Ns Dk	言 艹 𠂇 口		兼容	U+F95D
+丹	Mk Zt 	⺆亠		兼容	U+F95E
+寧	Wg Hx Am Ad	宀 心 皿 丁		兼容	U+F95F
+怒	Bn Ry Hx	女 又 心		兼容	U+F960
+率	Zt Iy Wb Wb Ns	亠 幺 冫  十		兼容	U+F961
+異	Qt Ln Hb	田 龷 八		兼容	U+F962
+北	Ap Vb 	 匕		兼容	U+F963
+磻	Ms Tp Pm Qt	石 丿 米 田		兼容	U+F964
+便	Jr Fi Or Bi	亻 一 日 		兼容	U+F965
+復	Wc Et Or Hi	彳 𠂉 日 夊		兼容	U+F966
+不	Cb	不		兼容	U+F967
+泌	Ks Hx Tp	氵 心 丿		兼容	U+F968
+數	Ku Or Bn Hp	  女 攵		兼容	U+F969
+索	Ns Wg Is	十 冖 糸		兼容	U+F96A
+參	Ks Ks Ks Jr Es	厶 厶 厶 人 彡		兼容	U+F96B
+塞	Wg Qj Hb Gt	宀   土		兼容	U+F96C
+省	Yx Tp Qm	𡭔 丿 目		兼容	U+F96D
+葉	Lc Ln Ae Em	艹 廿 ㇗木		兼容	U+F96E
+說	Sy Hb Dk Pe	言 八 口 儿		兼容	U+F96F
+殺	Bi Em Id Rs	㐅 木 丶 殳		兼容	U+F970
+辰	Fc	辰		兼容	U+F971
+沈	Ks Wg Pe	氵 冖 		兼容	U+F972
+拾	Us Ji Dk	扌 亼 口		兼容	U+F973
+若	Lc Ns Dk	艹 𠂇 口		兼容	U+F974
+掠	Us Gg Yx	扌  小		兼容	U+F975
+略	Qt Sg 	田 各		兼容	U+F976
+亮	Gg Pe 	 儿		兼容	U+F977
+兩	Ml	兩		兼容	U+F978
+凉	Wb Gg Yx	冫  小		兼容	U+F979
+梁	Ks Pd Hb Em	氵 刀 八 木		兼容	U+F97A
+糧	Pm Or Fi Dl	米 日 一 里		兼容	U+F97B
+良	Id Ig 	丶 艮		兼容	U+F97C
+諒	Sy Gg Yx	言  小		兼容	U+F97D
+量	Or Fi Dl	日 一 里		兼容	U+F97E
+勵	Xc Lc Qt Vr Sl	厂 艹 田 ⽱力		兼容	U+F97F
+呂	Dk Tp Dk	口 丿 口		兼容	U+F980
+女	Bn	女		兼容	U+F981
+廬	Xg Zh Qt Am	广 虍 田 皿		兼容	U+F982
+旅	Lf Et Ti	方 𠂉 		兼容	U+F983
+濾	Ks Zh Qt Hx	氵 虍 田 心		兼容	U+F984
+礪	Ms Xc Lc Qt Vr	石 厂 艹 田 ⽱		兼容	U+F985
+閭	Am Dk Dk	門 口 口		兼容	U+F986
+驪	Nm Fi Vy Fi Vy Xl	馬 一  一  鹿		兼容	U+F987
+麗	Fi Vy Fi Vy Xl	一  一  鹿		兼容	U+F988
+黎	Xh Pd Jr Ks	禾  人 氺		兼容	U+F989
+力	Sl	力		兼容	U+F98A
+曆	Xc Xh Xh Or	厂 禾 禾 日		兼容	U+F98B
+歷	Xc Xh Xh Si	厂 禾 禾 止		兼容	U+F98C
+轢	Yc Ub Iy Iy Em	車 白 幺 幺 木		兼容	U+F98D
+年	Et Vk 	𠂉 		兼容	U+F98E
+憐	Hx Pm Lx Vk	忄 米 夕 㐄		兼容	U+F98F
+戀	Sy Is Is Hx	言 糹 糹 心		兼容	U+F990
+撚	Us Vy Mq Ch	扌  犬 灬		兼容	U+F991
+漣	Ks Yc Uc	氵 車 辶		兼容	U+F992
+煉	Ch Xs Hb	火 束 丷		兼容	U+F993
+璉	Nw Yc Uc	王 車 辶		兼容	U+F994
+秊	Xh Lq 	禾 千		兼容	U+F995
+練	Is Xs Hb	糹 束 丷		兼容	U+F996
+聯	Qe Iy Iy Lc	耳 幺 幺 丱		兼容	U+F997
+輦	Hf Hf Yc	夫 夫 車		兼容	U+F998
+蓮	Lc Yc Uc	艹 車 辶		兼容	U+F999
+連	Yc Uc 	車 辶		兼容	U+F99A
+鍊	Zj Xs Hb	金 束 丷		兼容	U+F99B
+列	Gd Pd 	歹 刂		兼容	U+F99C
+劣	Yx Tp Sl	𡭔 丿 力		兼容	U+F99D
+咽	Dk Rk Md	口 囗 大		兼容	U+F99E
+烈	Gd Pd Ch	歹 刂 灬		兼容	U+F99F
+裂	Gd Pd Ti	歹 刂 衣		兼容	U+F9A0
+說	Sy Hb Dk Pe	言 八 口 儿		兼容	U+F9A1
+廉	Xg Hb Bj Ch	广 䒑  		兼容	U+F9A2
+念	Ji Ae Hx	亽  心		兼容	U+F9A3
+捻	Us Ji Ae Hx	扌 亽  心		兼容	U+F9A4
+殮	Gd Ji Dk Dk Jr Jr	歹 亼 口 口 人 人		兼容	U+F9A5
+簾	Ru Xg Hb Bj Ch	⺮ 广 䒑  		兼容	U+F9A6
+獵	Mq Oc Ps	犭 巛 		兼容	U+F9A7
+令	Ji Zj 	亼 ㄗ		兼容	U+F9A8
+囹	Rk Ji Zj	囗 亼 ㄗ		兼容	U+F9A9
+寧	Wg Hx Am Ad	宀 心 皿 丁		兼容	U+F9AA
+嶺	Vs Ji Zj Wy	山 亼 ㄗ 頁		兼容	U+F9AB
+怜	Hx Ji Zj	忄 亼 ㄗ		兼容	U+F9AC
+玲	Nw Ji Zj	王 亼 ㄗ		兼容	U+F9AD
+瑩	Ch Ch Wg Nw Id	火 火 冖 王 丶		兼容	U+F9AE
+羚	Gy Ji Zj	⺶ 亼 ㄗ		兼容	U+F9AF
+聆	Qe Ji Zj	耳 亼 ㄗ		兼容	U+F9B0
+鈴	Zj Ji Zj	金 亼 ㄗ		兼容	U+F9B1
+零	Tv Ji Zj	⻗亼 ㄗ		兼容	U+F9B2
+靈	Tv Dk Dk Dk Ug Jr Jr	⻗口 口 口 工 人 人		兼容	U+F9B3
+領	Ji Zj Wy	亼 ㄗ 頁		兼容	U+F9B4
+例	Jr Gd Pd	亻 歹 刂		兼容	U+F9B5
+禮	Fs Yq Zd	礻 曲 豆		兼容	U+F9B6
+醴	Yy Yq Zd	酉 曲 豆		兼容	U+F9B7
+隸	Gs Fs Bj Ks	士 示  氺		兼容	U+F9B8
+惡	Fi Cy Hx	一  心		兼容	U+F9B9
+了	Rl	了		兼容	U+F9BA
+僚	Jr Md Hb Or Yx	亻 大 丷 日 小		兼容	U+F9BB
+寮	Wg Md Hb Or Yx	宀 大 丷 日 小		兼容	U+F9BC
+尿	Cs Ks 	尸 水		兼容	U+F9BD
+料	Pm Jd 	米 斗		兼容	U+F9BE
+樂	Ub Iy Iy Em	白 幺 幺 木		兼容	U+F9BF
+燎	Ch Md Hb Or Yx	火 大 丷 日 小		兼容	U+F9C0
+療	Ab Md Hb Or Yx	疒 大 丷 日 小		兼容	U+F9C1
+蓼	Lc Zv Jr Es	艹 羽 人 彡		兼容	U+F9C2
+遼	Md Hb Or Yx Uc	大 丷 日 小 辶		兼容	U+F9C3
+龍	Tl	龍		兼容	U+F9C4
+暈	Or Wg Yc	日 冖 車		兼容	U+F9C5
+阮	Te Me Pe	阝 二 儿		兼容	U+F9C6
+劉	Bm Zj Pd	 金 刂		兼容	U+F9C7
+杻	Em Ae Gt	木 ヿ土		兼容	U+F9C8
+柳	Em Bm 	木 卯		兼容	U+F9C9
+流	Ks By Oc	氵  		兼容	U+F9CA
+溜	Ks Bm Qt	氵  田		兼容	U+F9CB
+琉	Nw By Oc	王  		兼容	U+F9CC
+留	Bm Qt 	 田		兼容	U+F9CD
+硫	Ms By Oc	石  		兼容	U+F9CE
+紐	Is Ae Gt	糸 ヿ土		兼容	U+F9CF
+類	Pm Mq Wy	米 犬 頁		兼容	U+F9D0
+六	Al	六		兼容	U+F9D1
+戮	Zv Jr Es Pg	羽 人 彡 戈		兼容	U+F9D2
+陸	Te Gt Hb Gt	阝 土 八 土		兼容	U+F9D3
+倫	Jr Jl 	亻 侖		兼容	U+F9D4
+崙	Vs Jl 	山 侖		兼容	U+F9D5
+淪	Ks Jl 	氵 侖		兼容	U+F9D6
+輪	Yc Jl 	車 侖		兼容	U+F9D7
+律	Wc Bv 	彳 聿		兼容	U+F9D8
+慄	Hx Vx Em	忄 覀 木		兼容	U+F9D9
+栗	Vx Em 	覀 木		兼容	U+F9DA
+率	Zt Iy Wb Wb Ns	亠 幺 冫  十		兼容	U+F9DB
+隆	Te Hi Fi Ls	阝 夂 一 生		兼容	U+F9DC
+利	Xh Pd 	禾 刂		兼容	U+F9DD
+吏	Fi Dk Bi	一 口 		兼容	U+F9DE
+履	Cs Wc Et Or Hi	尸 彳 𠂉 日 夊		兼容	U+F9DF
+易	Or Nk Es	日 勹 		兼容	U+F9E0
+李	Em Hi 	木 子		兼容	U+F9E1
+梨	Xh Pd Em	禾 刂 木		兼容	U+F9E2
+泥	Ks Cs Vb	氵 尸 匕		兼容	U+F9E3
+理	Nw Dl 	王 里		兼容	U+F9E4
+痢	Ab Xh Pd	疒 禾 刂		兼容	U+F9E5
+罹	Ys Hx Ui	罒 忄 隹		兼容	U+F9E6
+裏	Ti Dl 	衣 里		兼容	U+F9E7
+裡	Ti Dl 	衤 里		兼容	U+F9E8
+里	Dl	里		兼容	U+F9E9
+離	Zt Bi Mk Vr Ui	亠 㐅 凵 禸 隹		兼容	U+F9EA
+匿	Nk Lc Ns Dk	匸 艹 𠂇 口		兼容	U+F9EB
+溺	Ks Bg Es Bg Es	氵 弓 彡 弓 彡		兼容	U+F9EC
+吝	Vw Dk 	文 口		兼容	U+F9ED
+燐	Ch Pm Lx Vk	火 米 夕 㐄		兼容	U+F9EE
+璘	Nw Pm Lx Vk	王 米 夕 㐄		兼容	U+F9EF
+藺	Lc Am Ui	艹 門 隹		兼容	U+F9F0
+隣	Te Pm Lx Vk	阝 米 夕 㐄		兼容	U+F9F1
+鱗	Wv Pm Lx Vk	鱼 米 夕 㐄		兼容	U+F9F2
+麟	Xl Pm Lx Vk	鹿 米 夕 㐄		兼容	U+F9F3
+林	Em Em 	木 木		兼容	U+F9F4
+淋	Ks Em Em	氵 木 木		兼容	U+F9F5
+臨	Qc Et Dk Dk Dk	臣 𠂉 口 口 口		兼容	U+F9F6
+立	Il	立		兼容	U+F9F7
+笠	Ru Il 	⺮ 立		兼容	U+F9F8
+粒	Pm Il 	米 立		兼容	U+F9F9
+狀	Ap Mq 	爿 犬		兼容	U+F9FA
+炙	Vy Ch 	 火		兼容	U+F9FB
+識	Sy Xy Pg	言 音 戈		兼容	U+F9FC
+什	Jr Ns 	亻 十		兼容	U+F9FD
+茶	Lc Jr Em	艹 人 木		兼容	U+F9FE
+刺	Em Mk Pd	木 冂 刂		兼容	U+F9FF
+切	Rq Pd 	七 刀		兼容	U+FA00
+度	Xg Ln Ry	广 廿 又		兼容	U+FA01
+拓	Us Ms 	扌 石		兼容	U+FA02
+糖	Pm Xg Bv Dk	米 广 肀 口		兼容	U+FA03
+宅	Wg Tp Rq	宀 丿 七		兼容	U+FA04
+洞	Ks Mk Fi Dk	氵 冂 一 口		兼容	U+FA05
+暴	Or Ln Hb Ks	日 龷 八 氺		兼容	U+FA06
+輻	Yc Fi Dk Qt	車 一 口 田		兼容	U+FA07
+行	Px	行		兼容	U+FA08
+降	Te Hi Vk	阝 夂 㐄		兼容	U+FA09
+見	Ej	見		兼容	U+FA0A
+廓	Xg Gg Hi Te	广  子 阝		兼容	U+FA0B
+兀	Fi Pe 	一 儿		兼容	U+FA0C
+嗀	Gs Wg Fi Dk Rs	士 冖 一 口 殳		兼容	U+FA0D
+﨎	Vw Ui Ry	文 隹 又		兼容	U+FA0E
+﨏	Gt Hg 	土 谷		兼容	U+FA0F
+塚	Gt Wg Js Id	土 冖 豕 丶		兼容	U+FA10
+﨑	Vs Il Zk	山  可		兼容	U+FA11
+晴	Or Af Vy	日 龶 円		兼容	U+FA12
+﨓	Em Lc Jr Kc	木 艹 亻 寸		兼容	U+FA13
+﨔	Em Ks Hb Us	木 ⺍ 手		兼容	U+FA14
+凞	Wb Qc Vj Ch	冫 臣 己 灬		兼容	U+FA15
+猪	Mq Ql Or	犭 耂 日		兼容	U+FA16
+益	Ks Am 	 皿		兼容	U+FA17
+礼	Fs Ae 	示 乚	lǐ	兼容	U+FA18
+神	Fs Or Gs	⺬日 丨		兼容	U+FA19
+祥	Fs Gy 	⺬羊		兼容	U+FA1A
+福	Fs Fi Dk Qt	⺬一 口 田		兼容	U+FA1B
+靖	Il Af Vy	立 龶 円		兼容	U+FA1C
+精	Pm Af Vy	米 龶 円		兼容	U+FA1D
+羽	Zv	羽		兼容	U+FA1E
+﨟	Lc Vy Or Nk Fw	艹 月 曰 勹 亾		兼容	U+FA1F
+蘒	Lc Xh Wg	艹 禾 龜		兼容	U+FA20
+﨡	Cc Ls 	虫 生		兼容	U+FA21
+諸	Sy Ql Or	言 耂 日		兼容	U+FA22
+﨣	Pz Jd 	走 斗		兼容	U+FA23
+﨤	Cj Uc 	及 ⻍		兼容	U+FA24
+逸	Wt Uc 	兔 辶		兼容	U+FA25
+都	Ql Or Te	耂 日 阝		兼容	U+FA26
+﨧	Zj Ql Hi	金 耂 子		兼容	U+FA27
+﨨	Zj Gt Gy	金 土 		兼容	U+FA28
+﨩	Te Xn Vs	阝  山		兼容	U+FA29
+飯	Qs Xc Ry	⻞⺁ 又		兼容	U+FA2A
+飼	Qs Ae Fi Dk	⻞㇆ 一 口		兼容	U+FA2B
+館	Qs Wg Ki	⻞宀 㠯		兼容	U+FA2C
+鶴	Wg Ui Xn	宀 隹 鳥		兼容	U+FA2D
+郞	Id Ig Te	丶 艮 阝		兼容	U+FA2E
+隷	Gs Fs Bj Ks	士 示  氺		兼容	U+FA2F
+侮	Jr Et Km	亻 𠂉 母		兼容	U+FA30
+僧	Jr Hb Rk Yx Or	亻 丷 囗 ⺌ 曰		兼容	U+FA31
+免	Wt Pe 	 		兼容	U+FA32
+勉	Wt Pe Sl	  力		兼容	U+FA33
+勤	Ln Dk Af Sl	廿 口 龶 力		兼容	U+FA34
+卑	Ub Tp Ns	白 丿 十		兼容	U+FA35
+喝	Dk Or Nk Fw	口 曰 勹 亾		兼容	U+FA36
+嘆	Dk Ln Dk Hf	口 廿 口 夫		兼容	U+FA37
+器	Dk Dk Mq Dk Dk	口 口 犬 口 口		兼容	U+FA38
+塀	Gt Cs Tp Eg Tp Eg	土 尸 丿  丿 干		兼容	U+FA39
+墨	Ph Gt 	黑 土		兼容	U+FA3A
+層	Cs Hb Rk Yx Or	尸 丷 囗 ⺌ 曰		兼容	U+FA3B
+屮	Sc	屮		兼容	U+FA3C
+悔	Hx Et Km	忄 𠂉 母		兼容	U+FA3D
+慨	Hx Ub Vb Du	忄 白 匕 旡		兼容	U+FA3E
+憎	Hx Hb Rk Yx Or	忄 丷 囗 ⺌ 曰		兼容	U+FA3F
+懲	Wc Vs Fi Tp Gs Hp Hx	彳 山 一 ㇒士 攵 心		兼容	U+FA40
+敏	Et Km Hp	𠂉 母 攵		兼容	U+FA41
+既	Ub Vb Du	白 匕 旡		兼容	U+FA42
+暑	Or Ql Or	日 耂 日		兼容	U+FA43
+梅	Em Et Km	木 𠂉 母		兼容	U+FA44
+海	Ks Et Km	氵 𠂉 母		兼容	U+FA45
+渚	Ks Ql Or	氵 耂 日		兼容	U+FA46
+漢	Ks Ln Dk Hf	氵 廿 口 夫		兼容	U+FA47
+煮	Ql Or Ch	耂 日 灬		兼容	U+FA48
+爫	Ya	爫		兼容	U+FA49
+琢	Nw Js Id	王 豕 丶		兼容	U+FA4A
+碑	Ms Ub Tp Ns	石 白 丿 十		兼容	U+FA4B
+社	Fs Gt 	⺬土		兼容	U+FA4C
+祉	Fs Si 	⺬止		兼容	U+FA4D
+祈	Fs Tj 	⺬斤		兼容	U+FA4E
+祐	Fs Ns Dk	⺬𠂇 口		兼容	U+FA4F
+祖	Fs Fq 	⺬且		兼容	U+FA50
+祝	Fs Dk Pe	⺬口 儿		兼容	U+FA51
+禍	Fs Fg Dk	⺬冎 口		兼容	U+FA52
+禎	Fs Yb Ob	⺬⺊ 貝		兼容	U+FA53
+穀	Gs Wg Fi Xh Rs	士 冖 一 禾 殳		兼容	U+FA54
+突	Ex Mq 	 犬		兼容	U+FA55
+節	Ru Ig Zj	⺮  卩		兼容	U+FA56
+練	Is Xs Hb	糸 束 丷		兼容	U+FA57
+縉	Is Fi Cy Or	糸 一 业 日		兼容	U+FA58
+繁	Et Km Hp Is	𠂉 母 攵 糸		兼容	U+FA59
+署	Ys Ql Or	罒 耂 日		兼容	U+FA5A
+者	Ql Or 	耂 日		兼容	U+FA5B
+臭	Oi Mq 	自 犬		兼容	U+FA5C
+艹	Lc	艹		兼容	U+FA5D
+艹	Lc	艹		兼容	U+FA5E
+著	Lc Ql Or	艹 耂 日		兼容	U+FA5F
+褐	Ti Or Nk Fw	衤 曰 勹 亾		兼容	U+FA60
+視	Fs Ej 	⺬見		兼容	U+FA61
+謁	Sy Or Nk Fw	言 曰 勹 亾		兼容	U+FA62
+謹	Sy Ln Dk Af	言 廿 口 龶		兼容	U+FA63
+賓	Wg Fi Si Ob	宀 一  貝		兼容	U+FA64
+贈	Ob Hb Rk Yx Or	貝 丷 囗 ⺌ 曰		兼容	U+FA65
+辶	Uc	辶		兼容	U+FA66
+逸	Wt Uc 	兔 ⻍		兼容	U+FA67
+難	Ln Dk Hf Ui	廿 口 夫 隹		兼容	U+FA68
+響	Ix Ub Vb Te Xy	乡 白 匕 阝 音		兼容	U+FA69
+頻	Si Si Wy	止  頁		兼容	U+FA6A
+恵	Nf Hx 	 心		兼容	U+FA6B
+𤋮	Qc Vj Ch	臣 己 灬		兼容	U+FA6C
+舘	Jr Gt Dk Wg Ki	人 土 口 宀 㠯		兼容	U+FA6D
+並	Hb Cy 	䒑 		兼容	U+FA70
+况	Me Dk Pe	二 口 儿		兼容	U+FA71
+全	Jr Nw 	人 王		兼容	U+FA72
+侀	Jr Eg Eg Pd	亻  干 刂		兼容	U+FA73
+充	Fi Ks Pe	一 厶 儿		兼容	U+FA74
+冀	Ap Vb Qt Lc Hb	 匕 田 ⺿		兼容	U+FA75
+勇	Ks Ty Sl	龴  力		兼容	U+FA76
+勺	Nk Id 	勹 丶		兼容	U+FA77
+喝	Dk Or Nk Vb	口 曰 勹 匕		兼容	U+FA78
+啕	Dk Nk Af	口 勹 		兼容	U+FA79
+喙	Dk Bj Js	口 彑 		兼容	U+FA7A
+嗢	Dk Or Am	口 日 皿		兼容	U+FA7B
+塚	Gt Wg Js	土 冖 豕		兼容	U+FA7C
+墳	Gt Ns Lc Ob	土 十 ⺿貝		兼容	U+FA7D
+奄	Md Or Ae	大 日 乚		兼容	U+FA7E
+奔	Md Ns Lc	大 十 		兼容	U+FA7F
+婢	Bn Or Tp Ns	女 日 丿 十		兼容	U+FA80
+嬨	Bn Hx Zt Iy Zt Iy	女 心 亠 幺 亠 幺		兼容	U+FA81
+廒	Xg Af Pd Hp	广 龶  攵		兼容	U+FA82
+廙	Xg Qt Lc Hb	广 田 ⺿		兼容	U+FA83
+彩	Tp Pm Es	丿 米 彡		兼容	U+FA84
+徭	Wc Ya Eg Mk	彳 爫 干 凵		兼容	U+FA85
+惘	Hx Mk Hb Fw	忄 冂 䒑 亾		兼容	U+FA86
+慎	Hx Ns Fq Hb	忄 十 且 八		兼容	U+FA87
+愈	Ji Vy Pd Hx	亼 ⺝刂 心		兼容	U+FA88
+憎	Hx Hb Rk Yx Or	忄 丷 囗 ⺌ 曰		兼容	U+FA89
+慠	Hx Af Pd Hp	忄 龶  攵		兼容	U+FA8A
+懲	Wc Vs Nw Hp Hx	彳 山 王 攵 心		兼容	U+FA8B
+戴	Ns Pg Qt Ln Hb	十 戈 田 龷 八		兼容	U+FA8C
+揄	Us Ji Vy Pd	扌 亼 ⺝刂		兼容	U+FA8D
+搜	Us Pj Gs Ry	扌  丨 又		兼容	U+FA8E
+摒	Us Cs Hb Lc	扌 尸 䒑 廾		兼容	U+FA8F
+敖	Af Pd Hp	龶  攵		兼容	U+FA90
+晴	Or Af Vy	日 龶 ⺝		兼容	U+FA91
+朗	Id Ig Vy	丶  月		兼容	U+FA92
+望	Fw Vy Nw	 月 王		兼容	U+FA93
+杖	Em Fi Bi Id	木 一  丶		兼容	U+FA94
+歹	Gd	歹		兼容	U+FA95
+殺	Bi Em Rs	㐅 木 殳		兼容	U+FA96
+流	Ks By Oc	氵  		兼容	U+FA97
+滛	Ks Ya Eg Mk	氵 爫 干 凵		兼容	U+FA98
+滋	Ks Zt Iy Zt Iy	氵 亠 幺 亠 幺		兼容	U+FA99
+漢	Ks Ln Dk Hf	氵 廿 口 夫		兼容	U+FA9A
+瀞	Ks Af Vy Xd Bv	氵 龶 ⺝⺈ 		兼容	U+FA9B
+煮	Ql Or Ch	耂 日 灬		兼容	U+FA9C
+瞧	Qm Ui Ch	目 隹 灬		兼容	U+FA9D
+爵	Ya Ys Ig Kc	爫 罒  寸		兼容	U+FA9E
+犯	Mq Vs 	犭 巳		兼容	U+FA9F
+猪	Mq Ql Or	犭 耂 日		兼容	U+FAA0
+瑱	Nw Ns Qm Ae Hb	王 十 目 ㇗八		兼容	U+FAA1
+甆	Zt Iy Zt Iy Rw	亠 幺 亠 幺 瓦		兼容	U+FAA2
+画	Fi Qt Mk	一 田 凵		兼容	U+FAA3
+瘝	Ab Ys Ks	疒 罒 水		兼容	U+FAA4
+瘟	Ab Or Am	疒 日 皿		兼容	U+FAA5
+益	Ks Am 	 皿		兼容	U+FAA6
+盛	Nu Ae Am	戊 ㇆皿		兼容	U+FAA7
+直	Ns Qm Fi	十  一		兼容	U+FAA8
+睊	Qm Ks Vy	目 厶 ⺝		兼容	U+FAA9
+着	Gy Qm 	⺶ 目		兼容	U+FAAA
+磌	Ms Ns Qm Hb	石 十  		兼容	U+FAAB
+窱	Ex Jr Gs Hi Em	 亻 丨 夂 木		兼容	U+FAAC
+節	Ru Ig Zj	⺮  卩		兼容	U+FAAD
+类	Pm Mq 	米 犬		兼容	U+FAAE
+絛	Jr Gs Hi Is	亻 丨 夂 糸		兼容	U+FAAF
+練	Is Em Or	糸 木 日		兼容	U+FAB0
+缾	Af Tp Eg Tp Eg	缶 丿  丿 干		兼容	U+FAB1
+者	Ql Or 	耂 日		兼容	U+FAB2
+荒	Lc Fw Oc	艹 亾 		兼容	U+FAB3
+華	Ln Lc Us	龷 艹 		兼容	U+FAB4
+蝹	Cc Rk Jr Am	虫 囗 人 皿		兼容	U+FAB5
+襁	Ti Bg Ks Cc	衤 弓 厶 虫		兼容	U+FAB6
+覆	Vx Wc Et Or Hi	襾 彳 𠂉 日 夊		兼容	U+FAB7
+視	Fs Ej 	礻 見		兼容	U+FAB8
+調	Sy Mk Gt Dk	言 ⺆土 口		兼容	U+FAB9
+諸	Sy Ql Or	言 耂 日		兼容	U+FABA
+請	Sy Af Vy	言 龶 ⺝		兼容	U+FABB
+謁	Sy Or Nk Vb	言 曰 勹 匕		兼容	U+FABC
+諾	Sy Lc Ns Dk	言 ⺿𠂇 口		兼容	U+FABD
+諭	Sy Ji Vy Pd	言 亼 ⺝刂		兼容	U+FABE
+謹	Sy Ln Dk Gt	言 廿 口 土		兼容	U+FABF
+變	Sy Is Is Hi	言 糹 糹 夂		兼容	U+FAC0
+贈	Ob Hb Qt Or	貝 丷 田 曰		兼容	U+FAC1
+輸	Yc Ji Vy Pd	車 亼 ⺝刂		兼容	U+FAC2
+遲	Cs Ks Vk Uc	尸 氺 㐄 ⻍		兼容	U+FAC3
+醙	Yy Pj Gs Ry	酉  丨 又		兼容	U+FAC4
+鉶	Zj Eg Eg Pd	金  干 刂		兼容	U+FAC5
+陼	Te Ql Or	阝 耂 日		兼容	U+FAC6
+難	Ln Dk Hf Ui	廿 口 夫 隹		兼容	U+FAC7
+靖	Il Af Vy	立 龶 ⺝		兼容	U+FAC8
+韛	Gw Ln Tp Ty	韋 龷 丿 		兼容	U+FAC9
+響	Ix Ig Te Xy	乡  阝 音		兼容	U+FACA
+頋	Xc Zj Wy	厂 ⺋ 頁		兼容	U+FACB
+頻	Si Yx Tp Wy	止 𡭔 丿 頁		兼容	U+FACC
+鬒	Pc Es Ns Qm Hb	镸 彡 十  		兼容	U+FACD
+龜	Wg	⿔		兼容	U+FACE
+𢡊	Hx Tp Md Tp Md Hx	忄 丿 大 丿 大 心		兼容	U+FACF
+𢡄	Hx Tp Md Tp Md Or	忄 丿 大 丿 大 日		兼容	U+FAD0
+𣏕	Em Em Id	木 木 丶		兼容	U+FAD1
+㮝	Em Hg Te	木 谷 阝		兼容	U+FAD2
+䀘	Qm Eg Eg	目  干		兼容	U+FAD3
+䀹	Qm Md Ju Ju	目 大 入 入		兼容	U+FAD4
+𥉉	Qm Jr Gs Hi Em	目 亻 丨 夂 木		兼容	U+FAD5
+𥳐	Ru Am Eg Eg	⺮ 門  干		兼容	U+FAD6
+𧻓	Pz Tp Eg Tp Eg	走 丿  丿 干		兼容	U+FAD7
+齃	Oi Qt Lc Or Nk Vb	自 田 丌 曰 勹 匕		兼容	U+FAD8
+龎	Xc Tl 	厂 龍		兼容	U+FAD9
 丽	Fi Vy Fi Vy	一 月 一 月		兼补	U+2F800
 丸	Kj Id 	九 丶		兼补	U+2F801
 乁	Ae	乁		兼补	U+2F802
