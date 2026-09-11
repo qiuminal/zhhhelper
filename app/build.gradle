@@ -11,8 +11,8 @@ android {
         applicationId "com.qiuminal.zhhhelper"
         minSdk 23
         targetSdk 34
-        versionCode 22
-        versionName "0.3.1"
+        versionCode 23
+        versionName "0.3.2"
     }
 
     signingConfigs {
