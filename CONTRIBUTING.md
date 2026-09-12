@@ -132,11 +132,22 @@
    - 正文结构：首行 `X.Y.Z（日期）` + `·` 开头的**对外精简**条目 + 末尾 `详细记录见 CHANGELOG.md` + `**Full Changelog**: https://github.com/qiuminal/zhhhelper/compare/v上一版本...v当前版本`
    - 正文**不用** `##`/`###` 标题（Release 名称栏已显示版本）
    - 附件名：`zhhhelper-vX.Y.Z-release.apk`，每个 Release **只上传一个正式签名 APK**。
+   - ⚠️ **坑**：若 tag 提前手工建好，`softprops/action-gh-release` 会走「补全已有 Release」路径，**忽略** workflow 里配置的 `name`/`body`/`files`，产出的 Release 会变成标题无「虎助手」前缀、附件名 `app-release.apk`、正文为自动生成的 PR 列表。此时应删除该 Release 后用 API 按上列规范重建。
+9. **清理临时分支（发版必做，勿遗漏）**：Release 发布完成后，删除本次发版用到的所有临时分支，只保留 `main`。
+   - 典型待删：`work/x.y.z-*`（功能/数据分支）、`ci/*`、`release/x.y.z*`。
+   - 删除前先确认对应 PR **已 merged**、且关键文件已在 `main` 上（比对 blob sha），避免误删未合并内容。
+   - 删除命令（GitHub API）：
+     ```
+     DELETE https://api.github.com/repos/qiuminal/zhhhelper/git/refs/heads/<branch>
+     ```
+     （分支名含 `/` 时直接放在路径里即可，如 `.../git/refs/heads/ci/foo`）
+   - 删完复查：`GET /repos/qiuminal/zhhhelper/branches` 应只剩 `main`。
 
 ### 其他注意
 
 - 分支保护（strict checks/reviews）会挡 force push，这是设计目的；确需改写历史要先临时解除、推完立即恢复。
 - APK 签名密钥仅存于本地/GitHub Secrets，**绝不入库**。
+- **发版收尾清单**：Release 合规（标题/正文/附件名）→ 线上 APK 下载复核签名与版本 → 临时分支清理 → tag 与 Release 对应关系正确。
 
 ## 本项目资源位置
 
