@@ -152,21 +152,25 @@ class JustifyTextView @JvmOverloads constructor(
         var runWidth = 0f
         var i = start
         while (i < end) {
-            val run = runFor(content[i], i)
+            // 按码点（而非 UTF-16 码元）推进：增补平面字符（如 𧮡 U+27BA1）是代理对，
+            // 必须整体成 run，否则拆成两个孤立代理会各自按系统字体渲染成豆腐块/乱码。
+            val cp = Character.codePointAt(content, i)
+            val cc = Character.charCount(cp)
+            val run = runFor(i, cp, cc)
             if (runs.isEmpty() || runWidth + run.width <= availW) {
                 runs.add(run)
                 runWidth += run.width
-                i++
+                i += cc
                 continue
             }
-            if (isForbiddenLineStart(content[i])) {
+            if (isForbiddenLineStart(cp)) {
                 // 句末标点不能起行：回退本行末尾字符，让标点随其后顺延到下一行（保持原文顺序）
                 val carried = mutableListOf<Run>()
                 while (runs.isNotEmpty()) {
                     val removed = runs.removeAt(runs.size - 1)
                     runWidth -= removed.width
                     carried.add(0, removed)
-                    if (!isForbiddenLineStart(carried.first().c)) {
+                    if (!isForbiddenLineStart(carried.first().cp)) {
                         break
                     }
                 }
@@ -178,13 +182,13 @@ class JustifyTextView @JvmOverloads constructor(
                 if (runs.isEmpty() || runWidth + run.width <= availW) {
                     runs.add(run)
                     runWidth += run.width
-                    i++
+                    i += cc
                 }
                 // 若回退后仍放不下，下一轮继续回退（每轮至少回退一个字符，最终标点单独成行）
             } else {
                 // 行尾避头尾：行尾不能是句首标点，将其顺延到下一行行首
                 val carried = mutableListOf<Run>()
-                while (runs.isNotEmpty() && isForbiddenLineEnd(runs.last().c)) {
+                while (runs.isNotEmpty() && isForbiddenLineEnd(runs.last().cp)) {
                     val removed = runs.removeAt(runs.size - 1)
                     runWidth -= removed.width
                     carried.add(removed)
@@ -244,16 +248,17 @@ class JustifyTextView @JvmOverloads constructor(
     }
 
     private fun isJustifiableGap(left: Run, right: Run): Boolean =
-        isCjkOrSpace(left.c) || isCjkOrSpace(right.c)
+        isCjkOrSpace(left.cp) || isCjkOrSpace(right.cp)
 
-    private fun runFor(c: Char, index: Int): Run {
+    private fun runFor(index: Int, cp: Int, charCount: Int): Run {
         val spanned = content as? Spanned
-        val bold = spanned?.getSpans(index, index + 1, StyleSpan::class.java)?.isNotEmpty() ?: false
-        val font = AppFonts.typefaceForCodePoint(c.code)
+        val bold = spanned?.getSpans(index, index + charCount, StyleSpan::class.java)?.isNotEmpty() ?: false
+        val font = AppFonts.typefaceForCodePoint(cp)
+        val text = String(Character.toChars(cp))
         paint.textSize = textSizePx
         paint.typeface = font
         paint.isFakeBoldText = bold
-        return Run(c, paint.measureText(c.toString()), font, bold)
+        return Run(cp, text, paint.measureText(text), font, bold)
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -270,7 +275,7 @@ class JustifyTextView @JvmOverloads constructor(
                 paint.typeface = r.font
                 paint.isFakeBoldText = r.bold
                 paint.color = textColor
-                canvas.drawText(r.c.toString(), x, y, paint)
+                canvas.drawText(r.text, x, y, paint)
                 x += r.width
                 if (i < line.runs.size - 1 && line.gap > 0f && isJustifiableGap(r, line.runs[i + 1])) {
                     x += line.gap
@@ -280,7 +285,7 @@ class JustifyTextView @JvmOverloads constructor(
         }
     }
 
-    private class Run(val c: Char, val width: Float, val font: Typeface?, val bold: Boolean)
+    private class Run(val cp: Int, val text: String, val width: Float, val font: Typeface?, val bold: Boolean)
 
     private class Line(
         val runs: List<Run>,
@@ -290,15 +295,17 @@ class JustifyTextView @JvmOverloads constructor(
         val descent: Float
     )
 
-    private fun isForbiddenLineStart(c: Char): Boolean = c in FORBIDDEN_LINE_START
+    private fun isForbiddenLineStart(cp: Int): Boolean =
+        cp <= 0xFFFF && cp.toChar() in FORBIDDEN_LINE_START
 
-    private fun isForbiddenLineEnd(c: Char): Boolean = c in FORBIDDEN_LINE_END
+    private fun isForbiddenLineEnd(cp: Int): Boolean =
+        cp <= 0xFFFF && cp.toChar() in FORBIDDEN_LINE_END
 
-    private fun isCjkOrSpace(c: Char): Boolean {
-        if (c == ' ' || c == '\u3000') {
+    private fun isCjkOrSpace(cp: Int): Boolean {
+        if (cp == ' '.code || cp == '\u3000'.code) {
             return true
         }
-        val v = c.code
+        val v = cp
         return v in 0x2E80..0x2EFF ||
                 v in 0x3000..0x303F ||
                 v in 0x3400..0x4DBF ||
