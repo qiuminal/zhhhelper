@@ -9086,7 +9086,7 @@
 鿫	Vq Tp Mk Pm Md	气 丿 冂 米 大	ào	基本	U+9FEB
 鿬	Ms Qt 	石 田	tián	基本	U+9FEC
 鿭	Zj Xd Yx	钅  小	nǐ	基本	U+9FED
-鿽	Ex Wa 	穴 乍		基本	U+9FFD
+鿽	Dk Ex Wa 	口 穴 乍		基本	U+9FFD
 𠀾	Cb Jr By	不 人 云		扩B	U+2003E
 𠂉	Et	𠂉		扩B	U+20089
 𠃓	Ae Es 	ㄋ 		扩B	U+200D3
@@ -59652,7 +59652,7 @@
 𧮞	Sy Qm Qm Ui Ry	言 目 目 隹 又	xuè	扩B	U+27B9E
 𧮟	Gy Sy Sy Sy	⺷ 言 言 言		扩B	U+27B9F
 𧮠	Sy Zm Xh Or	言 麻 禾 日	nèn	扩B	U+27BA0
-𧮡	Sy Sy Oc Ob	言 言 巛 貝	dòu	扩B	U+27BA1
+𧮡	Sy Ex Gs Ob	言 穴 士 貝	dòu	扩B	U+27BA1
 𧮢	Sy Qt Qt Qt Is	言 田 田 田 糸		扩B	U+27BA2
 𧮣	Ob Ob Sy Sy	貝 貝 言 言		扩B	U+27BA3
 𧮤	Sy Qc Ru Ys Ej	言 臣  罒 見	lǎn	扩B	U+27BA4
