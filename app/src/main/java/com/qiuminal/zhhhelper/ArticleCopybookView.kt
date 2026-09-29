@@ -8,6 +8,7 @@ import android.graphics.Typeface
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
+import androidx.core.content.ContextCompat
 import kotlin.math.ceil
 
 /**
@@ -20,7 +21,6 @@ class ArticleCopybookView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : View(context, attrs, defStyleAttr) {
     companion object {
-        private const val COLOR_PENDING = 0xFF333333.toInt()
         private const val COLOR_CORRECT = 0xFF2E9E5B.toInt()
         private const val COLOR_CORRECT_BG = 0xFFE8F5E9.toInt()
         private const val COLOR_WRONG = 0xFFD64545.toInt()
@@ -29,6 +29,9 @@ class ArticleCopybookView @JvmOverloads constructor(
         private const val FORBIDDEN_LINE_START = "，。、；：？！）》】」』”’…—·～｝〕〗〙〟〞｡､｣"
         private const val FORBIDDEN_LINE_END = "（《〈「『【〔〖｛“‘"
     }
+
+    // 待跟打文本色与练单一致：用主题文字色（浅色 #333333 / 深色近白），随暗黑模式切换
+    private val colorPending = ContextCompat.getColor(context, R.color.text_primary)
 
     private val caretWidthPx = dp(2.5f)
     private val caretTextGapPx = 2f
@@ -226,7 +229,7 @@ class ArticleCopybookView @JvmOverloads constructor(
                 paint.color = when (state) {
                     1 -> COLOR_CORRECT
                     2 -> COLOR_WRONG
-                    else -> COLOR_PENDING
+                    else -> colorPending
                 }
                 canvas.drawText(run.value, x, baseline, paint)
                 x += visualWidth

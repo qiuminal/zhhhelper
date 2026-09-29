@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate
  * - 存储：SharedPreferences("settings") 的 "night_mode"（0=白天,1=黑夜,2=跟随系统）。
  * - 应用：映射到 AppCompatDelegate.MODE_NIGHT_NO / YES / FOLLOW_SYSTEM，
  *   setDefaultNightMode 在夜间模式实际变化时会自动重建当前 Activity。
- * - 首次未设置默认「跟随系统」。
+ * - 首次未设置默认「白天」。
  */
 object ThemeManager {
 
@@ -20,9 +20,9 @@ object ThemeManager {
     private const val PREFS = "settings"
     private const val KEY = "night_mode"
 
-    /** 读取已保存的档位（默认跟随系统）。 */
+    /** 读取已保存的档位（默认白天）。 */
     fun currentMode(context: Context): Int =
-        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getInt(KEY, MODE_SYSTEM)
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getInt(KEY, MODE_DAY)
 
     /** 把档位映射为 AppCompatDelegate 的夜间模式常量。 */
     private fun toDelegateMode(mode: Int): Int = when (mode) {
