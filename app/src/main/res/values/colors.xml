@@ -5,10 +5,29 @@
     <color name="text_secondary">#7A8BA0</color>
     <color name="text_hint">#BBBBBB</color>
     <color name="code_blue">#5B7FB5</color>
+    <color name="code_blue_variant">#3D5A8A</color>
     <color name="link_blue">#4A90D9</color>
     <color name="border_light">#E0E0E0</color>
     <color name="gradient_start">#F5E6F0</color>
     <color name="gradient_end">#E0EAF5</color>
+
+    <!-- 语义色：卡片/输入框/对话框等浅底表面，供 drawable 与代码统一引用，随 values-night 切深色 -->
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_stroke">#EEEEEE</color>
+    <color name="divider">#F0F0F0</color>
+    <color name="row_alt_bg">#FAFAFA</color>
+    <color name="completed_green">#4C8C50</color>
+
+    <!-- 历史搜索胶囊（原为 MainActivity 硬编码常量，改为资源以支持深色） -->
+    <color name="capsule_bg">#F2F7FF</color>
+    <color name="capsule_stroke">#EFEFEF</color>
+    <color name="capsule_text">#5E687A</color>
+    <color name="capsule_icon">#828A9A</color>
+
+    <!-- 文章参考区背景 -->
+    <color name="article_ref_bg">#F5FAF3</color>
+    <color name="article_ref_stroke">#D7E7D2</color>
+
     <!-- 标签胶囊 5 组配色（text 同时用于命中标签编码的着色；均与编码 code_blue 区分） -->
     <color name="label_text_huishou">#B45309</color>
     <color name="label_bg_huishou">#FBEEDD</color>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 深色模式配色（中性深灰）。名称沿用浅色版，仅换值，@color 引用处自动切换。 -->
+    <color name="bg_white">#121316</color>
+    <color name="text_primary">#E6E7EA</color>
+    <color name="text_secondary">#9FB0C6</color>
+    <color name="text_hint">#727783</color>
+    <color name="code_blue">#8CB0E4</color>
+    <color name="code_blue_variant">#6C93CC</color>
+    <color name="link_blue">#7DB8F2</color>
+    <color name="border_light">#3A3E44</color>
+    <color name="gradient_start">#2C2533</color>
+    <color name="gradient_end">#232B39</color>
+
+    <color name="surface">#1E2126</color>
+    <color name="surface_stroke">#34383F</color>
+    <color name="divider">#2C2F35</color>
+    <color name="row_alt_bg">#1A1C20</color>
+    <color name="completed_green">#6FBF74</color>
+
+    <color name="capsule_bg">#232A36</color>
+    <color name="capsule_stroke">#343B47</color>
+    <color name="capsule_text">#AEBBCE</color>
+    <color name="capsule_icon">#9AA6B6</color>
+
+    <color name="article_ref_bg">#1C2A22</color>
+    <color name="article_ref_stroke">#2E4738</color>
+
+    <!-- 标签胶囊 5 组：深底 + 亮文字 + 低调描边 -->
+    <color name="label_text_huishou">#E0A96A</color>
+    <color name="label_bg_huishou">#3A2E1E</color>
+    <color name="label_stroke_huishou">#5A4A30</color>
+    <color name="label_text_xianzhong">#B9A6F0</color>
+    <color name="label_bg_xianzhong">#2C2740</color>
+    <color name="label_stroke_xianzhong">#484067</color>
+    <color name="label_text_shunqu">#5FCBA0</color>
+    <color name="label_bg_shunqu">#1B3A30</color>
+    <color name="label_stroke_shunqu">#2E5A49</color>
+    <color name="label_text_chongfu">#EC90AC</color>
+    <color name="label_bg_chongfu">#3A2530</color>
+    <color name="label_stroke_chongfu">#5C3A47</color>
+    <color name="label_text_yinbu">#F0897C</color>
+    <color name="label_bg_yinbu">#3A2420</color>
+    <color name="label_stroke_yinbu">#5C3833</color>
+</resources>

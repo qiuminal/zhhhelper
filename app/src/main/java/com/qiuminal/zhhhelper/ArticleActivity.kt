@@ -334,7 +334,7 @@ class ArticleActivity : AppCompatActivity() {
         val speed = ArticlePracticeLogic.correctCharactersPerMinute(correct, elapsedSeconds)
         speedView.text = "$speed 字/分"
         progressView.text = "${input.size} / ${reference.size}"
-        progressView.setTextColor(if (completed) Color.rgb(76, 140, 80) else ContextCompat.getColor(this, R.color.code_blue))
+        progressView.setTextColor(if (completed) ContextCompat.getColor(this, R.color.completed_green) else ContextCompat.getColor(this, R.color.code_blue))
     }
 
     private fun complete(input: IntArray) {
@@ -493,7 +493,7 @@ class ArticleActivity : AppCompatActivity() {
                     rowHeight,
                 )
             }
-            if (index % 2 == 1) row.setBackgroundColor(Color.parseColor("#FAFAFA"))
+            if (index % 2 == 1) row.setBackgroundColor(ContextCompat.getColor(this, R.color.row_alt_bg))
             fun cell(weight: Float, text: String, ellipsize: Boolean = false): TextView {
                 return TextView(this).apply {
                     layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, weight)

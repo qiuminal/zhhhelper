@@ -2,6 +2,20 @@
 
 > 客户端「关于」页仅展示精炼文案，本文件保留仓库内详细记录，便于后续追溯与维护。
 
+## 0.3.4（2026-09-30）
+· 新增暗黑模式切换：主界面头部右上角新增图标，点击在「白天 / 黑夜 / 跟随系统」三档循环，用 AppCompatDelegate.setDefaultNightMode 全局生效并持久化（SharedPreferences "settings" 的 "night_mode"，默认跟随系统）；新增 `ZhhApplication` 在启动时按存储应用档位，新增 `ThemeManager` 统一管理档位/图标/持久化
+· 三档状态图标 `ic_theme_day` / `ic_theme_night` / `ic_theme_system`（由用户提供 SVG 转为 vector drawable）
+· 深色主题落地：主题父级改为 `Theme.MaterialComponents.DayNight.NoActionBar`，新增 `values-night/themes.xml`（深底状态栏 + `windowLightStatusBar=false`）与 `values-night/colors.xml`（中性深灰配色，覆盖背景/文字/渐变/边框/分隔线/历史胶囊/标签胶囊 5 组等全部色值）
+· 白底类 drawable 改引用语义色资源（`@color/surface`/`surface_stroke`/`divider`/`capsule_*`/`article_ref_*` 等），随深色模式自动切换：`bg_search_input`/`bg_result_card`/`bg_result_table`/`bg_chip`/`bg_circle_button`/`bg_dialog_rounded`/`bg_button_ghost`/`bg_history_capsule`/`bg_circle_history_arrow`/`bg_article_reference`/`divider_result_h`/`divider_result_v`
+· 代码内硬编码色改为色资源：`MainActivity` 历史胶囊文字/箭头色（原 `COLOR_HISTORY_*` 常量）→ `@color/capsule_text`/`capsule_icon`；`ArticleActivity` 完成态绿色 → `@color/completed_green`、隔行底色 `#FAFAFA` → `@color/row_alt_bg`；文章成绩表头底色 `#F5F7FA` → `@color/row_alt_bg`
+· 分享图始终浅色：`shareResultCard` 用强制 `UI_MODE_NIGHT_NO` 的 `ContextThemeWrapper` inflate 卡片并解析 @color/标签配色，导出的图片无视 App 当前深色档位、保持浅底
+· 码表订正（订正 𦓐、裉 错拆）：
+  - `data/chai.txt`：𦓐（U+264D0）拆分由 `Tp Ys`（丿 ⺵）改为 `Tp Mk Pd`（丿 冂 …）
+  - `data/zi.txt`：𦓐 单字编码 `tys`→`tmpd`；裉 次选编码 `tige`→`tigi`
+  - `data/label.txt`：裉 回头码 `tige`→`tigi`
+  - 逐行核验确认差异仅涉及 𦓐、裉；`data/zheng.txt` 未变。三张附件 SHA-256：`chai.txt` `A2F12B5FCC2319CDDC4B37BF7C6B67F6C611DF15DE2DAAFD145FDBB3A5D3B966`、`zi.txt` `F395548C96456FD415A7863314FFED665AF711EA1B1A0AC6A52AD2B829B5BECA`、`label.txt` `7DFDEAE795D577DEFAD5747108D8AD62020A95B7145125B4660460B30864E889`
+· `versionCode` 24→25，`versionName` 0.3.3→0.3.4
+
 ## 0.3.3（2026-09-22）
 · 更新三张码表：`data/chai.txt`（99144 行）、`data/zi.txt`（103460 行）与 `data/zheng.txt`（1508 行）；前两张行数不变，整句码表新增「巡」的整句码 `ou`
 · 修正「鿽」（U+9FFD）错拆：拆分码由 `Ex Wa` 改为 `Dk Ex Wa`，部件由 `穴 乍` 改为 `口 穴 乍`；单字编码由 `ewa` 改为 `dewa`
