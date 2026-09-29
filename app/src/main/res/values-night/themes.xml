@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- 深色模式：状态栏改深底 + 关闭浅色状态栏图标（用浅色图标）。
+         windowBackground / statusBarColor 引用 @color/bg_white，随 values-night 自动切深底。 -->
     <style name="Theme.ZhhHelper" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/code_blue</item>
         <item name="colorPrimaryVariant">@color/code_blue_variant</item>
         <item name="colorOnPrimary">#FFFFFF</item>
         <item name="android:windowBackground">@color/bg_white</item>
         <item name="android:statusBarColor">@color/bg_white</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

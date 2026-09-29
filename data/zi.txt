@@ -5830,7 +5830,7 @@
 荽	lybn
 蚶	czg
 衄	taa taag
-裉	tig tige
+裉	tig tigi
 鹈	htx htxn
 圉	rggy
 嫘	bqi bqis
@@ -53823,7 +53823,7 @@
 𦓍	qodm
 𦓎	lpd
 𦓏	kle
-𦓐	tys
+𦓐	tmpd
 𦓑	lkj
 𦓒	cle
 𦓓	rle

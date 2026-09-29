@@ -41,6 +41,18 @@
             android:textColor="@color/text_primary"
             android:textSize="28sp"
             android:textStyle="bold" />
+
+        <!-- 暗黑模式切换：白天/黑夜/跟随系统 三档循环 -->
+        <ImageButton
+            android:id="@+id/btn_theme"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="切换主题"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_theme_system"
+            android:tint="@color/text_primary" />
     </LinearLayout>
 
     <!-- ========== 主内容区（可滚动） ========== -->

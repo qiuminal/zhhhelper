@@ -2,6 +2,8 @@ package com.qiuminal.zhhhelper
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
+import android.view.ContextThemeWrapper
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnFontMinus: ImageButton
     private lateinit var btnFontPlus: ImageButton
     private lateinit var btnMenu: ImageButton
+    private lateinit var btnTheme: ImageButton
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
 
@@ -76,10 +79,7 @@ class MainActivity : AppCompatActivity() {
         private const val HISTORY_MAX_LABEL = 10    // 单条历史标签最多展示字数（超出加 ...）
         private const val HISTORY_MAX_ROWS = 2      // 默认折叠最多展示行数
         private const val HISTORY_HIDDEN_KEY = "history_hidden"   // 是否隐藏历史条目
-        private const val COLOR_HISTORY_BG = 0xFFF2F7FF.toInt()      // 标签底色
-        private const val COLOR_HISTORY_STROKE = 0xFFEFEFEF.toInt()  // 标签描边
-        private const val COLOR_HISTORY_TEXT = 0xFF5E687A.toInt()    // 标签文字
-        private const val COLOR_HISTORY_ICON = 0xFF828A9A.toInt()    // 展开/收起箭头
+        // 历史胶囊文字/箭头色改用 @color 资源（capsule_text / capsule_icon），随深色模式切换
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,6 +113,8 @@ class MainActivity : AppCompatActivity() {
         btnFontMinus = findViewById(R.id.btn_font_minus)
         btnFontPlus = findViewById(R.id.btn_font_plus)
         btnMenu = findViewById(R.id.btn_menu)
+        btnTheme = findViewById(R.id.btn_theme)
+        updateThemeButton()
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.navigation_view)
 
@@ -177,9 +179,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /** 按当前暗黑模式档位刷新头部图标与无障碍描述。 */
+    private fun updateThemeButton() {
+        val mode = ThemeManager.currentMode(this)
+        btnTheme.setImageResource(ThemeManager.iconRes(mode))
+        btnTheme.contentDescription = ThemeManager.contentDescription(mode)
+    }
+
     private fun setupListeners() {
         // 三横杠：打开左侧菜单
         btnMenu.setOnClickListener { drawerLayout.openDrawer(GravityCompat.START) }
+
+        // 暗黑模式切换：白天 → 黑夜 → 跟随系统 → 白天
+        // 夜间模式实际变化时框架会自动重建 Activity（onCreate 会重设图标）；
+        // 未变化（如跟随系统本就是白天时切到白天）则在此手动刷新图标。
+        btnTheme.setOnClickListener {
+            ThemeManager.cycle(this)
+            updateThemeButton()
+        }
         // 侧滑菜单：首页 / 关于
         navView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -549,7 +566,7 @@ class MainActivity : AppCompatActivity() {
         )
         tv.text = AppFonts.style(historyLabel(word)) ?: historyLabel(word)
         tv.setTextSize(14f)
-        tv.setTextColor(COLOR_HISTORY_TEXT)
+        tv.setTextColor(ContextCompat.getColor(this, R.color.capsule_text))
         tv.includeFontPadding = false
         tv.gravity = Gravity.CENTER
         tv.isClickable = true
@@ -604,7 +621,7 @@ class MainActivity : AppCompatActivity() {
         circle.layoutParams = FrameLayout.LayoutParams(dp(32), dp(32), Gravity.CENTER)
         circle.background = ContextCompat.getDrawable(this, R.drawable.bg_circle_history_arrow)
         circle.setImageResource(if (expand) R.drawable.ic_expand_more else R.drawable.ic_expand_less)
-        circle.setColorFilter(COLOR_HISTORY_ICON)
+        circle.setColorFilter(ContextCompat.getColor(this, R.color.capsule_icon))
         circle.scaleType = ImageView.ScaleType.CENTER
         circle.isClickable = false
         circle.isFocusable = false
@@ -775,6 +792,17 @@ class MainActivity : AppCompatActivity() {
      */
 
     /**
+     * 生成一个强制「非夜间（浅色）」的主题化上下文，用于分享图渲染，
+     * 使其无视 App 当前的暗黑档位、始终取浅色资源。
+     */
+    private fun lightContext(): Context {
+        val cfg = Configuration(resources.configuration)
+        cfg.uiMode = (cfg.uiMode and Configuration.UI_MODE_NIGHT_MASK.inv()) or
+            Configuration.UI_MODE_NIGHT_NO
+        return ContextThemeWrapper(createConfigurationContext(cfg), R.style.Theme_ZhhHelper)
+    }
+
+    /**
      * 生成单字查询结果卡片图片并调起系统分享。
      * 图片与 App 内渲染一致：复用同款卡片样式与内置字体，
      * 不含字统/汉典链接行，也不含分享按钮；右下角加虎助手水印。
@@ -787,12 +815,16 @@ class MainActivity : AppCompatActivity() {
         if (!CharLabels.isLoaded()) {
             CharLabels.load(applicationContext)
         }
-        val card = layoutInflater.inflate(R.layout.layout_share_card, null) as LinearLayout
+        // 分享图始终用浅色渲染：即使 App 处于深色模式，导出的图片也保持浅底，便于发到社交平台阅读。
+        // 用强制 NIGHT_NO 的配置上下文来 inflate 与解析 @color，使卡片与标签均取浅色资源。
+        val sctx = lightContext()
+        val card = android.view.LayoutInflater.from(sctx)
+            .inflate(R.layout.layout_share_card, null) as LinearLayout
 
         val shareChar = card.findViewById<TextView>(R.id.tv_share_char)
         shareChar.text = d.charText
         val tvShareCodes = card.findViewById<TextView>(R.id.tv_share_codes)
-        tvShareCodes.text = CharLabels.styleCodes(this, d.codes, d.charText)
+        tvShareCodes.text = CharLabels.styleCodes(sctx, d.codes, d.charText)
         // 拆分：字根编码与部件逐组上下对齐（数量不配时视图内部退回两行样式）
         card.findViewById<RootPairsView>(R.id.pairs_share).setContent(d.rootCodes, d.components)
         card.findViewById<TextView>(R.id.tv_share_pinyin).text = formatPinyin(d.pinyin)
@@ -809,7 +841,7 @@ class MainActivity : AppCompatActivity() {
         applyShareFontSize(card)
         val shareCharRow = shareChar.parent as? LinearLayout
         if (shareCharRow != null) {
-            CharLabels.addLabelChips(this, shareCharRow, d.charText, shareChar, tvShareCodes)
+            CharLabels.addLabelChips(sctx, shareCharRow, d.charText, shareChar, tvShareCodes)
         }
         AppFonts.applyToHierarchy(card)
 

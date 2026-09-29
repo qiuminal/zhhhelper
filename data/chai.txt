@@ -53828,7 +53828,7 @@
 𦓍	Ql Or Dk Dk Qt Ns Jr Me	耂 日 口 口 田 十 亻 二	chě	扩B	U+264CD
 𦓎	Le Pd 	而 刂	nài	扩B	U+264CE
 𦓏	Kj Le 	九 而		扩B	U+264CF
-𦓐	Tp Ys 	丿 ⺵	jué	扩B	U+264D0
+𦓐	Tp Mk Pd	丿 冂 	jué	扩B	U+264D0
 𦓑	Le Kj 	而 九		扩B	U+264D1
 𦓒	Ch Le 	火 而		扩B	U+264D2
 𦓓	Rw Le 	瓦 而	ér liè	扩B	U+264D3
