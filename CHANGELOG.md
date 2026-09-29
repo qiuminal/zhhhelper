@@ -3,11 +3,12 @@
 > 客户端「关于」页仅展示精炼文案，本文件保留仓库内详细记录，便于后续追溯与维护。
 
 ## 0.3.4（2026-09-30）
-· 新增暗黑模式切换：主界面头部右上角新增图标，点击在「白天 / 黑夜 / 跟随系统」三档循环，用 AppCompatDelegate.setDefaultNightMode 全局生效并持久化（SharedPreferences "settings" 的 "night_mode"，默认跟随系统）；新增 `ZhhApplication` 在启动时按存储应用档位，新增 `ThemeManager` 统一管理档位/图标/持久化
+· 新增暗黑模式切换：主界面头部右上角新增图标，点击在「白天 / 黑夜 / 跟随系统」三档循环，用 AppCompatDelegate.setDefaultNightMode 全局生效并持久化（SharedPreferences "settings" 的 "night_mode"，**默认白天**）；新增 `ZhhApplication` 在启动时按存储应用档位，新增 `ThemeManager` 统一管理档位/图标/持久化
 · 三档状态图标 `ic_theme_day` / `ic_theme_night` / `ic_theme_system`（由用户提供 SVG 转为 vector drawable）
 · 深色主题落地：主题父级改为 `Theme.MaterialComponents.DayNight.NoActionBar`，新增 `values-night/themes.xml`（深底状态栏 + `windowLightStatusBar=false`）与 `values-night/colors.xml`（中性深灰配色，覆盖背景/文字/渐变/边框/分隔线/历史胶囊/标签胶囊 5 组等全部色值）
 · 白底类 drawable 改引用语义色资源（`@color/surface`/`surface_stroke`/`divider`/`capsule_*`/`article_ref_*` 等），随深色模式自动切换：`bg_search_input`/`bg_result_card`/`bg_result_table`/`bg_chip`/`bg_circle_button`/`bg_dialog_rounded`/`bg_button_ghost`/`bg_history_capsule`/`bg_circle_history_arrow`/`bg_article_reference`/`divider_result_h`/`divider_result_v`
 · 代码内硬编码色改为色资源：`MainActivity` 历史胶囊文字/箭头色（原 `COLOR_HISTORY_*` 常量）→ `@color/capsule_text`/`capsule_icon`；`ArticleActivity` 完成态绿色 → `@color/completed_green`、隔行底色 `#FAFAFA` → `@color/row_alt_bg`；文章成绩表头底色 `#F5F7FA` → `@color/row_alt_bg`
+· 文章跟打字帖待跟打文本色与练单一致：`ArticleCopybookView` 待打字色由硬编码 `#333333` 改为主题文字色 `@color/text_primary`（深色模式下为近白色，修复深色下待打文本对比度过低）
 · 分享图始终浅色：`shareResultCard` 用强制 `UI_MODE_NIGHT_NO` 的 `ContextThemeWrapper` inflate 卡片并解析 @color/标签配色，导出的图片无视 App 当前深色档位、保持浅底
 · 码表订正（订正 𦓐、裉 错拆）：
   - `data/chai.txt`：𦓐（U+264D0）拆分由 `Tp Ys`（丿 ⺵）改为 `Tp Mk Pd`（丿 冂 …）
