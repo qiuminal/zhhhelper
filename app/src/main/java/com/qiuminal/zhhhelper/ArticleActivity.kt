@@ -59,6 +59,9 @@ class ArticleActivity : AppCompatActivity() {
     private var timerRunning = false
     private var completed = false
     private var fontSp = 26f
+    // 剪贴板载文从机器人发文尾部解析出的「段号/总段」；无则为 null（非机器人发文如导入 TXT）。段号可为字母数字编码（虎魄 base-N）
+    private var segNo: String? = null
+    private var segTotal: String? = null
     private val results = mutableListOf<ArticleResult>()
     private var resultPage = 0
     private var resultPageSize = ARTICLE_RESULT_FALLBACK_PAGE_SIZE
@@ -164,6 +167,7 @@ class ArticleActivity : AppCompatActivity() {
         applyFontSize()
         ArticleWhitelist.load(applicationContext)
         val welcomeText = assets.open("article_welcome.txt").bufferedReader(Charsets.UTF_8).use { it.readText() }
+        segNo = null; segTotal = null
         loadReference(welcomeText, "欢迎使用虎助手")
         if (AppFonts.isLoaded()) AppFonts.applyToHierarchy(findViewById(android.R.id.content))
         inputView.postDelayed({
@@ -333,12 +337,29 @@ class ArticleActivity : AppCompatActivity() {
         val correct = ArticlePracticeLogic.correctCount(reference, input)
         val speed = ArticlePracticeLogic.correctCharactersPerMinute(correct, elapsedSeconds)
         speedView.text = "$speed 字/分"
-        progressView.text = "${input.size} / ${reference.size}"
+        // 右下角统一展示「段号 / 总段」：机器人发文取自尾部；正常发文无段号时视为 1 / 1
+        // （后续规划：正常发文按字数自动分段，届时此处显示当前段/总段并随完成自动跳段，见 ROADMAP.md）
+        val no = segNo
+        progressView.text = when {
+            no != null && segTotal != null -> "$no / $segTotal"
+            no != null -> "$no"
+            else -> "1 / 1"
+        }
         progressView.setTextColor(if (completed) ContextCompat.getColor(this, R.color.completed_green) else ContextCompat.getColor(this, R.color.code_blue))
     }
 
-    private fun complete(input: IntArray) {
-        completed = true
+    /** 成绩「标题」列：机器人发文拼接段号/总段以区分（如「西游记 12/500」），正常发文仅标题。 */
+    private fun resultTitle(): String {
+        val base = titleView.text.toString()
+        val no = segNo
+        return when {
+            no != null && segTotal != null -> "$base $no/$segTotal"
+            no != null -> "$base $no"
+            else -> base
+        }
+    }
+
+    private fun complete(input: IntArray) {        completed = true
         pauseTimer()
         inputView.isEnabled = false
         updateStatsLine(input)
@@ -346,7 +367,7 @@ class ArticleActivity : AppCompatActivity() {
         results.add(
             0,
             ArticleResult(
-                title = titleView.text.toString(),
+                title = resultTitle(),
                 characters = stats.total,
                 elapsedSeconds = stats.elapsedSeconds,
                 speed = stats.speed,
@@ -369,7 +390,11 @@ class ArticleActivity : AppCompatActivity() {
         } else {
             ""
         }
-        loadReference(raw, "剪贴板文本")
+        // 剪贴板载文自动去头去尾：删除机器人发文头/尾标记行，并提取标题与段号/总段
+        val cleaned = ArticleTextCleaner.parseClipboard(raw)
+        segNo = cleaned.segNo
+        segTotal = cleaned.segTotal
+        loadReference(cleaned.body, cleaned.title ?: "剪贴板文本")
     }
 
     private fun importText(uri: Uri) {
@@ -388,6 +413,7 @@ class ArticleActivity : AppCompatActivity() {
             }
             val bytes = contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: return
             val text = bytes.toString(Charsets.UTF_8)
+            segNo = null; segTotal = null
             loadReference(text, metadata.second)
         } catch (_: Exception) {
             Toast.makeText(this, "读取失败", Toast.LENGTH_SHORT).show()
